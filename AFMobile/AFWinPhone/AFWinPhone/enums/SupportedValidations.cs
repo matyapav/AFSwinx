@@ -2,7 +2,7 @@
 
 namespace AFWinPhone.enums
 {
-    class SupportedValidations
+    public sealed class SupportedValidations
     {
         public static readonly SupportedValidations REQUIRED = new SupportedValidations("REQUIRED");
         public static readonly SupportedValidations MAXLENGTH = new SupportedValidations("MAXLENGTH");

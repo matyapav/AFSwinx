@@ -1,0 +1,8 @@
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\bin\Debug\AFWinPhoneTests.dll
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\bin\Debug\AFWinPhoneTests.pdb
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\bin\Debug\AFWinPhone.dll
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\bin\Debug\AFWinPhone.pdb
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\bin\Debug\AFWinPhone.pri
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\obj\Debug\AFWinPhoneTests.csprojResolveAssemblyReference.cache
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\obj\Debug\AFWinPhoneTests.dll
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhoneTests\obj\Debug\AFWinPhoneTests.pdb

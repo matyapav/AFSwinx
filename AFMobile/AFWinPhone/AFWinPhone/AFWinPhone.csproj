@@ -79,7 +79,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="components\AfWindowsPhone.cs" />
+    <Compile Include="AfWindowsPhone.cs" />
     <Compile Include="builders\AFComponentBuilder.cs" />
     <Compile Include="builders\FieldBuilder.cs" />
     <Compile Include="builders\FormBuilder.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="builders\widgets\PasswordWidgetBuilder.cs" />
     <Compile Include="builders\widgets\TextWidgetBuilder.cs" />
     <Compile Include="builders\widgets\WidgetBuilderFactory.cs" />
-    <Compile Include="components\AFComponentFactory.cs" />
+    <Compile Include="components\types\AFComponentFactory.cs" />
     <Compile Include="components\parts\AFField.cs" />
     <Compile Include="components\parts\ClassDefinition.cs" />
     <Compile Include="components\parts\FieldInfo.cs" />
@@ -142,7 +142,6 @@
     <Compile Include="rest\RequestTask.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\Localization.cs" />
-    <Compile Include="utils\StreamExtensions.cs" />
     <Compile Include="utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

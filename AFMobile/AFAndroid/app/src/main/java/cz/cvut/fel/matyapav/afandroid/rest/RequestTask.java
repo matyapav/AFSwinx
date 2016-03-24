@@ -23,27 +23,19 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
  */
 public class RequestTask extends AsyncTask<String,Integer,Object> {
 
-    Activity activity;
-
     HeaderType headerType;
     HttpMethod httpMethod;
     ConnectionSecurity security;
     String address;
     Object data;
 
-    public RequestTask(final Activity activity, HttpMethod method, HeaderType headerType,
+    public RequestTask(HttpMethod method, HeaderType headerType,
                        ConnectionSecurity security, Object data, String url) {
-        this.activity = activity;
         this.headerType = headerType;
         this.httpMethod = method;
         this.security = security;
         this.address = url;
         this.data = data;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override
@@ -102,10 +94,5 @@ public class RequestTask extends AsyncTask<String,Integer,Object> {
                 urlConnection.disconnect();
             }
         }
-    }
-
-        @Override
-    protected void onPostExecute(final Object response){
-        super.onPostExecute(response);
     }
 }

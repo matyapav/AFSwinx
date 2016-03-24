@@ -40,6 +40,7 @@ namespace AFWinPhone.builders
             //errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             errorView.Visibility = Visibility.Collapsed;
             errorView.Foreground = new SolidColorBrush(skin.getValidationColor());
+            errorView.TextWrapping = TextWrapping.Wrap;
             errorView.FontFamily = skin.getValidationFont();
             errorView.FontSize = skin.getValidationFontSize();
             field.setErrorView(errorView);

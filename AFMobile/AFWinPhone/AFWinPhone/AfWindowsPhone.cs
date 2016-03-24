@@ -3,7 +3,7 @@ using AFWinPhone.components.types;
 using System;
 using System.Collections.Generic;
 
-namespace AFWinPhone.components
+namespace AFWinPhone
 {
     public class AfWindowsPhone
     {

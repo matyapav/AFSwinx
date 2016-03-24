@@ -7,14 +7,20 @@ using Windows.Data.Json;
 
 namespace AFWinPhone.parsers
 {
-    class JSONDefinitionParser : JSONParser
+    public class JSONDefinitionParser : JSONParser
     {
-        public ClassDefinition parse(JsonObject classInfo)
+        public ClassDefinition parse(String classInfoStr, bool parsingInnerClass)
         {
             ClassDefinition definition = null;
 
             try
             {
+                JsonObject classInfo = JsonObject.Parse(classInfoStr);
+                if (!parsingInnerClass)
+                {
+                    classInfo = (JsonObject) Utils.TryToGetValueFromJson(classInfo[(Constants.CLASS_INFO)]);
+                }
+
                 //Parse class name and create data pack with this class name
                 Debug.WriteLine("PARSING CLASS " + Utils.TryToGetValueFromJson(classInfo[Constants.CLASS_NAME]));
                 definition = new ClassDefinition((String) Utils.TryToGetValueFromJson(classInfo[Constants.CLASS_NAME]));
@@ -39,7 +45,7 @@ namespace AFWinPhone.parsers
                     for (int i = 0; i < innerClasses.Count; i++)
                     {
                         JsonObject innerClass = (JsonObject) Utils.TryToGetValueFromJson(innerClasses[i]);
-                        definition.addInnerClass(parse(innerClass)); //recursion;
+                        definition.addInnerClass(parse(innerClass.Stringify(), true)); //recursion;
                     }
                 }
             }

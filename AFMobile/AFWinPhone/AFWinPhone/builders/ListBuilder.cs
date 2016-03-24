@@ -5,7 +5,6 @@ using Windows.UI.Xaml;
 using AFWinPhone.enums;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using AFWinPhone.components;
 
 namespace AFWinPhone.builders
 {

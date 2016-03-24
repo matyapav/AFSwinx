@@ -4,7 +4,6 @@ using AFWinPhone.components.types;
 using Windows.UI.Xaml;
 using AFWinPhone.enums;
 using Windows.UI.Xaml.Controls;
-using AFWinPhone.components;
 using AFWinPhone.components.parts;
 
 namespace AFWinPhone.builders

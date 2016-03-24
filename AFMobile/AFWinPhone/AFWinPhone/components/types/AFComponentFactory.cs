@@ -1,7 +1,7 @@
 ﻿using AFWinPhone.components.types;
 using AFWinPhone.enums;
 
-namespace AFWinPhone.components
+namespace AFWinPhone.components.types
 {
     class AFComponentFactory
     {

@@ -1,6 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="d:\projects\afswinx\examples\showcasewp\showcasewp\obj\debug\intermediatexaml\showcasewp.exe" HashGuid="9f7d3cf5-edde-ea57-6b8b-3c9b6dc80230" />
-    <ReferenceAssembly PathName="d:\projects\afswinx\afmobile\afwinphone\afwinphone\bin\debug\afwinphone.dll" HashGuid="55dbddec-0793-4ee2-31bf-beddd3cf770a" />
+    <LocalAssembly PathName="d:\projects\afswinx\examples\showcasewp\showcasewp\obj\debug\intermediatexaml\showcasewp.exe" HashGuid="e03dd846-0a75-0366-6020-60b975a9c800" />
+    <ReferenceAssembly PathName="d:\projects\afswinx\afmobile\afwinphone\afwinphone\bin\debug\afwinphone.dll" HashGuid="4929870f-799f-7113-962e-f2d49c446180" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

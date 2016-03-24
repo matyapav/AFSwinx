@@ -183,7 +183,7 @@
   <ItemGroup>
     <Reference Include="AFWinPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\AFMobile\AFWinPhone\AFWinPhone\bin\Debug\AFWinPhone.dll</HintPath>
+      <HintPath>..\..\..\AFMobile\AFWinPhone\AFWinPhone\bin\Debug\AFWinPhone\AFWinPhone.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

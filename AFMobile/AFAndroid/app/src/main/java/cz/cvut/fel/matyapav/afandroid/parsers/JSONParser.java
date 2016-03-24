@@ -9,5 +9,5 @@ import cz.cvut.fel.matyapav.afandroid.components.parts.ClassDefinition;
  */
 public interface JSONParser {
 
-    ClassDefinition parse(JSONObject toBeParsed);
+    ClassDefinition parse(String jsonStrToBeParsed, boolean parsingInnerClass);
 }

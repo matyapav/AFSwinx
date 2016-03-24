@@ -21,10 +21,15 @@ import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 public class JSONDefinitionParser implements JSONParser {
 
     @Override
-    public ClassDefinition parse(JSONObject classInfo){
+    public ClassDefinition parse(String classInfoJson, boolean parsingInnerClass){
+
         ClassDefinition definition = null;
 
         try {
+            JSONObject classInfo = new JSONObject(classInfoJson);
+            if(!parsingInnerClass){
+                classInfo = classInfo.optJSONObject(Constants.CLASS_INFO);
+            }
             //Parse class name and create data pack with this class name
             System.err.println("PARSING CLASS "+ classInfo.getString(Constants.CLASS_NAME));
             definition = new ClassDefinition(classInfo.getString(Constants.CLASS_NAME));
@@ -45,7 +50,7 @@ public class JSONDefinitionParser implements JSONParser {
             if(innerClasses != null){
                 for (int i = 0; i < innerClasses.length(); i++) {
                     JSONObject innerClass = innerClasses.getJSONObject(i);
-                    definition.addInnerClass(parse(innerClass)); //recursion;
+                    definition.addInnerClass(parse(innerClass.toString(), true)); //recursion;
                 }
             }
         } catch (JSONException e) {
@@ -59,30 +64,30 @@ public class JSONDefinitionParser implements JSONParser {
         System.out.println("PARSING FIELD " + field.getString(Constants.ID));
         FieldInfo fieldInfo = new FieldInfo();
         try {
-            fieldInfo.setWidgetType(SupportedWidgets.valueOf(field.getString(Constants.WIDGET_TYPE)));
+            fieldInfo.setWidgetType(SupportedWidgets.valueOf(field.optString(Constants.WIDGET_TYPE)));
         }catch (IllegalArgumentException e){
             System.err.println(e.getLocalizedMessage());
         }
         fieldInfo.setId(field.getString(Constants.ID));
 
-        fieldInfo.setLabelText(field.get(Constants.LABEL).equals(null) ? null : field.get(Constants.LABEL).toString());
-        fieldInfo.setIsClass(Boolean.valueOf(field.getString(Constants.CLASS_TYPE)));
-        fieldInfo.setVisible(Boolean.valueOf(field.getString(Constants.VISIBLE)));
-        fieldInfo.setReadOnly(Boolean.valueOf(field.getString(Constants.READ_ONLY)));
+        fieldInfo.setLabelText(field.optString(Constants.LABEL));
+        fieldInfo.setIsClass(field.optBoolean(Constants.CLASS_TYPE));
+        fieldInfo.setVisible(field.optBoolean(Constants.VISIBLE));
+        fieldInfo.setReadOnly(field.optBoolean(Constants.READ_ONLY));
         //field layout
-        fieldInfo.setLayout(createLayoutProperties(field.getJSONObject(Constants.LAYOUT)));
+        fieldInfo.setLayout(createLayoutProperties(field.optJSONObject(Constants.LAYOUT)));
         //rules
         JSONArray rules = field.optJSONArray(Constants.RULES);
         if(rules != null) {
             for (int i = 0; i < rules.length(); i++) {
-                fieldInfo.addRule(createRule(rules.getJSONObject(i)));
+                fieldInfo.addRule(createRule(rules.optJSONObject(i)));
             }
         }
         //options
         JSONArray options = field.optJSONArray(Constants.OPTIONS);
         if(options != null){
             for (int i = 0; i < options.length(); i++) {
-                fieldInfo.addOption(createOption(options.getJSONObject(i)));
+                fieldInfo.addOption(createOption(options.optJSONObject(i)));
             }
         }
 
@@ -125,16 +130,24 @@ public class JSONDefinitionParser implements JSONParser {
     }
 
     private ValidationRule createRule(JSONObject ruleJson) throws JSONException {
-        ValidationRule rule = new ValidationRule();
-        rule.setValidationType(ruleJson.getString(Constants.VALIDATION_TYPE));
-        rule.setValue(ruleJson.getString(Constants.VALUE));
-        return rule;
+        if(ruleJson != null) {
+            ValidationRule rule = new ValidationRule();
+            rule.setValidationType(ruleJson.optString(Constants.VALIDATION_TYPE));
+            rule.setValue(ruleJson.optString(Constants.VALUE));
+            return rule;
+        }else{
+            return null;
+        }
     }
 
     private FieldOption createOption(JSONObject optionJson) throws JSONException {
-        FieldOption option = new FieldOption();
-        option.setKey(optionJson.getString(Constants.KEY));
-        option.setValue(optionJson.getString(Constants.VALUE));
-        return option;
+        if(optionJson != null) {
+            FieldOption option = new FieldOption();
+            option.setKey(optionJson.optString(Constants.KEY));
+            option.setValue(optionJson.optString(Constants.VALUE));
+            return option;
+        }else{
+            return null;
+        }
     }
 }

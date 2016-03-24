@@ -2,7 +2,7 @@
 
 namespace AFWinPhone.rest.connection
 {
-    abstract class BaseRestBuilder : Reselization
+    public abstract class BaseRestBuilder : Reselization
     {
         public abstract object reselialize(AFDataHolder componentData);
     }

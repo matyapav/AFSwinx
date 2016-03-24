@@ -17,7 +17,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using AFWinPhone.components;
+using AFWinPhone;
 using AFWinPhone.components.types;
 using AFWinPhone.utils;
 using ShowcaseWP.skins;

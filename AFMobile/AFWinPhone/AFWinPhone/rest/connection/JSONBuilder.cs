@@ -6,13 +6,8 @@ using Windows.Data.Json;
 
 namespace AFWinPhone.rest.connection
 {
-    class JSONBuilder : BaseRestBuilder
+    public class JSONBuilder : BaseRestBuilder
     {
-        private static String baseClass = "dummy";
-
-        StringBuilder sb = new StringBuilder();
-        AFDataPack dataPack = new AFDataPack(baseClass);
-        List<AFDataPack> moreDatas = new List<AFDataPack>();
 
         public override object reselialize(AFDataHolder componentData)
         {

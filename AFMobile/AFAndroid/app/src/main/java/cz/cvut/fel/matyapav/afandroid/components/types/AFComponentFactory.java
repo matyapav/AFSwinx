@@ -1,9 +1,5 @@
-package cz.cvut.fel.matyapav.afandroid.components;
+package cz.cvut.fel.matyapav.afandroid.components.types;
 
-import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
-import cz.cvut.fel.matyapav.afandroid.components.types.AFForm;
-import cz.cvut.fel.matyapav.afandroid.components.types.AFList;
-import cz.cvut.fel.matyapav.afandroid.components.types.AFTable;
 import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 
 /**

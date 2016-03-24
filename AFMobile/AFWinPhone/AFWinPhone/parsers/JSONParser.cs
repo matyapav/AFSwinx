@@ -1,10 +1,11 @@
-﻿using AFWinPhone.components.parts;
+﻿using System;
+using AFWinPhone.components.parts;
 using Windows.Data.Json;
 
 namespace AFWinPhone.parsers
 {
-    interface JSONParser
+    public interface JSONParser
     {
-        ClassDefinition parse(JsonObject toBeParsed);
+        ClassDefinition parse(String jsonStrToBeParsed, bool parsingInnerClass);
     }
 }

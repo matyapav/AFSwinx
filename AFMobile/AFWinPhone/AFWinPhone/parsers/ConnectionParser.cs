@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Windows.Data.Xml.Dom;
 using Windows.Web.Http;
+using AFWinPhone.utils;
 
 namespace AFWinPhone.parsers
 {
@@ -251,56 +252,12 @@ namespace AFWinPhone.parsers
         {
             if (doElEvaluation && !String.IsNullOrEmpty(nodeValue))
             {
-                return evaluateElExpression(nodeValue, elConnectionData);
+                return Utils.evaluateElExpression(nodeValue, elConnectionData);
             }
             return nodeValue;
         }
 
-        private String evaluateElExpression(String expressionToEvaluate,
-                                              Dictionary<String, String> parameters)
-        {
-            // To chaining string use string builder
-            StringBuilder replacedValue = new StringBuilder();
-            // Split expression by #{ it gives you strings between and after value which should be
-            // replaced
-            String[] values = expressionToEvaluate.Split(new []{ "#{" }, StringSplitOptions.None);
-            bool firstCycle = true;
-            foreach (String value in values)
-            {
-                // in first cycle add everything because split is done by #{ which means that before
-                // first char sequence #{ is plain text
-                if (firstCycle)
-                {
-                    replacedValue.Append(value.Substring(0, value.Length));
-                    firstCycle = false;
-                    continue;
-                }
-                // This are values behind string which will be replaced. in first position is string to
-                // replaced
-                String[] valuesBehind = value.Split(new []{"}"}, StringSplitOptions.None);
-                // Find replaced value and append it
-                String elValue = parameters[valuesBehind[0].Substring(0, valuesBehind[0].Length)];
-                replacedValue.Append(elValue);
-                // If some values left - this means that there is more } brackets ex: #{value}/a}/a}
-                // then append them too
-                for (int i = 1; i < valuesBehind.Length; i++)
-                {
-                    if (String.IsNullOrEmpty(valuesBehind[i]))
-                    {
-                        continue;
-                    }
-                    replacedValue.Append(valuesBehind[i]);
-                    char firstChar = valuesBehind[i][0];
-                    //Because split was done by } then it should not be there, then add it if left brackets
-                    if (firstChar == '{')
-                    {
-                        replacedValue.Append("}");
-                    }
-
-                }
-            }
-            return replacedValue.ToString();
-        }
+      
 
     }
 }

@@ -23,9 +23,6 @@ import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
  */
 public class Utils {
 
-
-    /// moje metody
-
     public static String convertInputStreamToString(InputStream inputStream) throws IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
