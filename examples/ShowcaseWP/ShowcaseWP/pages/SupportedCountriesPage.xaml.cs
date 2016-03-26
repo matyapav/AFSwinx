@@ -112,6 +112,7 @@ namespace ShowcaseWP.pages
                     (AFList)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_LIST];
                 var position = countryList.getListView().Items.IndexOf(itemClickEventArgs.ClickedItem);
                 countryForm.insertData(countryList.getDataFromItemOnPosition(position));
+                countryForm.hideErrors();
             }
         }
 
@@ -121,8 +122,8 @@ namespace ShowcaseWP.pages
             {
                 var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
                 form.clearData();
+                form.hideErrors();
             }
-            ;
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
@@ -131,8 +132,8 @@ namespace ShowcaseWP.pages
             {
                 var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
                 form.resetData();
+                form.hideErrors();
             }
-            ;
         }
 
         private async void Perform_Click(object sender, RoutedEventArgs e)
@@ -140,28 +141,30 @@ namespace ShowcaseWP.pages
             if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_FORM))
             {
                 var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
-                if (form.validateData())
-                {
                     try
                     {
                         var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
                         progressbar.Text = Localization.translate("please.wait");
                         await progressbar.ShowAsync();
-                        await form.sendData();
-                        await progressbar.HideAsync();
-                        await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
-                        //refresh page
-                        Frame.GoBack();
-                        Frame.GoForward();
+                        if (await form.sendData())
+                        {
+                            await progressbar.HideAsync();
+                            await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
+                            //refresh page
+                            Frame.GoBack();
+                            Frame.GoForward();
+                        }
+                        else
+                        {
+                            await progressbar.HideAsync();
+                        }
                     }
                     catch (Exception ex)
                     {
                         await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
                         Debug.WriteLine(ex.StackTrace);
                     }
-                }
             }
-            ;
         }
 
         /// <summary>

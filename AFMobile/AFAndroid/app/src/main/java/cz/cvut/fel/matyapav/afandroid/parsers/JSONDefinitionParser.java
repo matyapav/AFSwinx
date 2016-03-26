@@ -70,7 +70,7 @@ public class JSONDefinitionParser implements JSONParser {
         }
         fieldInfo.setId(field.getString(Constants.ID));
 
-        fieldInfo.setLabelText(field.optString(Constants.LABEL));
+        fieldInfo.setLabelText(field.get(Constants.LABEL).equals(null) ? null : field.get(Constants.LABEL).toString());
         fieldInfo.setIsClass(field.optBoolean(Constants.CLASS_TYPE));
         fieldInfo.setVisible(field.optBoolean(Constants.VISIBLE));
         fieldInfo.setReadOnly(field.optBoolean(Constants.READ_ONLY));

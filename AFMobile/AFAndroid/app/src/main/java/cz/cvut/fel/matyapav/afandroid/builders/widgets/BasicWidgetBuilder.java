@@ -6,12 +6,12 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 /**
  * Created by Pavel on 24.02.2016.
  */
-abstract class BasicBuilder implements AbstractWidgetBuilder {
+abstract class BasicWidgetBuilder implements AbstractWidgetBuilder {
 
     private Skin skin;
     private FieldInfo properties;
 
-    public BasicBuilder(Skin skin, FieldInfo properties) {
+    public BasicWidgetBuilder(Skin skin, FieldInfo properties) {
         this.skin = skin;
         this.properties = properties;
     }

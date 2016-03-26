@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
+using Windows.UI.Xaml;
 
 namespace AFWinPhone.components.types
 {
@@ -133,22 +134,42 @@ namespace AFWinPhone.components.types
 
         }
 
-       
-        public async Task sendData()
+        public void hideErrors()
         {
-            if(getConnectionPack().getSendConnection() == null) 
-               {
+            foreach (var field in getFields())
+            {
+                field.getErrorView().Visibility = Visibility.Collapsed;
+            }
+        }
+
+       
+        public async Task<Boolean> sendData()
+        {
+            if (validateData())
+            {
+                if (getConnectionPack().getSendConnection() == null)
+                {
                     throw new Exception(
-                            "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
+                        "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
                 }
                 Object data = generateSendData();
-            if(data == null) {
-                    return;
+                if (data == null)
+                {
+                    return false;
                 }
-                Debug.WriteLine("SEND CONNECTION "+ Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
-                RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
-                    getConnectionPack().getSendConnection().getSecurity(), data, Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
+                Debug.WriteLine("SEND CONNECTION " +
+                                Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
+                RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(),
+                    getConnectionPack().getSendConnection().getContentType(),
+                    getConnectionPack().getSendConnection().getSecurity(), data,
+                    Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
                 await sendTask.doRequest();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private Object generateSendData()

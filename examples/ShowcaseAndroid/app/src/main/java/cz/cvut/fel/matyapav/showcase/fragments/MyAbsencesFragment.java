@@ -33,7 +33,7 @@ public class MyAbsencesFragment extends Fragment {
 
         try {
             AFList list = AFAndroid.getInstance().getListBuilder().initBuilder(getActivity(),
-                    ShowcaseConstants.MY_ABSENCES_LIST , getResources().openRawResource(R.raw.connection_local),
+                    ShowcaseConstants.MY_ABSENCES_LIST , getResources().openRawResource(R.raw.connection),
                     ShowcaseConstants.MY_ABSENCES_CONNECTION_KEY, securityConstrains)
                     .setSkin(new MyAbsencesListSkin(getContext())).createComponent();
             myAbsencesLayout.addView(list.getView());

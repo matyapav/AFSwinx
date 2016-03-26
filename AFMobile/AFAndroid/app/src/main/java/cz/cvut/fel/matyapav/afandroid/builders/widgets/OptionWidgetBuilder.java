@@ -15,7 +15,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 /**
  * Created by Pavel on 15.02.2016.
  */
-public class OptionWidgetBuilder extends BasicBuilder {
+public class OptionWidgetBuilder extends BasicWidgetBuilder {
 
     public OptionWidgetBuilder(Skin skin, FieldInfo properties) {
         super(skin, properties);

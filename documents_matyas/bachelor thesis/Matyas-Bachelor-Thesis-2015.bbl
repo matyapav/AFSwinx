@@ -1,0 +1,78 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[apa()]{apache-cordova}
+\emph{Apache Cordova} [online]. [cit.~23.\,03.\,2016].
+\newblock Dostupn{\'{e}} z: \url{https://cordova.apache.org/}.
+
+\bibitem[asp()]{aspect-faces}
+\emph{AspectFaces framework} [online]. [cit.~23.\,03.\,2016].
+\newblock Dostupn{\'{e}} z: \url{http://www.aspectfaces.com/overview}.
+
+\bibitem[ora()]{oracle-ws}
+\emph{What Are RESTful Web Services?} [online]. [cit.~22.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html}.
+
+\bibitem[uiT()]{uiTypes}
+\emph{Typy uživatelských rozhraní a jejich specifika/old – Wikisofia}
+  [online]. [cit.~22.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://wikisofia.cz/index.php/Typy_u\v{z}ivatelsk\'{y}ch_rozhran\'{i}_a_jejich_specifika/old}.
+
+\bibitem[wik()]{wiki-ws}
+\emph{Web service} [online]. [cit.~22.\,03.\,2016].
+\newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Web_service}.
+
+\bibitem[Ableson()]{dynamic-android-xml}
+ABLESON, F.
+\newblock \emph{Build dynamic user interfaces with Android and XML} [online].
+  [cit.~23.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.ibm.com/developerworks/xml/tutorials/x-andddyntut}.
+
+\bibitem[Bartlett()]{android-auto-update}
+BARTLETT, M.
+\newblock \emph{Enable or Disable Auto-Update Apps in Google Play for Android}
+  [online]. [cit.~23.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.technipages.com/auto-update-apps-setting-google-play}.
+
+\bibitem[Cerny et~al.(2012)Cerny, Chalupa,, Donahoo]{towards-smart-design}
+CERNY, T. -- CHALUPA, V. -- DONAHOO, M.
+\newblock Towards Smart User Interface Design.
+\newblock In \emph{Information Science and Applications (ICISA), 2012
+  International Conference on}, s. 1--6, May 2012.
+\newblock \doi{10.1109/ICISA.2012.6220929}.
+
+\bibitem[Cerny et~al.(2013{\natexlab{a}})Cerny, Cemus, Donahoo,,
+  Song]{aspectdriven}
+CERNY, T. et~al.
+\newblock Aspect-driven, Data-reflective and Context-aware User Interfaces
+  Design.
+\newblock \emph{SIGAPP Appl. Comput. Rev.} December 2013{\natexlab{a}}, 13, 4,
+  s.~53--66.
+\newblock ISSN 1559-6915.
+\newblock \doi{10.1145/2577554.2577561}.
+\newblock Dostupn{\'{e}} z: \url{http://doi.acm.org/10.1145/2577554.2577561}.
+
+\bibitem[Cerny et~al.(2013{\natexlab{b}})Cerny, Donahoo,, Song]{cernyTEA}
+CERNY, T. -- DONAHOO, M.~J. -- SONG, E.
+\newblock Towards Effective Adaptive User Interfaces Design.
+\newblock In \emph{Proceedings of the 2013 Research in Adaptive and Convergent
+  Systems}, RACS '13, s. 373--380, New York, NY, USA, 2013{\natexlab{b}}. ACM.
+\newblock \doi{10.1145/2513228.2513278}.
+\newblock Dostupn{\'{e}} z: \url{http://doi.acm.org/10.1145/2513228.2513278}.
+\newblock ISBN 978-1-4503-2348-2.
+
+\bibitem[Jenkov()]{ws-formats}
+JENKOV, J.
+\newblock \emph{Web Service Message Formats} [online]. [cit.~23.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://tutorials.jenkov.com/web-services/message-formats.html}.
+
+\end{thebibliography}

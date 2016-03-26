@@ -93,32 +93,32 @@ namespace ShowcaseWP.pages
                     .getCreatedComponents()
                     .ContainsKey(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM))
             {
-                var form =
-                    (AFForm)
-                        AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM
-                            ];
-                if (form.validateData())
+            var form = (AFForm) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM];
+                try
                 {
-                    try
+                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                    progressbar.Text = Localization.translate("please.wait");
+                    await progressbar.ShowAsync();
+                    if (await form.sendData())
                     {
-                        var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                        progressbar.Text = Localization.translate("please.wait");
-                        await progressbar.ShowAsync();
-                        await form.sendData();
                         await progressbar.HideAsync();
                         await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
                         //refresh page
                         Frame.GoBack();
                         Frame.GoForward();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
-                        Debug.WriteLine(ex.StackTrace);
+                        await progressbar.HideAsync();
                     }
+                      
+                }
+                catch (Exception ex)
+                {
+                    await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
-                    ;
         }
 
         private void AbsenceManagementPage_ItemClick(object sender, ItemClickEventArgs e)
@@ -131,16 +131,11 @@ namespace ShowcaseWP.pages
                     .getCreatedComponents()
                     .ContainsKey(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM))
             {
-                var absenceForm =
-                    (AFForm)
-                        AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM
-                            ];
-                var absenceList =
-                    (AFList)
-                        AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST
-                            ];
+                var absenceForm = (AFForm) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM];
+                var absenceList = (AFList) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST];
                 var position = absenceList.getListView().Items.IndexOf(e.ClickedItem);
                 absenceForm.insertData(absenceList.getDataFromItemOnPosition(position));
+                absenceForm.hideErrors();
             }
         }
 

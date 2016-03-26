@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using AFWinPhone.builders.widgets;
 
 namespace AFWinPhone.builders
 {

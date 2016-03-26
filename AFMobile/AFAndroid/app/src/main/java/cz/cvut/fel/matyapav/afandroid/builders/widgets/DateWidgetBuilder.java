@@ -10,7 +10,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,7 +23,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 /**
  * Created by Pavel on 14.02.2016.
  */
-public class DateWidgetBuilder extends BasicBuilder {
+public class DateWidgetBuilder extends BasicWidgetBuilder {
 
     private String dateFormat;
 

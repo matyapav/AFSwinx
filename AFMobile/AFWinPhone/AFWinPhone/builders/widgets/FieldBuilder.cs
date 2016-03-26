@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace AFWinPhone.builders
+namespace AFWinPhone.builders.widgets
 {
     class FieldBuilder
     {
@@ -21,28 +21,11 @@ namespace AFWinPhone.builders
             field.setId(road.ToString() + properties.getId());
 
             //LABEL
-            TextBlock label = new TextBlock();
-            if (!String.IsNullOrEmpty(properties.getLabelText()))
-            {
-                String labelText = Localization.translate(properties.getLabelText());
-                //set label position
-                LabelPosition pos = properties.getLayout().getLabelPosition();
-                label.Foreground = new SolidColorBrush(skin.getLabelColor());
-                label.FontFamily = skin.getLabelFont();
-                label.FontSize = skin.getLabelFontSize();
-                label.Text = labelText;
-                label.TextWrapping = TextWrapping.Wrap;
-                field.setLabel(label);
-            }
+            TextBlock label = buildLabel(properties, skin);
+            field.setLabel(label);
 
             //ERROR TEXT
-            TextBlock errorView = new TextBlock();
-            //errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            errorView.Visibility = Visibility.Collapsed;
-            errorView.Foreground = new SolidColorBrush(skin.getValidationColor());
-            errorView.TextWrapping = TextWrapping.Wrap;
-            errorView.FontFamily = skin.getValidationFont();
-            errorView.FontSize = skin.getValidationFontSize();
+            TextBlock errorView = buildErrorView(skin);
             field.setErrorView(errorView);
 
             //Input view
@@ -144,6 +127,36 @@ namespace AFWinPhone.builders
             fullLayoutWithErrors.Children.Add(field.getErrorView());
             fullLayoutWithErrors.Children.Add(fullLayout);
             return fullLayoutWithErrors;
+        }
+
+        private TextBlock buildErrorView(Skin skin)
+        {
+            TextBlock errorView = new TextBlock();
+            //errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            errorView.Visibility = Visibility.Collapsed;
+            errorView.Foreground = new SolidColorBrush(skin.getValidationColor());
+            errorView.TextWrapping = TextWrapping.Wrap;
+            errorView.FontFamily = skin.getValidationFont();
+            errorView.FontSize = skin.getValidationFontSize();
+            return errorView;
+        }
+
+        private TextBlock buildLabel(FieldInfo properties, Skin skin)
+        {
+            TextBlock label = new TextBlock();
+            if (!String.IsNullOrEmpty(properties.getLabelText()))
+            {
+                String labelText = Localization.translate(properties.getLabelText());
+                //set label position
+                LabelPosition pos = properties.getLayout().getLabelPosition();
+                label.Foreground = new SolidColorBrush(skin.getLabelColor());
+                label.FontFamily = skin.getLabelFont();
+                label.FontSize = skin.getLabelFontSize();
+                label.Text = labelText;
+                label.TextWrapping = TextWrapping.Wrap;
+                return label;
+            }
+            return null;
         }
     }
 }

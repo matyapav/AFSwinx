@@ -21,7 +21,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 /**
  * Created by Pavel on 15.02.2016.
  */
-public class DropDownWidgetBuilder extends BasicBuilder {
+public class DropDownWidgetBuilder extends BasicWidgetBuilder {
 
     public DropDownWidgetBuilder(Skin skin, FieldInfo properties) {
         super(skin, properties);

@@ -31,11 +31,12 @@ public class CreateAbsenceFragment extends Fragment {
         public void onClick(View v) {
             AFForm createAbsenceForm = (AFForm) AFAndroid.getInstance().getCreatedComponents()
                     .get(ShowcaseConstants.ABSENCE_ADD_FORM);
-            if(createAbsenceForm != null && createAbsenceForm.validateData()){
+            if(createAbsenceForm != null){
                 try {
-                    createAbsenceForm.sendData();
-                    Toast.makeText(getActivity(), Localization.translate("absence.create"),
-                            Toast.LENGTH_SHORT).show();
+                    if(createAbsenceForm.sendData()) {
+                        Toast.makeText(getActivity(), Localization.translate("absence.create"),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                     alertDialog.setTitle(Localization.translate("absence.createFailed"));
@@ -57,7 +58,7 @@ public class CreateAbsenceFragment extends Fragment {
         securityConstrains.put("user", ShowCaseUtils.getUserLogin(getActivity()));
         try {
             AFForm createAbsenceForm = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
-                    ShowcaseConstants.ABSENCE_ADD_FORM, getResources().openRawResource(R.raw.connection_local),
+                    ShowcaseConstants.ABSENCE_ADD_FORM, getResources().openRawResource(R.raw.connection),
                     ShowcaseConstants.ABSENCE_ADD_FORM_CONNECTION_KEY,
                     securityConstrains).setSkin(new CreateAbsenceFormSkin(getContext())).createComponent();
             createAbsenceLayout.addView(createAbsenceForm.getView());

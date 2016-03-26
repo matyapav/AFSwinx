@@ -50,12 +50,13 @@ public class AbsenceTypeManagementFragment extends Fragment {
         @Override
         public void onClick(View v) {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
-            if(form != null && form.validateData()) {
+            if(form != null) {
                 try {
-                    form.sendData();
-                    Toast.makeText(getActivity(), Localization.translate("success.addOrUpdate"),
-                            Toast.LENGTH_SHORT).show();
-                    ShowCaseUtils.refreshCurrentFragment(getActivity());
+                    if(form.sendData()) {
+                        Toast.makeText(getActivity(), Localization.translate("success.addOrUpdate"),
+                                Toast.LENGTH_SHORT).show();
+                        ShowCaseUtils.refreshCurrentFragment(getActivity());
+                    }
                 } catch (Exception e) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                     alertDialog.setTitle(Localization.translate("error.addOrUpdate"));
@@ -74,6 +75,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(form != null) {
                 form.resetData();
+                form.hideErrors();
             }
         }
     };
@@ -83,6 +85,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(form != null) {
                 form.clearData();
+                form.hideErrors();
             }
         }
     };
@@ -99,7 +102,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
 
         try {
             AFForm chooseCountryForm = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
-                    ShowcaseConstants.CHOOSE_COUNTRY_FORM, getResources().openRawResource(R.raw.connection_local),
+                    ShowcaseConstants.CHOOSE_COUNTRY_FORM, getResources().openRawResource(R.raw.connection),
                     ShowcaseConstants.CHOOSE_COUNTRY_FORM_CONNECTION_KEY).createComponent();
             formWithBtn.addView(chooseCountryForm.getView());
 
@@ -125,7 +128,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
             parameters.put(ShowcaseConstants.ID_KEY, String.valueOf(getCountryId()));
             try {
                 AFList absenceTypeList = AFAndroid.getInstance().getListBuilder().initBuilder(getActivity(),
-                        ShowcaseConstants.ABSENCE_TYPE_LIST, getResources().openRawResource(R.raw.connection_local),
+                        ShowcaseConstants.ABSENCE_TYPE_LIST, getResources().openRawResource(R.raw.connection),
                         ShowcaseConstants.ABSENCE_TYPE_LIST_CONNECTION_KEY, parameters)
                         .setSkin(new AbsenceManagementListSkin(getContext())).createComponent();
                 absenceTypeManagementLayout.addView(absenceTypeList.getView());
@@ -134,7 +137,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
                 securityConstrains.put(ShowcaseConstants.ID_KEY, String.valueOf(getCountryId()));
 
                 AFForm absenceTypeForm = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
-                        ShowcaseConstants.ABSENCE_TYPE_FORM, getResources().openRawResource(R.raw.connection_local),
+                        ShowcaseConstants.ABSENCE_TYPE_FORM, getResources().openRawResource(R.raw.connection),
                         ShowcaseConstants.ABSENCE_TYPE_FORM_CONNECTION_KEY, securityConstrains)
                         .setSkin(new CountryFormSkin(getContext())).createComponent();
                 absenceTypeManagementLayout.addView(absenceTypeForm.getView());
@@ -172,6 +175,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         absenceTypeForm.insertData(absenceTypeList.getDataFromItemOnPosition(position));
+                        absenceTypeForm.hideErrors();
                     }
                 });
             }

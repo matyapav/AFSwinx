@@ -31,12 +31,13 @@ public class ProfileFragment extends Fragment {
         @Override
         public void onClick(View v) {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.PROFILE_FORM);
-            if (form != null && form.validateData()) {
+            if (form != null) {
                 try {
-                    form.sendData();
-                    ShowCaseUtils.refreshCurrentFragment(getActivity());
-                    Toast.makeText(getActivity(), Localization.translate("person.updateSuccess"),
-                            Toast.LENGTH_SHORT).show();
+                    if(form.sendData()) {
+                        ShowCaseUtils.refreshCurrentFragment(getActivity());
+                        Toast.makeText(getActivity(), Localization.translate("person.updateSuccess"),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     //update failed
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -56,6 +57,7 @@ public class ProfileFragment extends Fragment {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.PROFILE_FORM);
             if(form != null){
                 form.resetData();
+                form.hideErrors();
             }
         }
     };
@@ -63,7 +65,7 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        InputStream connectionResource = getResources().openRawResource(R.raw.connection_local);
+        InputStream connectionResource = getResources().openRawResource(R.raw.connection);
 
         View root = inflater.inflate(R.layout.profile_fragment_layout, container, false);
         LinearLayout layout = (LinearLayout) root.findViewById(R.id.profileLayout);
@@ -71,7 +73,8 @@ public class ProfileFragment extends Fragment {
 
         try {
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
-                    ShowcaseConstants.PROFILE_FORM, getResources().openRawResource(R.raw.connection_local),
+                    ShowcaseConstants.PROFILE_FORM, getResources().openRawResource(
+                            R.raw.connection),
                     ShowcaseConstants.PROFILE_FORM_CONNECTION_KEY, securityConstrains).createComponent();
             layout.addView(form.getView());
         } catch (Exception e) {

@@ -33,10 +33,11 @@ public class LoginFragment extends Fragment {
         @Override
         public void onClick(View v) {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.LOGIN_FORM);
-            if (form != null && form.validateData()) {
+            if (form != null) {
                 try {
-                    form.sendData();
-                    doLogin(form);
+                    if(form.sendData()) {
+                        doLogin(form);
+                    }
                 } catch (Exception e) {
                     //login failed
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
@@ -58,7 +59,7 @@ public class LoginFragment extends Fragment {
         try {
             //init builder
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
-                    ShowcaseConstants.LOGIN_FORM, getResources().openRawResource(R.raw.connection_local),
+                    ShowcaseConstants.LOGIN_FORM, getResources().openRawResource(R.raw.connection),
                     ShowcaseConstants.LOGIN_FORM_CONNECTION_KEY).
                     setSkin(new LoginSkin(getContext())).createComponent();
             layout.addView(form.getView());

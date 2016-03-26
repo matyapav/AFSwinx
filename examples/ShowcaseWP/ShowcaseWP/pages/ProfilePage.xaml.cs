@@ -92,6 +92,7 @@ namespace ShowcaseWP.pages
                 AFForm form =
                     (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.PROFILE_FORM];
                 form.resetData();
+                form.hideErrors();
             }
         }
 
@@ -101,24 +102,28 @@ namespace ShowcaseWP.pages
             {
                 AFForm form =
                     (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.PROFILE_FORM];
-                if (form.validateData())
+                try
                 {
-                    try
+                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                    progressbar.Text = Localization.translate("please.wait");
+                    await progressbar.ShowAsync();
+                    if (await form.sendData())
                     {
-                        var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                        progressbar.Text = Localization.translate("please.wait");
-                        await progressbar.ShowAsync();
-                        await form.sendData();
                         await progressbar.HideAsync();
                         await new MessageDialog(Localization.translate("person.updateSuccess")).ShowAsync();
                         Frame.GoBack();
                         Frame.GoForward();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        await new MessageDialog(Localization.translate("person.updateFailed")).ShowAsync();
-                        Debug.WriteLine(ex.StackTrace);
+                        await progressbar.HideAsync();
                     }
+                    
+                }
+                catch (Exception ex)
+                {
+                    await new MessageDialog(Localization.translate("person.updateFailed")).ShowAsync();
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
         }

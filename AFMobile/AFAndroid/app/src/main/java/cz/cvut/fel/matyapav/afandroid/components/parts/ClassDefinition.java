@@ -1,5 +1,7 @@
 package cz.cvut.fel.matyapav.afandroid.components.parts;
 
+import com.tomscz.afrest.rest.dto.AFMetaModelPack;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -143,24 +143,24 @@ namespace ShowcaseWP.pages
             if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.LOGIN_FORM))
             {
                 var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.LOGIN_FORM];
-                if (form.validateData())
+                var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                progressbar.Text = Localization.translate("please.wait");
+                try
                 {
-                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                    progressbar.Text = Localization.translate("please.wait");
-                    try
-                    {
-                        await progressbar.ShowAsync();
-                        await form.sendData();
+                    await progressbar.ShowAsync();
+                    if(await form.sendData())
+                    { 
                         doLogin(form);
-                        await progressbar.HideAsync();
                     }
-                    catch (Exception ex)
-                    {
-                        await progressbar.HideAsync();
-                        await new MessageDialog(Localization.translate("login.failed")).ShowAsync();
-                        Debug.WriteLine(ex.StackTrace);
-                    }
+                    await progressbar.HideAsync();
                 }
+                catch (Exception ex)
+                {
+                    await progressbar.HideAsync();
+                    await new MessageDialog(Localization.translate("login.failed")).ShowAsync();
+                    Debug.WriteLine(ex.StackTrace);
+                }
+                
             }
         }
 

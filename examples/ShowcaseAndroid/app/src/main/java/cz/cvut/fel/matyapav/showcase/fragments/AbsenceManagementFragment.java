@@ -35,12 +35,13 @@ public class AbsenceManagementFragment extends Fragment {
         public void onClick(View v) {
             AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents()
                     .get(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
-            if(form != null && form.validateData()){
+            if(form != null){
                 try {
-                    form.sendData();
-                    ShowCaseUtils.refreshCurrentFragment(getActivity());
-                    Toast.makeText(getActivity(), Localization.translate("success.addOrUpdate"),
-                            Toast.LENGTH_SHORT).show();
+                    if(form.sendData()) {
+                        ShowCaseUtils.refreshCurrentFragment(getActivity());
+                        Toast.makeText(getActivity(), Localization.translate("success.addOrUpdate"),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                     alertDialog.setTitle(Localization.translate("error.addOrUpdate"));
@@ -59,7 +60,7 @@ public class AbsenceManagementFragment extends Fragment {
         LinearLayout layout = (LinearLayout) root.findViewById(R.id.absenceManagementLayout);
 
         //get connection.xml as stream
-        InputStream connectionResource = getResources().openRawResource(R.raw.connection_local);
+        InputStream connectionResource = getResources().openRawResource(R.raw.connection);
         //build security constraints
         HashMap<String, String> securityConstrains = ShowCaseUtils.getUserCredentials(getActivity());
 
@@ -74,7 +75,7 @@ public class AbsenceManagementFragment extends Fragment {
             e.printStackTrace();
         }
 
-        connectionResource = getResources().openRawResource(R.raw.connection_local); //must be called again
+        connectionResource = getResources().openRawResource(R.raw.connection); //must be called again
         try {
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM, connectionResource,
@@ -102,6 +103,7 @@ public class AbsenceManagementFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     absenceForm.insertData(absenceList.getDataFromItemOnPosition(position));
+                    absenceForm.hideErrors();
                 }
             });
         }

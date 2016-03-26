@@ -104,15 +104,17 @@ namespace AFWinPhone.builders.widgets
         private List<String> convertOptionsIntoList()
         {
             List<String> list = new List<String>();
+            //add no selection 
+            list.Add(null);
             if (getProperties().getOptions() != null)
             {
                 foreach (FieldOption option in getProperties().getOptions())
                 {
-                    if (option.getValue().ToString().Equals("true"))
+                    if (option.getValue().Equals("true"))
                     {
                         list.Add(Localization.translate("option.yes"));
                     }
-                    else if (option.getValue().ToString().Equals("false"))
+                    else if (option.getValue().Equals("false"))
                     {
                         list.Add(Localization.translate("option.no"));
                     }

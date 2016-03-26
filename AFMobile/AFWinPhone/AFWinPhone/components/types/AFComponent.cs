@@ -30,12 +30,6 @@ namespace AFWinPhone.components.types
             this.skin = skin;
         }
 
-        //this one should be used by users
-        public void insertData(Object dataObject)
-        {
-            insertData(dataObject.ToString(), new StringBuilder());
-        }
-
         public void addField(AFField field)
         {
             if (fields == null)
@@ -71,11 +65,6 @@ namespace AFWinPhone.components.types
             }
             return res;
         }
-
-        public abstract void insertData(string dataResponse, StringBuilder road);
-        public abstract SupportedComponents getComponentType();
-        public abstract bool validateData();
-        public abstract AFDataHolder reserialize();
 
         //GETTERS
         public String getName()
@@ -148,5 +137,15 @@ namespace AFWinPhone.components.types
         {
             this.layoutOrientation = layoutOrientation;
         }
+
+        public void insertData(String dataResponse)
+        {
+            insertData(dataResponse, new StringBuilder());
+        }
+
+        public abstract void insertData(string dataResponse, StringBuilder road);
+        public abstract SupportedComponents getComponentType();
+        public abstract bool validateData();
+        public abstract AFDataHolder reserialize();
     }
 }

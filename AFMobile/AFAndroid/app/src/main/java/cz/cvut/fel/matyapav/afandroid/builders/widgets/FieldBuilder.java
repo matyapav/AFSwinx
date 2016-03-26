@@ -1,4 +1,4 @@
-package cz.cvut.fel.matyapav.afandroid.builders;
+package cz.cvut.fel.matyapav.afandroid.builders.widgets;
 
 import android.app.Activity;
 import android.view.View;
@@ -28,23 +28,11 @@ public class FieldBuilder {
         field.setId(road.toString()+properties.getId());
 
         //LABEL
-        TextView label = new TextView(activity);
-        if (properties.getLabelText() != null && !properties.getLabelText().isEmpty()) {
-            String labelText = Localization.translate(properties.getLabelText());
-            //set label position
-            LabelPosition pos = properties.getLayout().getLabelPosition();
-            label.setTextColor(skin.getLabelColor());
-            label.setTypeface(skin.getLabelFont());
-            label.setText(labelText);
-            field.setLabel(label);
-        }
+        TextView label = buildLabel(activity, properties, skin);
+        field.setLabel(label);
 
         //ERROR TEXT
-        TextView errorView = new TextView(activity);
-        errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        errorView.setVisibility(View.GONE);
-        errorView.setTextColor(skin.getValidationColor());
-        errorView.setTypeface(skin.getValidationFont());
+        TextView errorView = buildErrorView(activity, skin);
         field.setErrorView(errorView);
 
         //Input view
@@ -113,6 +101,29 @@ public class FieldBuilder {
         fullLayoutWithErrors.addView(field.getErrorView());
         fullLayoutWithErrors.addView(fullLayout);
         return fullLayoutWithErrors;
+    }
+
+    private TextView buildErrorView(Activity activity, Skin skin){
+        TextView errorView = new TextView(activity);
+        errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        errorView.setVisibility(View.GONE);
+        errorView.setTextColor(skin.getValidationColor());
+        errorView.setTypeface(skin.getValidationFont());
+        return errorView;
+    }
+
+    private TextView buildLabel(Activity activity, FieldInfo properties, Skin skin){
+        TextView label = new TextView(activity);
+        if (properties.getLabelText() != null && !properties.getLabelText().isEmpty()) {
+            String labelText = Localization.translate(properties.getLabelText());
+            //set label position
+            LabelPosition pos = properties.getLayout().getLabelPosition();
+            label.setTextColor(skin.getLabelColor());
+            label.setTypeface(skin.getLabelFont());
+            label.setText(labelText);
+            return label;
+        }
+        return null;
     }
 
 }

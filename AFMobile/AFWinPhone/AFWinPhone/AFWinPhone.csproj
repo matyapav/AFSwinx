@@ -81,7 +81,7 @@
   <ItemGroup>
     <Compile Include="AfWindowsPhone.cs" />
     <Compile Include="builders\AFComponentBuilder.cs" />
-    <Compile Include="builders\FieldBuilder.cs" />
+    <Compile Include="builders\widgets\FieldBuilder.cs" />
     <Compile Include="builders\FormBuilder.cs" />
     <Compile Include="builders\ListBuilder.cs" />
     <Compile Include="builders\skins\DefaultSkin.cs" />
@@ -144,9 +144,7 @@
     <Compile Include="utils\Localization.cs" />
     <Compile Include="utils\Utils.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -13,7 +13,7 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 /**
  * Created by Pavel on 15.02.2016.
  */
-public class CheckboxWidgetBuilder extends BasicBuilder {
+public class CheckboxWidgetBuilder extends BasicWidgetBuilder {
 
     public CheckboxWidgetBuilder(Skin skin, FieldInfo properties) {
         super(skin, properties);

@@ -2,6 +2,7 @@ package cz.cvut.fel.matyapav.afandroid.components.types;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.view.View;
 
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
@@ -120,22 +121,26 @@ public class AFForm extends AFComponent {
     }
 
     /*TROCHU POUPRAVENA MARTINOVA METODA*/
-    public void sendData() throws Exception{
-        if (getConnectionPack().getSendConnection() == null) {
-            throw new IllegalStateException(
-                    "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
+    public boolean sendData() throws Exception{
+        if(validateData()) {
+            if (getConnectionPack().getSendConnection() == null) {
+                throw new IllegalStateException(
+                        "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
+            }
+            Object data = generateSendData();
+            if (data == null) {
+                return false;
+            }
+            System.err.println("SEND CONNECTION " + Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
+            RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
+                    getConnectionPack().getSendConnection().getSecurity(), data, Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
+            Object response = sendTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+            if (response instanceof Exception) {
+                throw (Exception) response;
+            }
+            return true;
         }
-        Object data = generateSendData();
-        if (data == null) {
-            return;
-        }
-        System.err.println("SEND CONNECTION "+ Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
-        RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
-                getConnectionPack().getSendConnection().getSecurity(), data, Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
-        Object response = sendTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-        if(response instanceof Exception){
-            throw (Exception) response;
-        }
+        return false;
     }
 
     /*MARTINOVA METODA*/
@@ -154,6 +159,12 @@ public class AFForm extends AFComponent {
         BaseRestBuilder dataBuilder = RestBuilderFactory.getInstance().getBuilder(sendConnection);
         Object data = dataBuilder.reselialize(reserialize());
         return data;
+    }
+
+    public void hideErrors(){
+        for(AFField field : getFields()){
+            field.getErrorView().setVisibility(View.GONE);
+        }
     }
 
     public void resetData() {

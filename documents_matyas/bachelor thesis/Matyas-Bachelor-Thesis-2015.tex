@@ -1,0 +1,202 @@
+\documentclass[11pt,twoside,a4paper]{book}  
+% definice dokumentu
+\usepackage[czech, english]{babel}
+\usepackage[T1]{fontenc} 				% pouzije EC fonty 
+\usepackage[utf8]{inputenc} 			% utf8 kódování vstupu 
+\usepackage[square, numbers]{natbib}	% sazba pouzite literatury
+\usepackage{indentfirst} 				% 1. odstavec jako v cestine, pro práci v aj možno zakomentovat
+\usepackage{fancyhdr}					% tisk hlaviček a patiček stránek
+\usepackage{nomencl} 					% umožňuje snadno definovat zkratky a jejich seznam
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% informace o práci
+\newcommand\WorkTitle{Servisně orientovaný aspektový vývoj uživatelských rozhraní pro mobilní aplikace}		% název
+\newcommand\FirstandFamilyName{Pavel Matyáš}															% autor
+\newcommand\Supervisor{Ing. Martin Tomášek}															% vedoucí
+
+\newcommand\TypeOfWork{Bakalářská práce}	% typ práce [Diplomová práce | Bakalářská práce | Bachelor's Project | Master's Thesis ]	
+
+% Nastavte následují podle vašeho oboru a programu (pomoc hledejte na http://www.fel.cvut.cz/cz/education/bk/prehled.html)								
+\newcommand\StudProgram{Otevřená informatika, Bakalářský}	% program
+\newcommand\StudBranch{Softwarové inženýrství}           					% obor
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% minimální importy
+\usepackage{graphicx}					% pro vkládání obrázků
+\usepackage{k336_thesis_macros} 		% specialni makra pro formatovani DP a BP
+\usepackage[
+pdftitle={\WorkTitle},				% nastaví v informacích o pdf název
+pdfauthor={\FirstandFamilyName},	% nastaví v informacích o pdf autora
+colorlinks=true,					% před tiskem doporučujeme nastavit na false, aby odkazy a url nebyly šedé při ČB tisku
+breaklinks=true,
+urlcolor=red,
+citecolor=blue,
+linkcolor=blue,
+unicode=true,
+]
+{hyperref}								% pro zobrazování "prokliknutelných" linků 
+
+% rozšiřující importy
+\usepackage{listings} 			%slouží pro tisk zdrojových kódů se syntax higlighting
+\usepackage{algorithmicx} 		%slouží pro zápis algoritmů
+\usepackage{algpseudocode} 		%slouží pro výpis pseudokódu
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% příkazy šablony
+\makenomenclature								% při překladu zajistí vytvoření pracovního souboru se seznamem zkratek
+
+\let\oldUrl\url									% url adresy budou zobrazeny: <url> 
+\renewcommand\url[1]{<\texttt{\oldUrl{#1}}>}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vaše vlastní příkazy
+\newcommand*{\nomExpl}[2]{#2 (#1)\nomenclature{#1}{#2}} 	% usnadňuje zápis zkratek : Slova ke Zkrácení (SZ)
+\newcommand*{\nom}[2]{#1\nomenclature{#1}{#2}} 			% usnadňuje zápis zkratek : SZ
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vlastní dokument
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%% 
+	% nastavení jazyka, kterým je práce psána
+	\selectlanguage{czech}	% podle jazyka práce nastavte na [czech | english]
+	\translate				% nastaví české nebo anglické popisy (např. katedra -> department); viz k336_thesis_macros
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%    
+	% Poznamky ke kompletaci prace
+	% Nasledujici pasaz uzavrenou v {} ve sve praci samozrejme 
+	% zakomentujte nebo odstrante. 
+	% Ve vysledne svazane praci bude nahrazena skutecnym 
+	% oficialnim zadanim vasi prace.
+	{
+	\pagenumbering{roman} \cleardoublepage \thispagestyle{empty}
+	\chapter*{Na tomto místě bude oficiální zadání vaší práce}
+	\begin{itemize}
+		\item Toto zadání je podepsané děkanem a vedoucím katedry,
+		\item musíte si ho vyzvednout na studijním oddělení Katedry počítačů na Karlově náměstí,
+		\item v jedné odevzdané práci bude originál tohoto zadání (originál zůstává po obhajobě na katedře),
+		\item ve druhé bude na stejném místě neověřená kopie tohoto dokumentu (tato se vám vrátí po obhajobě).
+	\end{itemize}
+	\newpage
+	}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%    
+	% Titulni stranka / Title page 
+	\coverpagestarts
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+	% Poděkovani / Acknowledgements 
+
+	\acknowledgements
+	\noindent
+	Zde můžete napsat své poděkování, pokud chcete a máte komu děkovat.
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%   
+	% Prohlášení / Declaration 
+
+	\declaration{V~Kořenovicích nad Bečvárkou dne 15.\,5.\,2008}
+	%\declaration{In Kořenovice nad Bečvárkou on May 15, 2008}
+
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+	% Abstrakt / Abstract 
+ 
+	\abstractpage
+
+	Translation of Czech abstract into English.
+
+	% Prace v cestine musi krome abstraktu v anglictine obsahovat i
+	% abstrakt v cestine.
+	\vglue60mm
+
+	\noindent{\Huge \textbf{Abstrakt}}
+	\vskip 2.75\baselineskip
+
+	\noindent
+	Abstrakt práce by měl velmi stručně vystihovat její obsah. Tedy čím se práce zabývá a co je jejím výsledkem/přínosem.
+
+	\noindent
+	Očekávají se cca 1 -- 2 odstavce, maximálně půl stránky.
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%    
+	% obsahy a seznamy
+	\tableofcontents		% Obsah / Table of Contents 
+
+	% pokud v práci nejsou obrázky nebo tabulky - odstraňte jejich seznam
+	\listoffigures			% Obsah / Table of Contents 
+	\listoftables			% Seznam tabulek / List of Tables
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%% 
+	% začátek textu  
+	\mainbodystarts
+%**************************************************************
+
+% Pro snadnejsi praci s vetsimi texty je rozumne tyto rozdelit
+% do samostatnych souboru nejlepe dle kapitol a tyto potom vkladat
+% pomoci prikazu \include{jmeno_souboru.tex} nebo \include{jmeno_souboru}.
+% Napr.:
+% \include{1_uvod}
+% \include{2_teorie}
+% atd...
+
+%*****************************************************************************
+\include{pages/1_uvod}
+\include{pages/2_popisproblemu}
+\include{pages/3_analyza}
+
+%*****************************************************************************
+% Seznam literatury je v samostatnem souboru reference.bib. Ten
+% upravte dle vlastnich potreb, potom zpracujte (a do textu
+% zapracujte) pomoci prikazu bibtex a nasledne pdflatex (nebo
+% latex). Druhy z nich alespon 2x, aby se poresily odkazy.
+
+% originally following specification for bibliography formating was used
+%\bibliographystyle{abbrv}
+
+% Here is an improvment by Petr Dlouhy (April 2010).
+% It is mainly for supervisors who expect Czech fomrating rules for references
+% Additional feature is live url addresses to sources from your pdf file
+% It requires the file csplainnat.bst (included in this sample zipfile).
+\bibliographystyle{csplainnat}
+
+%bibliographystyle{plain}
+%\bibliographystyle{psc}
+{
+%JZ: 11.12.2008 Kdo chce mit v techto ukazkovych odkazech take odkaz na CSTeX:
+\def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}
+\bibliography{reference}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% vše co následuje bude uvedeno v přílohách
+\appendix	
+
+\printnomenclature
+\label{apx:zkratky}
+
+\chapter{Obsah přiloženého CD}
+\textbf{\large Tato příloha je povinná pro každou práci. Každá práce musí totiž obsahovat přiložené CD. Viz dále.}
+
+Může vypadat například takto. Váš seznam samozřejmě bude odpovídat typu vaší práce. (viz \cite{infodp}):
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=14cm]{figures/seznamcd}
+\caption{Seznam přiloženého CD --- příklad}
+\label{fig:seznamcd}
+\end{center}
+\end{figure}
+
+Na GNU/Linuxu si strukturu přiloženého CD můžete snadno vyrobit příkazem:\\ 
+\verb|$ tree . >tree.txt|\\
+Ve vzniklém souboru pak stačí pouze doplnit komentáře.
+
+Z \textbf{README.TXT} (případne index.html apod.)  musí být rovněž zřejmé, jak programy instalovat, spouštět a jaké požadavky mají tyto programy na hardware.
+
+Adresář \textbf{text}  musí obsahovat soubor s vlastním textem práce v PDF nebo PS formátu, který bude později použit pro prezentaci diplomové práce na WWW.
+
+\end{document}

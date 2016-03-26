@@ -1,0 +1,15 @@
+\chapter{Úvod}
+Tato bakalářská práce se zabývá servisně orientovaným generováním uživatelského rozhraní pro mobilní zařízení s využitím knihovny AspectFaces. 
+
+První část práce popisuje využité technologie, aktuální situaci v tvorbě UI pro mobilní zařízení, specifikuje požadavky a cíle práce a analyzuje již existující řešení. Druhá část práce ukazuje návrh řešení, které splňuje stanovené požadavky a cíle. Ve třetí části je popsána struktura a vlastní implementace řešení. Poslední část pak obsahuje otestování řešení a ukazuje vzorovou aplikaci na dvou různých mobilních prostředích.
+
+ZMENIT PO DODELANI
+Práce obsahuje seznam použitých zkratek, které lze najít v příloze A, instalační a uživatelskou pří-
+ručku v příloze B, použité UML diagramy viz. příloha C a zdrojové kódy
+aplikace, které jsou přiloženy na CD, obsah tohoto cd je v příloze D.
+ 
+
+\section{Motivace}
+Nedílnou součástí většíny dnešních aplikací je uživatelské rozhraní. Uživatelské rozhraní by mělo uživateli co nejvíce usnadňovat manipulaci se softwarem a tudíž být intuitivní a použitelné, nemluvě o tom, že by mělo pěkně vypadat. Vývoj takového rozhraní je však časově velmi náročný proces, který zahrnuje nejenom samotný vývoj, ale také rozsáhlé testování, hlavně z hlediska funkčnosti a použitelnosti. Navíc se dnes většina vývojářů softwaru snaží podporovat co nejvíce platforem. Chtějí uživatelům nabídnout možnost operovat s jejich vytvořeným systémem nejen z počítače či laptopu, ale také z tabletu nebo mobilního zařízení. Mobilní verze grafického uživatelského rozhraní nebývá často moc rozdílná a vyskytují se v ní vesměs stejné grafické prvky jako v desktopové verzi a vývojáři tak musí v podstatě vytvořit kopii rozhraní pro mobilní platformu. Tím však vytváří jednu věc hned několikrát a vzniká duplicita. Problémem je, že se často uživatelské rozhraní mění, ať už se změna týká rozložení komponent, přidání nebo odebrání komponenty nebo třeba validace uživatelského vstupu. Takováto změna se pak musí provést na všech platformách a někdy dokonce na více místech v rámci aplikace, což může být v případě rozsáhlých systémů nejednoduchý úkol, který stojí vývojáře spoustu zbytečného času. Pokud bychom byli schopni nadefinovat uživatelské rozhraní jen jednou pro všechny platformy na jednom místě, tento problém bychom odstranili. To však vyžaduje vytvořit pro každou platformu framework, který takto nadefinované uživatelské rozhraní umí interpretovat. 
+
+Bylo mi nabítnuto vytvořit takovýto framework pro dvě mobilní platformy, kontrétně pro Android a Windows Phone, což mi přislo velmi užitečné a zajímavé a proto jsem se rozhodl zpracovat toto téma jako bakalářskou práci.

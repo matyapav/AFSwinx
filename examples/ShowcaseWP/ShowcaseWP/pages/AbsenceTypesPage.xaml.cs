@@ -68,6 +68,7 @@ namespace ShowcaseWP.pages
                     (AFList)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_LIST];
                 int position = absenceTypesList.getListView().Items.IndexOf(e.ClickedItem);
                 absenceTypeForm.insertData(absenceTypesList.getDataFromItemOnPosition(position));
+                absenceTypeForm.hideErrors();
                 AbsenceTypePagePivot.SelectedIndex = 1;
             }
         }
@@ -80,6 +81,7 @@ namespace ShowcaseWP.pages
                 AFForm form =
                     (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
                 form.clearData();
+                form.hideErrors();
             }
             ;
         }
@@ -91,6 +93,7 @@ namespace ShowcaseWP.pages
                 AFForm form =
                     (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
                 form.resetData();
+                form.hideErrors();
             }
             ;
         }
@@ -101,14 +104,13 @@ namespace ShowcaseWP.pages
             {
                 AFForm form =
                     (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
-                if (form.validateData())
+                try
                 {
-                    try
+                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                    progressbar.Text = Localization.translate("please.wait");
+                    await progressbar.ShowAsync();
+                    if (await form.sendData())
                     {
-                        var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                        progressbar.Text = Localization.translate("please.wait");
-                        await progressbar.ShowAsync();
-                        await form.sendData();
                         await progressbar.HideAsync();
                         await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
                         AbsenceTypePagePivot.SelectedIndex = 0;
@@ -118,14 +120,18 @@ namespace ShowcaseWP.pages
                         Frame.GoBack();
                         Frame.GoForward();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
-                        Debug.WriteLine(ex.StackTrace);
+                        await progressbar.HideAsync();
                     }
+                       
+                }
+                catch (Exception ex)
+                {
+                    await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
+                    Debug.WriteLine(ex.StackTrace);
                 }
             }
-            ;
         }
 
         /// <summary>

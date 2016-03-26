@@ -10,11 +10,11 @@ import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.connection.ConnectionParser;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.HashMap;
 
+import cz.cvut.fel.matyapav.afandroid.builders.widgets.FieldBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponentFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
@@ -26,7 +26,6 @@ import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
 import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
-import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**

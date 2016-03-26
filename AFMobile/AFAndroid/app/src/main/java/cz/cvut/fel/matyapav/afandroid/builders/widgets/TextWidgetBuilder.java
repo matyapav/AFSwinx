@@ -16,7 +16,7 @@ import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 /**
  * Created by Pavel on 14.02.2016.
  */
-public class TextWidgetBuilder extends BasicBuilder {
+public class TextWidgetBuilder extends BasicWidgetBuilder {
 
 
     public TextWidgetBuilder(Skin skin, FieldInfo properties) {
