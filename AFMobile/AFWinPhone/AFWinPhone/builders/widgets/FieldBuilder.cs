@@ -14,7 +14,7 @@ namespace AFWinPhone.builders.widgets
     class FieldBuilder
     {
 
-        public AFField prepareField(FieldInfo properties, StringBuilder road, Skin skin)
+        public AFField prepareField(AFFieldInfo properties, StringBuilder road, Skin skin)
         {
 
             AFField field = new AFField(properties);
@@ -52,7 +52,7 @@ namespace AFWinPhone.builders.widgets
             StackPanel fullLayout = new StackPanel();
             //fullLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            LayoutProperties layout = field.getFieldInfo().getLayout();
+            Layout layout = field.getFieldInfo().getLayout();
             //set orientation of label and field itself
             if (layout.getLayoutOrientation() != null)
             {
@@ -141,14 +141,13 @@ namespace AFWinPhone.builders.widgets
             return errorView;
         }
 
-        private TextBlock buildLabel(FieldInfo properties, Skin skin)
+        private TextBlock buildLabel(AFFieldInfo properties, Skin skin)
         {
             TextBlock label = new TextBlock();
             if (!String.IsNullOrEmpty(properties.getLabelText()))
             {
                 String labelText = Localization.translate(properties.getLabelText());
                 //set label position
-                LabelPosition pos = properties.getLayout().getLabelPosition();
                 label.Foreground = new SolidColorBrush(skin.getLabelColor());
                 label.FontFamily = skin.getLabelFont();
                 label.FontSize = skin.getLabelFontSize();

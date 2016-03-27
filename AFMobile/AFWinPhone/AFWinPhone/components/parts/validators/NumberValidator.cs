@@ -10,7 +10,7 @@ namespace AFWinPhone.components.parts.validators
 {
     class NumberValidator : AFValidator
     {
-        public bool validate(AFField field, StringBuilder errorMsgs, ValidationRule rule)
+        public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)
         {
             bool validationIsFine = true;
             String message = "";

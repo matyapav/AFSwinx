@@ -18,7 +18,7 @@ namespace AFWinPhone.components.parts
             return instance;
         }
 
-        public AFValidator getValidator(ValidationRule rule)
+        public AFValidator getValidator(AFValidationRule rule)
         {
             if (rule.getValidationType().Equals(SupportedValidations.REQUIRED.getValidationType()) && Utils.TryToConvertIntoBoolean(rule.getValue()))
             {

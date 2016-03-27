@@ -2,13 +2,12 @@
 
 namespace AFWinPhone.components.parts
 {
-    public class LayoutProperties
+    public class TopLevelLayout
     {
         private LayoutDefinitions layoutDefinition;
         private LayoutOrientation layoutOrientation;
-        private LabelPosition labelPosition;
 
-        public LayoutProperties()
+        public TopLevelLayout()
         {
         }
 
@@ -30,16 +29,6 @@ namespace AFWinPhone.components.parts
         public void setLayoutOrientation(LayoutOrientation layoutOrientation)
         {
             this.layoutOrientation = layoutOrientation;
-        }
-
-        public LabelPosition getLabelPosition()
-        {
-            return this.labelPosition;
-        }
-
-        public void setLabelPosition(LabelPosition labelPosition)
-        {
-            this.labelPosition = labelPosition;
         }
 
     }

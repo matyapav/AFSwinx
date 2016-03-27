@@ -8,7 +8,7 @@ namespace AFWinPhone.components.parts.validators
 {
     class RequiredValidator : AFValidator
     {
-        public bool validate(AFField field, StringBuilder errorMsgs, ValidationRule rule)
+        public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)
         {
             bool validationIsFine = true;
             if (Utils.IsFieldWritable(field.getFieldInfo().getWidgetType()))

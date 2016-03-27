@@ -1,8 +1,9 @@
 package cz.cvut.fel.matyapav.afandroid.builders.widgets;
 
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
@@ -20,7 +21,7 @@ public class WidgetBuilderFactory {
     }
 
 
-    public AbstractWidgetBuilder getFieldBuilder(FieldInfo properties, Skin skin){
+    public AbstractWidgetBuilder getFieldBuilder(AFFieldInfo properties, Skin skin){
         if(Utils.isFieldWritable(properties.getWidgetType())){
             return new TextWidgetBuilder(skin, properties);
         }

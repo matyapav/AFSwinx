@@ -1,6 +1,6 @@
 package cz.cvut.fel.matyapav.afandroid.components.types;
 
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
+import com.tomscz.afrest.commons.SupportedComponents;
 
 /**
  * Created by Pavel on 29.02.2016.

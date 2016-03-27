@@ -7,8 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 
@@ -17,7 +18,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
  */
 public class OptionWidgetBuilder extends BasicWidgetBuilder {
 
-    public OptionWidgetBuilder(Skin skin, FieldInfo properties) {
+    public OptionWidgetBuilder(Skin skin, AFFieldInfo properties) {
         super(skin, properties);
     }
 
@@ -53,7 +54,7 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
             radioGroup.addView(options[0]);
             radioGroup.addView(options[1]);
         }
-        if(getProperties().isReadOnly()){
+        if(getProperties().getReadOnly()){
             radioGroup.setEnabled(false);
         }
         return radioGroup;

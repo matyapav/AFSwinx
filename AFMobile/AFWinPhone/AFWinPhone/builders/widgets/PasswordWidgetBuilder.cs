@@ -9,7 +9,7 @@ namespace AFWinPhone.builders.widgets
 {
     class PasswordWidgetBuilder : BasicBuilder
     {
-        public PasswordWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public PasswordWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
         }
 

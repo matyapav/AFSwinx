@@ -17,7 +17,7 @@ namespace AFWinPhoneTests
         {
             JSONParser parser = new JSONDefinitionParser();
             String wellFormedPersonJson = GetWellFormedJson();
-            ClassDefinition actual = parser.parse(wellFormedPersonJson, false);
+            AFClassInfo actual = parser.parse(wellFormedPersonJson, false);
 
             //test parsing class basic info
             
@@ -26,7 +26,7 @@ namespace AFWinPhoneTests
             Assert.AreEqual(actual.getLayout().getLayoutOrientation(), LayoutOrientation.AXISX);
             Assert.AreEqual(actual.getFieldInfos().Count, 12);
             //test parsing field
-            FieldInfo firstField = actual.getFieldInfos()[0];
+            AFFieldInfo firstField = actual.getFieldInfos()[0];
             Assert.AreEqual(firstField.getWidgetType(), SupportedWidgets.TEXTFIELD);
             Assert.AreEqual(firstField.getId(), "login");
             Assert.AreEqual(firstField.getLabelText(), "Login");
@@ -36,7 +36,7 @@ namespace AFWinPhoneTests
             Assert.AreEqual(firstField.getLayout().getLabelPosition(), LabelPosition.BEFORE);
             Assert.AreEqual(firstField.getRules().Count, 2);
             //test parsing rule
-            ValidationRule firstRule = firstField.getRules()[0];
+            AFValidationRule firstRule = firstField.getRules()[0];
             Assert.AreEqual(firstRule.getValidationType(), SupportedValidations.REQUIRED.getValidationType());
             Assert.AreEqual(firstRule.getValue(), "true");
             //test parsing options
@@ -54,7 +54,7 @@ namespace AFWinPhoneTests
         {
             JSONParser parser = new JSONDefinitionParser();
             String corruptedPersonJson = "{\"classInfo\":{\"name\":\"person\",\"****CORRUPTED FILE****";
-            ClassDefinition actual = parser.parse(corruptedPersonJson, false);
+            AFClassInfo actual = parser.parse(corruptedPersonJson, false);
             Assert.IsNull(actual);
         }
 

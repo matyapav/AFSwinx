@@ -6,6 +6,6 @@ namespace AFWinPhone.parsers
 {
     public interface JSONParser
     {
-        ClassDefinition parse(String jsonStrToBeParsed, bool parsingInnerClass);
+        AFClassInfo parse(String jsonStrToBeParsed, bool parsingInnerClass);
     }
 }

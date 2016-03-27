@@ -10,6 +10,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.tomscz.afrest.commons.SupportedComponents;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.rebuild.holder.AFDataHolder;
 
@@ -22,7 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 

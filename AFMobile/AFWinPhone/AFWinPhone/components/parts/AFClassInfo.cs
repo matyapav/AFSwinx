@@ -3,32 +3,32 @@ using System.Collections.Generic;
 
 namespace AFWinPhone.components.parts
 {
-    public class ClassDefinition
+    public class AFClassInfo
     {
         private String className;
-        private LayoutProperties layout;
-        private List<FieldInfo> fieldInfos;
-        private List<ClassDefinition> innerClasses;
+        private TopLevelLayout layout;
+        private List<AFFieldInfo> fieldInfos;
+        private List<AFClassInfo> innerClasses;
 
-        public ClassDefinition(String className)
+        public AFClassInfo(String className)
         {
             this.className = className;
         }
 
-        public void addFieldInfo(FieldInfo field)
+        public void addFieldInfo(AFFieldInfo afField)
         {
             if (fieldInfos == null)
             {
-                fieldInfos = new List<FieldInfo>();
+                fieldInfos = new List<AFFieldInfo>();
             }
-            fieldInfos.Add(field);
+            fieldInfos.Add(afField);
         }
 
-        public void addInnerClass(ClassDefinition innerClass)
+        public void addInnerClass(AFClassInfo innerClass)
         {
             if (innerClasses == null)
             {
-                innerClasses = new List<ClassDefinition>();
+                innerClasses = new List<AFClassInfo>();
             }
             innerClasses.Add(innerClass);
         }
@@ -45,27 +45,27 @@ namespace AFWinPhone.components.parts
             return this.className;
         }
 
-        public void setLayout(LayoutProperties properties)
+        public void setLayout(TopLevelLayout properties)
         {
             this.layout = properties;
         }
 
-        public LayoutProperties getLayout()
+        public TopLevelLayout getLayout()
         {
             return this.layout;
         }
 
-        public List<FieldInfo> getFieldInfos()
+        public List<AFFieldInfo> getFieldInfos()
         {
             return this.fieldInfos;
         }
 
-        public void setFieldInfos(List<FieldInfo> fieldInfos)
+        public void setFieldInfos(List<AFFieldInfo> fieldInfos)
         {
             this.fieldInfos = fieldInfos;
         }
 
-        public List<ClassDefinition> getInnerClasses()
+        public List<AFClassInfo> getInnerClasses()
         {
             return this.innerClasses;
         }

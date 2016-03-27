@@ -66,7 +66,7 @@ namespace AFWinPhone.builders
             }
         }
 
-        protected void prepareComponent(ClassDefinition classDef, AFComponent component, int numberOfInnerClasses, bool parsingInnerClass, StringBuilder road)
+        protected void prepareComponent(AFClassInfo classDef, AFComponent component, int numberOfInnerClasses, bool parsingInnerClass, StringBuilder road)
         {
             if (parsingInnerClass)
             {
@@ -85,7 +85,7 @@ namespace AFWinPhone.builders
                 }
                 //fieldsView = (TableLayout) buildLayout(classDef, activity);
                 FieldBuilder builder = new FieldBuilder();
-                foreach (FieldInfo field in classDef.getFieldInfos())
+                foreach (AFFieldInfo field in classDef.getFieldInfos())
                 {
                     if (field.isInnerClass())
                     {
@@ -117,7 +117,7 @@ namespace AFWinPhone.builders
             StackPanel componentView = new StackPanel();
             //componentView.setLayoutParams(getSkin().getTopLayoutParams());
             JSONParser parser = new JSONDefinitionParser();
-            ClassDefinition classDef = parser.parse(modelResponse, false);
+            AFClassInfo classDef = parser.parse(modelResponse, false);
             prepareComponent(classDef, component, 0, false, new StringBuilder());
             FrameworkElement view = buildComponentView(component);
             componentView.Children.Add(view);

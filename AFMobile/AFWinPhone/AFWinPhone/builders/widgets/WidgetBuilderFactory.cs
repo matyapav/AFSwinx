@@ -20,7 +20,7 @@ namespace AFWinPhone.builders.widgets
         }
 
 
-        public AbstractWidgetBuilder getFieldBuilder(FieldInfo properties, Skin skin)
+        public AbstractWidgetBuilder getFieldBuilder(AFFieldInfo properties, Skin skin)
         {
             if (Utils.IsFieldWritable(properties.getWidgetType()))
             {

@@ -3,6 +3,8 @@ package cz.cvut.fel.matyapav.afandroid.components.types;
 import android.app.Activity;
 import android.view.ViewGroup;
 
+import com.tomscz.afrest.layout.definitions.LayouDefinitions;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 
 import java.util.ArrayList;
@@ -10,8 +12,6 @@ import java.util.List;
 
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutDefinitions;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
 
 /**
  * Created by Pavel on 13.02.2016.
@@ -21,7 +21,7 @@ public abstract class AFComponent implements AbstractComponent{
     private Activity activity;
     private String name;
     private ViewGroup view;
-    private LayoutDefinitions layoutDefinitions;
+    private LayouDefinitions layoutDefinitions;
     private LayoutOrientation layoutOrientation;
     private List<AFField> fields;
     private AFSwinxConnectionPack connectionPack;
@@ -62,7 +62,7 @@ public abstract class AFComponent implements AbstractComponent{
     public int getVisibleFieldsCount(){
         int res = 0;
         for (AFField field: getFields()) {
-            if(field.getFieldInfo().isVisible()){
+            if(field.getFieldInfo().getVisible()){
                 res++;
             }
         }
@@ -98,7 +98,7 @@ public abstract class AFComponent implements AbstractComponent{
         return layoutOrientation;
     }
 
-    public LayoutDefinitions getLayoutDefinitions() {
+    public LayouDefinitions getLayoutDefinitions() {
         return layoutDefinitions;
     }
 
@@ -127,7 +127,7 @@ public abstract class AFComponent implements AbstractComponent{
         this.view = view;
     }
 
-    public void setLayoutDefinitions(LayoutDefinitions layoutDefinitions) {
+    public void setLayoutDefinitions(LayouDefinitions layoutDefinitions) {
         this.layoutDefinitions = layoutDefinitions;
     }
 

@@ -3,6 +3,9 @@ package cz.cvut.fel.matyapav.afandroid.components.parts;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+import com.tomscz.afrest.rest.dto.AFValidationRule;
+
 import cz.cvut.fel.matyapav.afandroid.components.parts.validators.AFValidator;
 import cz.cvut.fel.matyapav.afandroid.components.parts.validators.ValidatorFactory;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
@@ -13,7 +16,7 @@ import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
  */
 public class AFField {
 
-    private FieldInfo fieldInfo;
+    private AFFieldInfo fieldInfo;
     private String id;
     private TextView label;
 
@@ -24,7 +27,7 @@ public class AFField {
 
     private AFComponent parent;
 
-    public AFField(FieldInfo fieldInfo) {
+    public AFField(AFFieldInfo fieldInfo) {
         this.fieldInfo = fieldInfo;
     }
 
@@ -33,7 +36,7 @@ public class AFField {
         StringBuilder errorMsgs = new StringBuilder();
         errorView.setVisibility(View.GONE);
         if(fieldInfo.getRules() != null) {
-            for (ValidationRule rule : fieldInfo.getRules()) {
+            for (AFValidationRule rule : fieldInfo.getRules()) {
                 AFValidator validator = ValidatorFactory.getInstance().getValidator(rule);
                 System.out.println("VALIDATION RULE "+rule.toString());
                 System.out.println("VALIDATOR "+validator.toString());
@@ -93,7 +96,7 @@ public class AFField {
         return completeView;
     }
 
-    public FieldInfo getFieldInfo() {
+    public AFFieldInfo getFieldInfo() {
         return fieldInfo;
     }
 

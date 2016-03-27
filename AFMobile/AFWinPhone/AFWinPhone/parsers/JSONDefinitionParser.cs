@@ -9,9 +9,9 @@ namespace AFWinPhone.parsers
 {
     public class JSONDefinitionParser : JSONParser
     {
-        public ClassDefinition parse(String classInfoStr, bool parsingInnerClass)
+        public AFClassInfo parse(String classInfoStr, bool parsingInnerClass)
         {
-            ClassDefinition definition = null;
+            AFClassInfo definition = null;
 
             try
             {
@@ -23,11 +23,11 @@ namespace AFWinPhone.parsers
 
                 //Parse class name and create data pack with this class name
                 Debug.WriteLine("PARSING CLASS " + Utils.TryToGetValueFromJson(classInfo[Constants.CLASS_NAME]));
-                definition = new ClassDefinition((String) Utils.TryToGetValueFromJson(classInfo[Constants.CLASS_NAME]));
+                definition = new AFClassInfo((String) Utils.TryToGetValueFromJson(classInfo[Constants.CLASS_NAME]));
 
                 //Parse layout
                 JsonObject layout = (JsonObject) Utils.TryToGetValueFromJson(classInfo[Constants.LAYOUT]);
-                definition.setLayout(createLayoutProperties(layout));
+                definition.setLayout(createTopLayoutProperties(layout));
 
                 //Parse fields
                 JsonArray fields = (JsonArray) Utils.TryToGetValueFromJson(classInfo[Constants.FIELD_INFO]);
@@ -57,10 +57,10 @@ namespace AFWinPhone.parsers
             return definition;
         }
 
-        private FieldInfo parseFieldInfo(JsonObject field)
+        private AFFieldInfo parseFieldInfo(JsonObject field)
         {
             Debug.WriteLine("PARSING FIELD " + Utils.TryToGetValueFromJson(field[Constants.ID]));
-            FieldInfo fieldInfo = new FieldInfo();
+            AFFieldInfo fieldInfo = new AFFieldInfo();
             try
             {
                 fieldInfo.setWidgetType(Utils.ValueOf<SupportedWidgets>(typeof(SupportedWidgets), (String) Utils.TryToGetValueFromJson(field[Constants.WIDGET_TYPE])));
@@ -91,7 +91,7 @@ namespace AFWinPhone.parsers
             {
                 if (fieldInfo.getWidgetType().Equals(SupportedWidgets.NUMBERFIELD) || fieldInfo.getWidgetType().Equals(SupportedWidgets.NUMBERDOUBLEFIELD))
                 {
-                    ValidationRule numberRule = new ValidationRule();
+                    AFValidationRule numberRule = new AFValidationRule();
                     numberRule.setValidationType("NUMBER");
                     numberRule.setValue("");
                     fieldInfo.addRule(numberRule);
@@ -114,10 +114,45 @@ namespace AFWinPhone.parsers
             return fieldInfo;
         }
 
-
-        private LayoutProperties createLayoutProperties(JsonObject layoutJson)
+        private TopLevelLayout createTopLayoutProperties(JsonObject layoutJson)
         {
-            LayoutProperties layoutProp = new LayoutProperties();
+            TopLevelLayout layoutProp = new TopLevelLayout();
+            if (layoutJson == null)
+            {
+                layoutProp.setLayoutDefinition(LayoutDefinitions.ONECOLUMNLAYOUT);
+                layoutProp.setLayoutOrientation(LayoutOrientation.AXISX);
+                return layoutProp; //with default values
+            }
+
+            try
+            {
+                String layDefName = (String)Utils.TryToGetValueFromJson(layoutJson[Constants.LAYOUT_DEF]);
+                LayoutDefinitions layDef = Utils.ValueOf<LayoutDefinitions>(typeof(LayoutDefinitions), layDefName);
+                if (layDef != null)
+                {
+                    layoutProp.setLayoutDefinition(layDef);
+                }
+
+                String orientation = (String)Utils.TryToGetValueFromJson(layoutJson[Constants.LAYOUT_ORIENT]);
+                LayoutOrientation layOrient = Utils.ValueOf<LayoutOrientation>(typeof(LayoutOrientation), orientation);
+                if (layOrient != null)
+                {
+                    layoutProp.setLayoutOrientation(layOrient);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                //e.printStackTrace();
+            }
+            return layoutProp;
+        }
+
+
+
+        private Layout createLayoutProperties(JsonObject layoutJson)
+        {
+            Layout layoutProp = new Layout();
             if (layoutJson == null)
             {
                 layoutProp.setLayoutDefinition(LayoutDefinitions.ONECOLUMNLAYOUT);
@@ -158,17 +193,17 @@ namespace AFWinPhone.parsers
             return layoutProp;
         }
 
-        private ValidationRule createRule(JsonObject ruleJson)
+        private AFValidationRule createRule(JsonObject ruleJson)
         {
-            ValidationRule rule = new ValidationRule();
+            AFValidationRule rule = new AFValidationRule();
             rule.setValidationType((String) Utils.TryToGetValueFromJson(ruleJson[Constants.VALIDATION_TYPE]));
             rule.setValue((String) Utils.TryToGetValueFromJson(ruleJson[Constants.VALUE]));
             return rule;
         }
 
-        private FieldOption createOption(JsonObject optionJson)
+        private AFOptions createOption(JsonObject optionJson)
         {
-            FieldOption option = new FieldOption();
+            AFOptions option = new AFOptions();
             option.setKey((String) Utils.TryToGetValueFromJson(optionJson[Constants.KEY]));
             option.setValue((String) Utils.TryToGetValueFromJson(optionJson[Constants.VALUE]));
             return option;

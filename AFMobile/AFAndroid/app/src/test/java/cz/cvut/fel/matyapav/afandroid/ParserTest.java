@@ -1,15 +1,16 @@
 package cz.cvut.fel.matyapav.afandroid;
 
+import com.tomscz.afrest.commons.SupportedValidations;
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.layout.definitions.LabelPosition;
+import com.tomscz.afrest.layout.definitions.LayouDefinitions;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+import com.tomscz.afrest.rest.dto.AFClassInfo;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+import com.tomscz.afrest.rest.dto.AFValidationRule;
+
 import org.junit.Test;
 
-import cz.cvut.fel.matyapav.afandroid.components.parts.ClassDefinition;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
-import cz.cvut.fel.matyapav.afandroid.components.parts.ValidationRule;
-import cz.cvut.fel.matyapav.afandroid.enums.LabelPosition;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutDefinitions;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedValidations;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
 
@@ -28,33 +29,33 @@ public class ParserTest {
 
         JSONParser parser = new JSONDefinitionParser();
         String wellFormedPersonJson = getWellFormedJson();
-        ClassDefinition actual = parser.parse(wellFormedPersonJson, false);
+        AFClassInfo actual = parser.parse(wellFormedPersonJson, false);
 
         //test parsing class basic info
-        assertEquals(actual.getClassName(), "person");
-        assertEquals(actual.getLayout().getLayoutDefinition(), LayoutDefinitions.ONECOLUMNLAYOUT);
+        assertEquals(actual.getName(), "person");
+        assertEquals(actual.getLayout().getLayoutDefinition(), LayouDefinitions.ONECOLUMNLAYOUT);
         assertEquals(actual.getLayout().getLayoutOrientation(), LayoutOrientation.AXISX);
-        assertEquals(actual.getFieldInfos().size(), 12);
+        assertEquals(actual.getFieldInfo().size(), 12);
         //test parsing field
-        FieldInfo firstField = actual.getFieldInfos().get(0);
+        AFFieldInfo firstField = actual.getFieldInfo().get(0);
         assertEquals(firstField.getWidgetType(), SupportedWidgets.TEXTFIELD);
         assertEquals(firstField.getId(), "login");
-        assertEquals(firstField.getLabelText(), "Login");
-        assertFalse(firstField.isReadOnly());
-        assertFalse(firstField.isInnerClass());
-        assertTrue(firstField.isVisible());
-        assertEquals(firstField.getLayout().getLabelPosition(), LabelPosition.BEFORE);
+        assertEquals(firstField.getLabel(), "Login");
+        assertFalse(firstField.getReadOnly());
+        assertFalse(firstField.getClassType());
+        assertTrue(firstField.getVisible());
+        assertEquals(firstField.getLayout().getLabelPosstion(), LabelPosition.BEFORE);
         assertEquals(firstField.getRules().size(), 2);
         //test parsing rule
-        ValidationRule firstRule = firstField.getRules().get(0);
-        assertEquals(firstRule.getValidationType(), SupportedValidations.REQUIRED.getValidationType());
+        AFValidationRule firstRule = firstField.getRules().get(0);
+        assertEquals(firstRule.getValidationType(), SupportedValidations.REQUIRED);
         assertEquals(firstRule.getValue(), "true");
         //test parsing options
         assertNull(firstField.getOptions());
         //test parsing innerclasses
         assertEquals(actual.getInnerClasses().size(), 1);
-        assertEquals(actual.getInnerClasses().get(0).getClassName(), "myAddress");
-        assertEquals(actual.getInnerClasses().get(0).getFieldInfos().size(), 5);
+        assertEquals(actual.getInnerClasses().get(0).getName(), "myAddress");
+        assertEquals(actual.getInnerClasses().get(0).getFieldInfo().size(), 5);
         System.out.println("Parsing date test PASSED");
     }
 
@@ -62,7 +63,7 @@ public class ParserTest {
     public void testParseFieldInfo_Corrupted() throws Exception{
         JSONParser parser = new JSONDefinitionParser();
         String corruptedPersonJson = "{\"classInfo\":{\"name\":\"person\",\"****CORRUPTED FILE****";
-        ClassDefinition actual = parser.parse(corruptedPersonJson, false);
+        AFClassInfo actual = parser.parse(corruptedPersonJson, false);
         assertNull(actual);
     }
 

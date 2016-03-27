@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 
 /**
  * Created by Pavel on 14.02.2016.
@@ -19,7 +20,7 @@ import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 public class TextWidgetBuilder extends BasicWidgetBuilder {
 
 
-    public TextWidgetBuilder(Skin skin, FieldInfo properties) {
+    public TextWidgetBuilder(Skin skin, AFFieldInfo properties) {
         super(skin, properties);
     }
 
@@ -29,7 +30,7 @@ public class TextWidgetBuilder extends BasicWidgetBuilder {
         text.setTextColor(getSkin().getFieldColor());
         text.setTypeface(getSkin().getFieldFont());
         addInputType(text, getProperties().getWidgetType());
-        if(getProperties().isReadOnly()){
+        if(getProperties().getReadOnly()){
             text.setInputType(InputType.TYPE_NULL);
             text.setTextColor(Color.LTGRAY);
         }
@@ -43,7 +44,7 @@ public class TextWidgetBuilder extends BasicWidgetBuilder {
             field.setActualData(value);
 
             //TODO zvazit tuhle feature .. non editable texty nejdou posunout v pripade, ze je user nevidi cele.
-            if(field.getFieldInfo().isReadOnly()) {
+            if(field.getFieldInfo().getReadOnly()) {
                 field.getFieldView().setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {

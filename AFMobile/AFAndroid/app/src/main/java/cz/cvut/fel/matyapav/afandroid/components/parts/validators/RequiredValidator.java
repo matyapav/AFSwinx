@@ -4,9 +4,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.rest.dto.AFValidationRule;
+
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.ValidationRule;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
@@ -16,7 +17,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 public class RequiredValidator implements AFValidator {
 
     @Override
-    public boolean validate(AFField field, StringBuilder errorMsgs, ValidationRule rule) {
+    public boolean validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule) {
         boolean validationIsFine = true;
         if(Utils.isFieldWritable(field.getFieldInfo().getWidgetType()) || field.getFieldInfo().getWidgetType().equals(SupportedWidgets.CALENDAR)){
             EditText textfield = (EditText) field.getFieldView();

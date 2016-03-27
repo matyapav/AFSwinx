@@ -7,9 +7,9 @@ namespace AFWinPhone.builders.widgets
     abstract class BasicBuilder : AbstractWidgetBuilder
     {
         private Skin skin;
-        private FieldInfo properties;
+        private AFFieldInfo properties;
 
-        public BasicBuilder(Skin skin, FieldInfo properties)
+        public BasicBuilder(Skin skin, AFFieldInfo properties)
         {
             this.skin = skin;
             this.properties = properties;
@@ -20,7 +20,7 @@ namespace AFWinPhone.builders.widgets
             return skin;
         }
 
-        public FieldInfo getProperties()
+        public AFFieldInfo getProperties()
         {
             return properties;
         }

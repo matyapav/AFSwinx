@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.tomscz.afrest.commons.SupportedComponents;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.rebuild.BaseRestBuilder;
@@ -25,7 +26,6 @@ import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.components.parts.CustomListAdapter;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 
 /**
  * Created by Pavel on 24.02.2016.

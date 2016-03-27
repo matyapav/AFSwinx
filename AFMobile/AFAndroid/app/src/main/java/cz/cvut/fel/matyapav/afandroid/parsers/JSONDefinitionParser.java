@@ -1,18 +1,22 @@
 package cz.cvut.fel.matyapav.afandroid.parsers;
 
+import com.tomscz.afrest.commons.SupportedProperties;
+import com.tomscz.afrest.commons.SupportedValidations;
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.layout.Layout;
+import com.tomscz.afrest.layout.TopLevelLayout;
+import com.tomscz.afrest.layout.definitions.LabelPosition;
+import com.tomscz.afrest.layout.definitions.LayouDefinitions;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+import com.tomscz.afrest.rest.dto.AFClassInfo;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+import com.tomscz.afrest.rest.dto.AFOptions;
+import com.tomscz.afrest.rest.dto.AFValidationRule;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cz.cvut.fel.matyapav.afandroid.components.parts.ClassDefinition;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldOption;
-import cz.cvut.fel.matyapav.afandroid.components.parts.LayoutProperties;
-import cz.cvut.fel.matyapav.afandroid.components.parts.ValidationRule;
-import cz.cvut.fel.matyapav.afandroid.enums.LabelPosition;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutDefinitions;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 
 /**
@@ -21,9 +25,9 @@ import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 public class JSONDefinitionParser implements JSONParser {
 
     @Override
-    public ClassDefinition parse(String classInfoJson, boolean parsingInnerClass){
+    public AFClassInfo parse(String classInfoJson, boolean parsingInnerClass){
 
-        ClassDefinition definition = null;
+        AFClassInfo definition = null;
 
         try {
             JSONObject classInfo = new JSONObject(classInfoJson);
@@ -31,12 +35,14 @@ public class JSONDefinitionParser implements JSONParser {
                 classInfo = classInfo.optJSONObject(Constants.CLASS_INFO);
             }
             //Parse class name and create data pack with this class name
-            System.err.println("PARSING CLASS "+ classInfo.getString(Constants.CLASS_NAME));
-            definition = new ClassDefinition(classInfo.getString(Constants.CLASS_NAME));
+            //System.err.println("PARSING CLASS "+ classInfo.getString(Constants.CLASS_NAME));
+            definition = new AFClassInfo();
+            System.err.println("PARSING CLASS " + classInfo.getString(Constants.CLASS_NAME));
+            definition.setName(classInfo.getString(Constants.CLASS_NAME));
 
             //Parse layout
             JSONObject layout = classInfo.optJSONObject(Constants.LAYOUT);
-            definition.setLayout(createLayoutProperties(layout));
+            definition.setLayout(createTopLayoutProperties(layout));
 
             //Parse fields
             JSONArray fields = classInfo.optJSONArray(Constants.FIELD_INFO);
@@ -60,9 +66,9 @@ public class JSONDefinitionParser implements JSONParser {
         return definition;
     }
 
-    private FieldInfo parseFieldInfo(JSONObject field) throws JSONException {
+    private AFFieldInfo parseFieldInfo(JSONObject field) throws JSONException {
         System.out.println("PARSING FIELD " + field.getString(Constants.ID));
-        FieldInfo fieldInfo = new FieldInfo();
+        AFFieldInfo fieldInfo = new AFFieldInfo();
         try {
             fieldInfo.setWidgetType(SupportedWidgets.valueOf(field.optString(Constants.WIDGET_TYPE)));
         }catch (IllegalArgumentException e){
@@ -70,8 +76,8 @@ public class JSONDefinitionParser implements JSONParser {
         }
         fieldInfo.setId(field.getString(Constants.ID));
 
-        fieldInfo.setLabelText(field.get(Constants.LABEL).equals(null) ? null : field.get(Constants.LABEL).toString());
-        fieldInfo.setIsClass(field.optBoolean(Constants.CLASS_TYPE));
+        fieldInfo.setLabel(field.get(Constants.LABEL).equals(null) ? null : field.get(Constants.LABEL).toString());
+        fieldInfo.setClassType(field.optBoolean(Constants.CLASS_TYPE));
         fieldInfo.setVisible(field.optBoolean(Constants.VISIBLE));
         fieldInfo.setReadOnly(field.optBoolean(Constants.READ_ONLY));
         //field layout
@@ -94,18 +100,45 @@ public class JSONDefinitionParser implements JSONParser {
         return fieldInfo;
     }
 
-    private LayoutProperties createLayoutProperties(JSONObject layoutJson) throws JSONException {
-        LayoutProperties layoutProp = new LayoutProperties();
+    private TopLevelLayout createTopLayoutProperties(JSONObject layoutJson) throws JSONException {
+        TopLevelLayout layoutProp = new TopLevelLayout();
         if(layoutJson == null){
-            layoutProp.setLayoutDefinition(LayoutDefinitions.ONECOLUMNLAYOUT);
+            layoutProp.setLayoutDefinition(LayouDefinitions.ONECOLUMNLAYOUT);
             layoutProp.setLayoutOrientation(LayoutOrientation.AXISX);
-            layoutProp.setLabelPosition(LabelPosition.BEFORE);
             return layoutProp; //with default values
         }
 
         try {
             String layDefName = layoutJson.optString(Constants.LAYOUT_DEF);
-            LayoutDefinitions layDef = LayoutDefinitions.valueOf(layDefName);
+            LayouDefinitions layDef = LayouDefinitions.valueOf(layDefName);
+            if(layDef != null){
+                layoutProp.setLayoutDefinition(layDef);
+            }
+
+            String orientation = layoutJson.optString(Constants.LAYOUT_ORIENT);
+            LayoutOrientation layOrient = LayoutOrientation.valueOf(orientation);
+            if(layOrient != null){
+                layoutProp.setLayoutOrientation(layOrient);
+            }
+        }catch(IllegalArgumentException e){
+            System.err.println(e.getLocalizedMessage());
+            //e.printStackTrace();
+        }
+        return layoutProp;
+    }
+
+    private Layout createLayoutProperties(JSONObject layoutJson) throws JSONException{
+        Layout layoutProp = new Layout();
+        if(layoutJson == null){
+            layoutProp.setLayoutDefinition(LayouDefinitions.ONECOLUMNLAYOUT);
+            layoutProp.setLayoutOrientation(LayoutOrientation.AXISX);
+            layoutProp.setLabelPosstion(LabelPosition.BEFORE);
+            return layoutProp; //with default values
+        }
+
+        try {
+            String layDefName = layoutJson.optString(Constants.LAYOUT_DEF);
+            LayouDefinitions layDef = LayouDefinitions.valueOf(layDefName);
             if(layDef != null){
                 layoutProp.setLayoutDefinition(layDef);
             }
@@ -116,11 +149,10 @@ public class JSONDefinitionParser implements JSONParser {
                 layoutProp.setLayoutOrientation(layOrient);
             }
 
-            String position  = layoutJson.optString(Constants.LABEL_POS);
-
-            LabelPosition labelPos = LabelPosition.valueOf(position);
-            if (labelPos != null) {
-                layoutProp.setLabelPosition(labelPos);
+            String labelPosition = layoutJson.optString(Constants.LABEL_POS);
+            LabelPosition position = LabelPosition.valueOf(labelPosition);
+            if(position != null){
+                layoutProp.setLabelPosstion(position);
             }
         }catch(IllegalArgumentException e){
             System.err.println(e.getLocalizedMessage());
@@ -129,23 +161,21 @@ public class JSONDefinitionParser implements JSONParser {
         return layoutProp;
     }
 
-    private ValidationRule createRule(JSONObject ruleJson) throws JSONException {
+    private AFValidationRule createRule(JSONObject ruleJson) throws JSONException {
         if(ruleJson != null) {
-            ValidationRule rule = new ValidationRule();
-            rule.setValidationType(ruleJson.optString(Constants.VALIDATION_TYPE));
-            rule.setValue(ruleJson.optString(Constants.VALUE));
-            return rule;
+            String validationType = ruleJson.optString(Constants.VALIDATION_TYPE);
+            String value = ruleJson.optString(Constants.VALUE);
+            return new AFValidationRule(SupportedValidations.valueOf(validationType), value);
         }else{
             return null;
         }
     }
 
-    private FieldOption createOption(JSONObject optionJson) throws JSONException {
+    private AFOptions createOption(JSONObject optionJson) throws JSONException {
         if(optionJson != null) {
-            FieldOption option = new FieldOption();
-            option.setKey(optionJson.optString(Constants.KEY));
-            option.setValue(optionJson.optString(Constants.VALUE));
-            return option;
+            String key = optionJson.optString(Constants.KEY);
+            String value = optionJson.optString(Constants.VALUE);
+            return new AFOptions(key, value);
         }else{
             return null;
         }

@@ -6,8 +6,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 
 /**
@@ -15,7 +16,7 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
  */
 public class CheckboxWidgetBuilder extends BasicWidgetBuilder {
 
-    public CheckboxWidgetBuilder(Skin skin, FieldInfo properties) {
+    public CheckboxWidgetBuilder(Skin skin, AFFieldInfo properties) {
         super(skin, properties);
     }
 
@@ -24,7 +25,7 @@ public class CheckboxWidgetBuilder extends BasicWidgetBuilder {
         CheckBox checkBox = new CheckBox(activity);
         checkBox.setTextColor(getSkin().getFieldColor());
         checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        if(getProperties().isReadOnly()){
+        if(getProperties().getReadOnly()){
             checkBox.setEnabled(false);
         }
         return checkBox;

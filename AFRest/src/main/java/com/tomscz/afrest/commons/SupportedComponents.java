@@ -10,7 +10,7 @@ package com.tomscz.afrest.commons;
  */
 public enum SupportedComponents {
 
-    FORM("FORM"),TABLE("TABLE");
+    FORM("FORM"),TABLE("TABLE"),LIST("LIST");
 
     private final String name;
 

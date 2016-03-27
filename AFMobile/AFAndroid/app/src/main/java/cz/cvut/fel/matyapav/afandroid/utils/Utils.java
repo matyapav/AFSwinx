@@ -5,6 +5,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
 import android.widget.TextView;
 
+import com.tomscz.afrest.commons.SupportedWidgets;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import java.util.Date;
 
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 
 /**
  * Created by Pavel on 25.12.2015.
@@ -65,7 +65,7 @@ public class Utils {
     public static boolean shouldBeInvisible(String column, AFComponent component) {
         for(AFField field: component.getFields()){
             if(field.getId().equals(column)){
-                return !field.getFieldInfo().isVisible();
+                return !field.getFieldInfo().getVisible();
             }
         }
         return true;

@@ -4,7 +4,7 @@ using AFWinPhone.enums;
 
 namespace AFWinPhone.components.parts
 {
-    public class FieldInfo
+    public class AFFieldInfo
     {
         private SupportedWidgets widgetType;
         private String id;
@@ -12,24 +12,24 @@ namespace AFWinPhone.components.parts
         private bool innerClass;
         private bool readOnly;
         private bool visible;
-        private LayoutProperties layout;
-        private List<ValidationRule> rules;
-        private List<FieldOption> options;
+        private Layout layout;
+        private List<AFValidationRule> rules;
+        private List<AFOptions> options;
 
-        public void addRule(ValidationRule rule)
+        public void addRule(AFValidationRule rule)
         {
             if (rules == null)
             {
-                rules = new List<ValidationRule>();
+                rules = new List<AFValidationRule>();
             }
             rules.Add(rule);
         }
 
-        public void addOption(FieldOption option)
+        public void addOption(AFOptions option)
         {
             if (options == null)
             {
-                options = new List<FieldOption>();
+                options = new List<AFOptions>();
             }
             options.Add(option);
         }
@@ -94,22 +94,22 @@ namespace AFWinPhone.components.parts
             this.visible = visible;
         }
 
-        public LayoutProperties getLayout()
+        public Layout getLayout()
         {
             return this.layout;
         }
 
-        public void setLayout(LayoutProperties layout)
+        public void setLayout(Layout layout)
         {
             this.layout = layout;
         }
 
-        public List<ValidationRule> getRules()
+        public List<AFValidationRule> getRules()
         {
             return this.rules;
         }
 
-        public List<FieldOption> getOptions()
+        public List<AFOptions> getOptions()
         {
             return this.options;
         }

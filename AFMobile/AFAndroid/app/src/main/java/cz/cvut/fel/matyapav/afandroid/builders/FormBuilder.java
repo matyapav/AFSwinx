@@ -4,12 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.tomscz.afrest.commons.SupportedComponents;
+import com.tomscz.afrest.layout.definitions.LayouDefinitions;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+
 import cz.cvut.fel.matyapav.afandroid.AFAndroid;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFForm;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
 
 /**
  * Builds for from class definition
@@ -55,12 +57,17 @@ public class FormBuilder extends AFComponentBuilder<FormBuilder>{
         }
 
         //determine layout
-        int numberOfColumns = form.getLayoutDefinitions().getNumberOfColumns();
+        int numberOfColumns;
+        if(form.getLayoutDefinitions().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
+            numberOfColumns = 2;
+        }else {
+            numberOfColumns = 1;
+        }
 
         int i = 0;
         LinearLayout setOfFields = null;;
         for (AFField field : form.getFields()) {
-            if(!field.getFieldInfo().isVisible()){
+            if(!field.getFieldInfo().getVisible()){
                 continue;
             }
             if (i % numberOfColumns == 0) {

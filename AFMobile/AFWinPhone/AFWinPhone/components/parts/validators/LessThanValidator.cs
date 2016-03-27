@@ -9,7 +9,7 @@ namespace AFWinPhone.components.parts.validators
 {
     class LessThanValidator : AFValidator
     {
-        public bool validate(AFField field, StringBuilder errorMsgs, ValidationRule rule)
+        public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)
         {
             bool validationIsFine = true;
             Object otherData = ((AFForm)field.getParent()).getDataFromFieldWithId(rule.getValue());

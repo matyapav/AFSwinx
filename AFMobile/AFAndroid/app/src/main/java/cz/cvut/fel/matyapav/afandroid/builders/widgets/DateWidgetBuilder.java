@@ -10,13 +10,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
@@ -27,7 +28,7 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
 
     private String dateFormat;
 
-    public DateWidgetBuilder(Skin skin, FieldInfo properties){
+    public DateWidgetBuilder(Skin skin, AFFieldInfo properties){
         super(skin, properties);
         this.dateFormat = "dd.MM.yyyy"; //Default date format
     }
@@ -64,7 +65,7 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
             }
         });
 
-        if(getProperties().isReadOnly()){
+        if(getProperties().getReadOnly()){
             dateText.setInputType(InputType.TYPE_NULL);
             dateText.setTextColor(Color.LTGRAY);
         }

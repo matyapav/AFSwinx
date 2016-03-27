@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tomscz.afrest.layout.definitions.LayouDefinitions;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+
 import cz.cvut.fel.matyapav.afandroid.components.types.AFList;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 
 /**
@@ -80,19 +82,19 @@ public class CustomListAdapter extends BaseAdapter {
             int i = 0;
             LinearLayout setOfFields = null;
             for (AFField field : list.getFields()) {
-                if (!field.getFieldInfo().isVisible()) {
+                if (!field.getFieldInfo().getVisible()) {
                     continue;
                 }
                 String label = "";
                 if (i == 0) {
-                    if(field.getFieldInfo().getLabelText() != null) {
-                        label = skin.isListItemNameLabelVisible() ? Localization.translate(field.getFieldInfo().getLabelText()) + ": " : "";
+                    if(field.getFieldInfo().getLabel() != null) {
+                        label = skin.isListItemNameLabelVisible() ? Localization.translate(field.getFieldInfo().getLabel()) + ": " : "";
                     }
                     textName.setText(label + list.getRows().get(position).get(field.getId()));
                     layout.addView(textName);
                 } else {
-                    if(field.getFieldInfo().getLabelText() != null) {
-                        label = skin.isListItemTextLabelsVisible() ? Localization.translate(field.getFieldInfo().getLabelText()) + ": " : "";
+                    if(field.getFieldInfo().getLabel() != null) {
+                        label = skin.isListItemTextLabelsVisible() ? Localization.translate(field.getFieldInfo().getLabel()) + ": " : "";
                     }
                     TextView text = new TextView(context);
                     text.setTextSize(skin.getListItemsTextSize());
@@ -102,7 +104,12 @@ public class CustomListAdapter extends BaseAdapter {
                     text.setPadding(skin.getListItemTextPaddingLeft(), skin.getListItemTextPaddingTop(),
                             skin.getListItemTextPaddingRight(), skin.getListItemTextPaddingBottom());
 
-                    int numberOfColumns = list.getLayoutDefinitions().getNumberOfColumns();
+                    int numberOfColumns;
+                    if(list.getLayoutDefinitions().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
+                        numberOfColumns = 2;
+                    }else{
+                        numberOfColumns = 1;
+                    }
 
                     if ((i - 1) % numberOfColumns == 0) {
                         if (setOfFields != null) {

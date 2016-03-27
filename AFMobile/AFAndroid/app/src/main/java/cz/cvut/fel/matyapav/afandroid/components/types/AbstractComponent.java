@@ -1,8 +1,7 @@
 package cz.cvut.fel.matyapav.afandroid.components.types;
 
+import com.tomscz.afrest.commons.SupportedComponents;
 import com.tomscz.afswinx.rest.rebuild.holder.AFDataHolder;
-
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 
 /**
  * Created by Pavel on 29.02.2016.

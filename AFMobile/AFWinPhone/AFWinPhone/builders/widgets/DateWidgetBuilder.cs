@@ -14,7 +14,7 @@ namespace AFWinPhone.builders.widgets
     {
         private String dateFormat;
 
-        public DateWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public DateWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
             this.dateFormat = "dd.MM.yyyy"; //Default date format
         }

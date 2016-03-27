@@ -9,7 +9,7 @@ namespace AFWinPhone.builders.widgets
 {
     class CheckboxWidgetBuilder : BasicBuilder
     {
-        public CheckboxWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public CheckboxWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
         }
 

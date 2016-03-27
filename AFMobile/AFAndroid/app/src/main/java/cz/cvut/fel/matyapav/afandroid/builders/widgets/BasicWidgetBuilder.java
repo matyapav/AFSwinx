@@ -1,6 +1,7 @@
 package cz.cvut.fel.matyapav.afandroid.builders.widgets;
 
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 
 /**
@@ -9,9 +10,9 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 abstract class BasicWidgetBuilder implements AbstractWidgetBuilder {
 
     private Skin skin;
-    private FieldInfo properties;
+    private AFFieldInfo properties;
 
-    public BasicWidgetBuilder(Skin skin, FieldInfo properties) {
+    public BasicWidgetBuilder(Skin skin, AFFieldInfo properties) {
         this.skin = skin;
         this.properties = properties;
     }
@@ -20,7 +21,7 @@ abstract class BasicWidgetBuilder implements AbstractWidgetBuilder {
         return skin;
     }
 
-    public FieldInfo getProperties() {
+    public AFFieldInfo getProperties() {
         return properties;
     }
 }

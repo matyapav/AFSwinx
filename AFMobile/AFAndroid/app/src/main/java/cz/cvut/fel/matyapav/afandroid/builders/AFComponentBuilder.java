@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.tomscz.afrest.commons.SupportedComponents;
+import com.tomscz.afrest.rest.dto.AFClassInfo;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.connection.ConnectionParser;
@@ -18,11 +21,8 @@ import cz.cvut.fel.matyapav.afandroid.builders.widgets.FieldBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponentFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.ClassDefinition;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.DefaultSkin;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
 import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
@@ -77,13 +77,13 @@ public abstract class AFComponentBuilder<T> {
         }
     }
 
-    protected void prepareComponent(ClassDefinition classDef, AFComponent component, int numberOfInnerClasses, boolean parsingInnerClass, StringBuilder road){
+    protected void prepareComponent(AFClassInfo classDef, AFComponent component, int numberOfInnerClasses, boolean parsingInnerClass, StringBuilder road){
         if(parsingInnerClass){
             numberOfInnerClasses = 0;
         }
         if(classDef != null) {
             if(!parsingInnerClass) { //set following properties only once at the beginning
-                component.setName(classDef.getClassName());
+                component.setName(classDef.getName());
                 if(classDef.getLayout() != null) {
                     component.setLayoutDefinitions(classDef.getLayout().getLayoutDefinition());
                     component.setLayoutOrientation(classDef.getLayout().getLayoutOrientation());
@@ -91,10 +91,10 @@ public abstract class AFComponentBuilder<T> {
             }
             //fieldsView = (TableLayout) buildLayout(classDef, activity);
             FieldBuilder builder = new FieldBuilder();
-            for (FieldInfo field : classDef.getFieldInfos()) {
-                if(field.isInnerClass()){
+            for (AFFieldInfo field : classDef.getFieldInfo()) {
+                if(field.getClassType()){
                     String roadBackup = road.toString();
-                    road.append(classDef.getInnerClasses().get(numberOfInnerClasses).getClassName());
+                    road.append(classDef.getInnerClasses().get(numberOfInnerClasses).getName());
                     road.append(".");
                     prepareComponent(classDef.getInnerClasses().get(numberOfInnerClasses), component, numberOfInnerClasses++, true, road);
                     road = new StringBuilder(roadBackup);
@@ -118,7 +118,7 @@ public abstract class AFComponentBuilder<T> {
         LinearLayout componentView = new LinearLayout(getActivity());
         componentView.setLayoutParams(getSkin().getTopLayoutParams());
         JSONParser parser = new JSONDefinitionParser();
-        ClassDefinition classDef = parser.parse(modelResponse, false);
+        AFClassInfo classDef = parser.parse(modelResponse, false);
         prepareComponent(classDef, component, 0, false, new StringBuilder());
         View view = buildComponentView(component);
         componentView.addView(view);

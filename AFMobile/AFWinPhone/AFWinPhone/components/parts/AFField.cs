@@ -10,7 +10,7 @@ namespace AFWinPhone.components.parts
 {
     public class AFField
     {
-        private FieldInfo fieldInfo;
+        private AFFieldInfo fieldInfo;
         private String id;
         private TextBlock label; 
 
@@ -21,7 +21,7 @@ namespace AFWinPhone.components.parts
 
         private AFComponent parent;
 
-        public AFField(FieldInfo fieldInfo)
+        public AFField(AFFieldInfo fieldInfo)
         {
             this.fieldInfo = fieldInfo;
         }
@@ -34,7 +34,7 @@ namespace AFWinPhone.components.parts
             if (fieldInfo.getRules() != null)
             {
                 //add number validation here because it is not among rules in definition
-                foreach (ValidationRule rule in fieldInfo.getRules())
+                foreach (AFValidationRule rule in fieldInfo.getRules())
                 {
                     AFValidator validator = ValidatorFactory.getInstance().getValidator(rule);
                     Debug.WriteLine("VALIDATION RULE " + rule);
@@ -109,7 +109,7 @@ namespace AFWinPhone.components.parts
             return this.completeView;
         }
 
-        public FieldInfo getFieldInfo()
+        public AFFieldInfo getFieldInfo()
         {
             return this.fieldInfo;
         }

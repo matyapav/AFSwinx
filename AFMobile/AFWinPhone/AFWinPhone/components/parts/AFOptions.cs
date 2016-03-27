@@ -2,12 +2,12 @@
 
 namespace AFWinPhone.components.parts
 {
-    public class FieldOption
+    public class AFOptions
     {
         private String key;
         private String value;
 
-        public FieldOption()
+        public AFOptions()
         {
         }
 

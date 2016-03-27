@@ -2,12 +2,12 @@
 
 namespace AFWinPhone.components.parts
 {
-    public class ValidationRule
+    public class AFValidationRule
     {
         private String validationType;
         private String value;
 
-        public ValidationRule()
+        public AFValidationRule()
         {
         }
 

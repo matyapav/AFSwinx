@@ -6,10 +6,12 @@ import android.graphics.drawable.shapes.RectShape;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.tomscz.afrest.commons.SupportedComponents;
+
 import cz.cvut.fel.matyapav.afandroid.AFAndroid;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFList;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 
 /**
  * Created by Pavel on 24.02.2016.

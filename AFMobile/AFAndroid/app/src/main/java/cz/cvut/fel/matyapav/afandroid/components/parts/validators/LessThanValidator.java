@@ -1,14 +1,12 @@
 package cz.cvut.fel.matyapav.afandroid.components.parts.validators;
 
-import android.widget.EditText;
+import com.tomscz.afrest.commons.SupportedWidgets;
+import com.tomscz.afrest.rest.dto.AFValidationRule;
 
 import java.util.Date;
 
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.ValidationRule;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFForm;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedWidgets;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
@@ -18,7 +16,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 public class LessThanValidator implements AFValidator {
 
     @Override
-    public boolean validate(AFField field, StringBuilder errorMsgs, ValidationRule rule) {
+    public boolean validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule) {
         boolean validationIsFine = true;
         Object otherData = ((AFForm) field.getParent()).getDataFromFieldWithId(rule.getValue());
         if(otherData != null) {
@@ -36,7 +34,7 @@ public class LessThanValidator implements AFValidator {
                 }
             }
             if (!validationIsFine) {
-                String otherFieldLabelText = (field.getParent()).getFieldById(rule.getValue()).getFieldInfo().getLabelText();
+                String otherFieldLabelText = (field.getParent()).getFieldById(rule.getValue()).getFieldInfo().getLabel();
                 errorMsgs.append(Localization.translate("validation.lessthan") + " "
                         + Localization.translate(otherFieldLabelText));
             }

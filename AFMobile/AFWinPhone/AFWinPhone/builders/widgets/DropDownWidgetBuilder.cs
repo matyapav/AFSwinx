@@ -11,7 +11,7 @@ namespace AFWinPhone.builders.widgets
     class DropDownWidgetBuilder : BasicBuilder
     {
 
-        public DropDownWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public DropDownWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
         }
 
@@ -40,7 +40,7 @@ namespace AFWinPhone.builders.widgets
             comboBox.FontSize = getSkin().getFieldFontSize();
             if (field.getFieldInfo().getOptions() != null)
             {
-                foreach (FieldOption option in field.getFieldInfo().getOptions())
+                foreach (AFOptions option in field.getFieldInfo().getOptions())
                 {
                     if (Localization.translate(option.getValue()).Equals(comboBox.SelectedItem.ToString()))
                     {
@@ -80,7 +80,7 @@ namespace AFWinPhone.builders.widgets
             }
             if (field.getFieldInfo().getOptions() != null)
             {
-                foreach (FieldOption option in field.getFieldInfo().getOptions())
+                foreach (AFOptions option in field.getFieldInfo().getOptions())
                 {
                     if (option.getKey().Equals(value))
                     {
@@ -104,11 +104,9 @@ namespace AFWinPhone.builders.widgets
         private List<String> convertOptionsIntoList()
         {
             List<String> list = new List<String>();
-            //add no selection 
-            list.Add(null);
             if (getProperties().getOptions() != null)
             {
-                foreach (FieldOption option in getProperties().getOptions())
+                foreach (AFOptions option in getProperties().getOptions())
                 {
                     if (option.getValue().Equals("true"))
                     {

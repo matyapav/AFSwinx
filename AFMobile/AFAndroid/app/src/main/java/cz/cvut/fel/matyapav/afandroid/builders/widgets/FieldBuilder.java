@@ -6,15 +6,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
-import cz.cvut.fel.matyapav.afandroid.components.parts.LayoutProperties;
+import com.tomscz.afrest.layout.Layout;
+import com.tomscz.afrest.layout.definitions.LabelPosition;
+import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+import com.tomscz.afrest.rest.dto.AFFieldInfo;
+
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.LayoutOrientation;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.components.parts.FieldInfo;
-import cz.cvut.fel.matyapav.afandroid.enums.LabelPosition;
 
 /**
  * Builds input field
@@ -22,7 +21,7 @@ import cz.cvut.fel.matyapav.afandroid.enums.LabelPosition;
  */
 public class FieldBuilder {
 
-    public AFField prepareField(FieldInfo properties, StringBuilder road, Activity activity, Skin skin) {
+    public AFField prepareField(AFFieldInfo properties, StringBuilder road, Activity activity, Skin skin) {
 
         AFField field = new AFField(properties);
         field.setId(road.toString()+properties.getId());
@@ -45,7 +44,7 @@ public class FieldBuilder {
         //put it all together
         //when field is not visible don't even add it to form;
         View completeView = buildCompleteView(field, skin);
-        if(!properties.isVisible()){
+        if(!properties.getVisible()){
            completeView.setVisibility(View.GONE);
         }
         field.setCompleteView(completeView);
@@ -56,7 +55,7 @@ public class FieldBuilder {
         LinearLayout fullLayout = new LinearLayout(field.getFieldView().getContext());
         fullLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        LayoutProperties layout = field.getFieldInfo().getLayout();
+        Layout layout = field.getFieldInfo().getLayout();
         //set orientation of label and field itself
         if(layout.getLayoutOrientation() != null){
             if(layout.getLayoutOrientation().equals(LayoutOrientation.AXISY)){
@@ -75,11 +74,11 @@ public class FieldBuilder {
         field.getFieldView().setLayoutParams(new LinearLayout.LayoutParams(skin.getInputWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
 
         //LABEL BEFORE
-        if (field.getLabel() != null && layout.getLabelPosition() != null && !layout.getLabelPosition().equals(LabelPosition.NONE)) {
-            if (layout.getLabelPosition().equals(LabelPosition.BEFORE)) {
+        if (field.getLabel() != null && layout.getLabelPosstion() != null && !layout.getLabelPosstion().equals(LabelPosition.NONE)) {
+            if (layout.getLabelPosstion().equals(LabelPosition.BEFORE)) {
                 fullLayout.addView(field.getLabel());
             }
-        }else if(field.getLabel() != null && layout.getLabelPosition() == null){
+        }else if(field.getLabel() != null && layout.getLabelPosstion() == null){
             fullLayout.addView(field.getLabel()); //default is before
         }
 
@@ -87,8 +86,8 @@ public class FieldBuilder {
             fullLayout.addView(field.getFieldView());
         }
         //LABEL AFTER
-        if(field.getLabel() != null && layout.getLabelPosition() != null && !layout.getLabelPosition().equals(LabelPosition.NONE)) {
-            if (layout.getLabelPosition().equals(LabelPosition.AFTER)) {
+        if(field.getLabel() != null && layout.getLabelPosstion() != null && !layout.getLabelPosstion().equals(LabelPosition.NONE)) {
+            if (layout.getLabelPosstion().equals(LabelPosition.AFTER)) {
                 fullLayout.addView(field.getLabel());
             }
         }
@@ -112,12 +111,11 @@ public class FieldBuilder {
         return errorView;
     }
 
-    private TextView buildLabel(Activity activity, FieldInfo properties, Skin skin){
+    private TextView buildLabel(Activity activity, AFFieldInfo properties, Skin skin){
         TextView label = new TextView(activity);
-        if (properties.getLabelText() != null && !properties.getLabelText().isEmpty()) {
-            String labelText = Localization.translate(properties.getLabelText());
+        if (properties.getLabel() != null && !properties.getLabel().isEmpty()) {
+            String labelText = Localization.translate(properties.getLabel());
             //set label position
-            LabelPosition pos = properties.getLayout().getLabelPosition();
             label.setTextColor(skin.getLabelColor());
             label.setTypeface(skin.getLabelFont());
             label.setText(labelText);

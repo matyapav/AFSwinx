@@ -8,11 +8,12 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.tomscz.afrest.commons.SupportedComponents;
+
 import cz.cvut.fel.matyapav.afandroid.AFAndroid;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFTable;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
@@ -74,7 +75,7 @@ public class TableBuilder extends AFComponentBuilder<TableBuilder> {
         //insert to header row
         int numberOfColumns = 0;
         for (AFField field : component.getFields()) {
-            if (!field.getFieldInfo().isVisible()) {
+            if (!field.getFieldInfo().getVisible()) {
                 continue;
             }
             numberOfColumns++;
@@ -84,8 +85,8 @@ public class TableBuilder extends AFComponentBuilder<TableBuilder> {
                     getSkin().getCellPaddingRight(), getSkin().getCellPaddingTop(), getSkin().getCellPaddingBottom(),
                     getSkin().getBorderWidth(), getSkin().getBorderColor());
             columnHeaderText.setTextColor(getSkin().getHeaderRowTextColor());
-            if(field.getFieldInfo().getLabelText() != null) {
-                columnHeaderText.setText(Localization.translate(field.getFieldInfo().getLabelText()));
+            if(field.getFieldInfo().getLabel() != null) {
+                columnHeaderText.setText(Localization.translate(field.getFieldInfo().getLabel()));
             }
             headerRow.addView(columnHeaderText, new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, getSkin().getHeaderRowHeight()));
             ((AFTable) component).setHeaderRow(headerRow);
@@ -95,8 +96,8 @@ public class TableBuilder extends AFComponentBuilder<TableBuilder> {
             Utils.setCellParams(fakeColumnHeaderText, getSkin().getContentGravity(), getSkin().getCellPaddingLeft(),
                     getSkin().getCellPaddingRight(), getSkin().getCellPaddingTop(), getSkin().getCellPaddingBottom(),
                     getSkin().getBorderWidth(), getSkin().getBorderColor());
-            if(field.getFieldInfo().getLabelText() != null) {
-                fakeColumnHeaderText.setText(Localization.translate(field.getFieldInfo().getLabelText()));
+            if(field.getFieldInfo().getLabel() != null) {
+                fakeColumnHeaderText.setText(Localization.translate(field.getFieldInfo().getLabel()));
             }
             fakeContentRow.addView(fakeColumnHeaderText, new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, 0));
         }

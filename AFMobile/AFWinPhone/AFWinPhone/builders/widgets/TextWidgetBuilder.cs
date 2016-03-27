@@ -12,7 +12,7 @@ namespace AFWinPhone.builders.widgets
 {
     class TextWidgetBuilder : BasicBuilder
     {
-        public TextWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public TextWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
         }
 

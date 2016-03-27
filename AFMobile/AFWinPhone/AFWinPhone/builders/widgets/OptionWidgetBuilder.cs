@@ -10,7 +10,7 @@ namespace AFWinPhone.builders.widgets
 {
     class OptionWidgetBuilder : BasicBuilder
     {
-        public OptionWidgetBuilder(Skin skin, FieldInfo properties) : base(skin, properties)
+        public OptionWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
         {
         }
 

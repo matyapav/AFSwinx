@@ -30,7 +30,7 @@ namespace AFWinPhone.components.types
             return SupportedComponents.FORM;
         }
 
-        public override void insertData(string dataResponse, StringBuilder road)
+        public override void insertData(String dataResponse, StringBuilder road)
         {
             try
             {

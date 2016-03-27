@@ -38,7 +38,7 @@ namespace AFWinPhone.components.types
             return SupportedComponents.LIST;
         }
 
-        public override void insertData(string dataResponse, StringBuilder road)
+        public override void insertData(String dataResponse, StringBuilder road)
         {
             try
             {

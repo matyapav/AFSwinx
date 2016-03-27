@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 
+import com.tomscz.afrest.commons.SupportedComponents;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.rebuild.BaseRestBuilder;
@@ -19,7 +20,6 @@ import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
 import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedComponents;
 import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
