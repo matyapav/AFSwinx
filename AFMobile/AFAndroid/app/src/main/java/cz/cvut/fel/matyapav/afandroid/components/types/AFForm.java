@@ -122,25 +122,22 @@ public class AFForm extends AFComponent {
 
     /*TROCHU POUPRAVENA MARTINOVA METODA*/
     public boolean sendData() throws Exception{
-        if(validateData()) {
-            if (getConnectionPack().getSendConnection() == null) {
-                throw new IllegalStateException(
-                        "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
-            }
-            Object data = generateSendData();
-            if (data == null) {
-                return false;
-            }
-            System.err.println("SEND CONNECTION " + Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
-            RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
-                    getConnectionPack().getSendConnection().getSecurity(), data, Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
-            Object response = sendTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-            if (response instanceof Exception) {
-                throw (Exception) response;
-            }
-            return true;
+        if (getConnectionPack().getSendConnection() == null) {
+            throw new IllegalStateException(
+                    "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
         }
-        return false;
+        Object data = generateSendData();
+        if (data == null) {
+            return false;
+        }
+        System.err.println("SEND CONNECTION " + Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
+        RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
+                getConnectionPack().getSendConnection().getSecurity(), data, Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
+        Object response = sendTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+        if (response instanceof Exception) {
+            throw (Exception) response;
+        }
+        return true;
     }
 
     /*MARTINOVA METODA*/

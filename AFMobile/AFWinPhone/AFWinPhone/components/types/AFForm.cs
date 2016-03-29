@@ -145,31 +145,24 @@ namespace AFWinPhone.components.types
        
         public async Task<Boolean> sendData()
         {
-            if (validateData())
+            if (getConnectionPack().getSendConnection() == null)
             {
-                if (getConnectionPack().getSendConnection() == null)
-                {
-                    throw new Exception(
-                        "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
-                }
-                Object data = generateSendData();
-                if (data == null)
-                {
-                    return false;
-                }
-                Debug.WriteLine("SEND CONNECTION " +
-                                Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
-                RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(),
-                    getConnectionPack().getSendConnection().getContentType(),
-                    getConnectionPack().getSendConnection().getSecurity(), data,
-                    Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
-                await sendTask.doRequest();
-                return true;
+                throw new Exception(
+                    "The post connection was not specify. Check your XML configuration or Connection which was used to build this form");
             }
-            else
+            Object data = generateSendData();
+            if (data == null)
             {
                 return false;
             }
+            Debug.WriteLine("SEND CONNECTION " +
+                            Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
+            RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(),
+                getConnectionPack().getSendConnection().getContentType(),
+                getConnectionPack().getSendConnection().getSecurity(), data,
+                Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
+            await sendTask.doRequest();
+            return true;
         }
 
         private Object generateSendData()
