@@ -6,14 +6,14 @@ The style file: csplainnat.bst
 A level-1 auxiliary file: pages/prilohy/zkratky.aux
 A level-1 auxiliary file: pages/prilohy/uml_a_obrazky.aux
 Database file #1: reference.bib
-Warning--I didn't find a database entry for "citation-needed"
 Warning--I didn't find a database entry for "https://en.wikipedia.org/wiki/Metadata"
-Warning--I didn't find a database entry for "viz-plocha-citace-arlow"
-Warning--I didn't find a database entry for "arlow-viz-plocha"
 Warning--I didn't find a database entry for "infodp"
 Warning--to sort, need author or key in uiTypes
 Warning--to sort, need author or key in wiki-ws
 Warning--to sort, need author or key in oracle-ws
+Warning--to sort, need author or key in serialization
+Warning--to sort, need author or key in json
+Warning--to sort, need author or key in gson
 Warning--to sort, need author or key in aspect-faces
 Warning--to sort, need author or key in phpdbform
 Warning--to sort, need author or key in apache-cordova

@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -6,7 +6,9 @@
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
 \bibitem[and()]{android-themes}
- [online].
+\emph{Styles and Themes} [online]. [cit.~26.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/guide/topics/ui/themes.html}.
 
 \bibitem[apa()]{apache-cordova}
 \emph{Apache Cordova} [online]. [cit.~23.\,03.\,2016].
@@ -16,13 +18,27 @@
 \emph{AspectFaces framework} [online]. [cit.~23.\,03.\,2016].
 \newblock Dostupn{\'{e}} z: \url{http://www.aspectfaces.com/overview}.
 
+\bibitem[gso()]{gson}
+\emph{Gson User Guide} [online]. [cit.~01.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://github.com/google/gson/blob/master/UserGuide.md}.
+
+\bibitem[jso()]{json}
+\emph{Introducing JSON} [online]. [cit.~01.\,04.\,2016].
+\newblock Dostupn{\'{e}} z: \url{http://www.json.org/}.
+
 \bibitem[ora()]{oracle-ws}
 \emph{What Are RESTful Web Services?} [online]. [cit.~22.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{https://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html}.
 
 \bibitem[php()]{phpdbform}
- [online].
+\emph{PHP Database Form} [online]. [cit.~26.\,03.\,2016].
+\newblock Dostupn{\'{e}} z: \url{http://phpdatabaseform.com/}.
+
+\bibitem[ser()]{serialization}
+\emph{Serialization} [online]. [cit.~01.\,04.\,2016].
+\newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Serialization}.
 
 \bibitem[uiT()]{uiTypes}
 \emph{Typy uživatelských rozhraní a jejich specifika/old – Wikisofia}
@@ -35,7 +51,9 @@
 \newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Web_service}.
 
 \bibitem[wp-()]{wp-themes}
- [online].
+\emph{Themes for Windows Phone} [online]. [cit.~26.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://msdn.microsoft.com/en-us/library/windows/apps/ff402557(v=vs.105).aspx}.
 
 \bibitem[Ableson()]{dynamic-android-xml}
 ABLESON, F.
@@ -43,6 +61,14 @@ ABLESON, F.
   [cit.~23.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{http://www.ibm.com/developerworks/xml/tutorials/x-andddyntut}.
+
+\bibitem[Arlow -- Neustadt(2008)Arlow, Neustadt]{UmlArlow}
+ARLOW, J. -- NEUSTADT, I.
+\newblock \emph{UML 2 a unifikovaný proces vývoje aplikací: Objektově
+  orientovaná analýza a návrh prakticky}.
+\newblock ~: Computer Press a.s., Brno, 2nd edition, 2008.
+\newblock In Czech.
+\newblock ISBN 978-90-251-1503-9.
 
 \bibitem[Bartlett()]{android-auto-update}
 BARTLETT, M.
@@ -83,5 +109,18 @@ JENKOV, J.
 \newblock \emph{Web Service Message Formats} [online]. [cit.~23.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{http://tutorials.jenkov.com/web-services/message-formats.html}.
+
+\bibitem[Sommerville(2011)]{sommerville}
+SOMMERVILLE, I.
+\newblock \emph{Software engineering}.
+\newblock ~: Addison-Wesley, 9 edition, 2011.
+\newblock ISBN 978-0-13-703515-1.
+
+\bibitem[Tomášek(2015)]{tomasek-thesis}
+TOMášEK, M.
+\newblock Aspektově orientovaný vývoj uživatelských rozhraní pro Java SE
+  aplikace.
+\newblock Master's thesis, České vysoké učení technické v Praze Fakulta
+  Elektrotechnická, 1 2015.
 
 \end{thebibliography}

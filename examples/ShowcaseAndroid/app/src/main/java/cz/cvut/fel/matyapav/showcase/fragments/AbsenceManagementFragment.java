@@ -64,19 +64,13 @@ public class AbsenceManagementFragment extends Fragment {
         //build security constraints
         HashMap<String, String> securityConstrains = ShowCaseUtils.getUserCredentials(getActivity());
 
+        connectionResource = getResources().openRawResource(R.raw.connection); //must be called again
         try {
             AFList list = AFAndroid.getInstance().getListBuilder().initBuilder(getActivity(),
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST, connectionResource,
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST_CONNECTION_KEY,
                     securityConstrains).setSkin(new AbsenceManagementListSkin(getContext())).createComponent();
             layout.addView(list.getView());
-        } catch (Exception e) {
-            ShowCaseUtils.showBuildingFailedDialog(getActivity(), e);
-            e.printStackTrace();
-        }
-
-        connectionResource = getResources().openRawResource(R.raw.connection); //must be called again
-        try {
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM, connectionResource,
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM_CONNECTION_KEY,
