@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.tomscz.afrest.rest.dto.AFFieldInfo;
 import com.tomscz.afrest.rest.dto.AFValidationRule;
 
+import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.parts.validators.AFValidator;
 import cz.cvut.fel.matyapav.afandroid.components.parts.validators.ValidatorFactory;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
@@ -23,8 +24,9 @@ public class AFField {
     private View fieldView;
     private TextView errorView;
     private View completeView;
-    private Object actualData;
+    private AbstractWidgetBuilder widgetBuilder;
 
+    private Object actualData;
     private AFComponent parent;
 
     public AFField(AFFieldInfo fieldInfo) {
@@ -126,5 +128,13 @@ public class AFField {
 
     public AFComponent getParent() {
         return parent;
+    }
+
+    public AbstractWidgetBuilder getWidgetBuilder() {
+        return widgetBuilder;
+    }
+
+    public void setWidgetBuilder(AbstractWidgetBuilder widgetBuilder) {
+        this.widgetBuilder = widgetBuilder;
     }
 }

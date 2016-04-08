@@ -30,9 +30,10 @@ namespace AFWinPhone.builders.widgets
 
             //Input view
             FrameworkElement widget = null;
-            AbstractWidgetBuilder widgetBuilder = WidgetBuilderFactory.getInstance().getFieldBuilder(properties, skin);
+            AbstractWidgetBuilder widgetBuilder = WidgetBuilderFactory.getInstance().getFieldBuilder(field, skin);
             if (widgetBuilder != null && (widget = widgetBuilder.buildFieldView()) != null)
             {
+                field.setWidgetBuilder(widgetBuilder);
                 field.setFieldView(widget);
             }
 

@@ -36,13 +36,13 @@ public class FieldBuilder {
 
         //Input view
         View widget = null;
-        AbstractWidgetBuilder widgetBuilder = WidgetBuilderFactory.getInstance().getFieldBuilder(properties, skin);
+        AbstractWidgetBuilder widgetBuilder = WidgetBuilderFactory.getInstance().getWidgetBuilder(field, skin);
         if(widgetBuilder != null && (widget = widgetBuilder.buildFieldView(activity))!= null){
+            field.setWidgetBuilder(widgetBuilder);
             field.setFieldView(widget);
         }
 
         //put it all together
-        //when field is not visible don't even add it to form;
         View completeView = buildCompleteView(field, skin);
         if(!properties.getVisible()){
            completeView.setVisibility(View.GONE);

@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.tomscz.afrest.layout.definitions.LayouDefinitions;
 import com.tomscz.afrest.layout.definitions.LayoutOrientation;
+import com.tomscz.afrest.rest.dto.AFClassInfo;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 
 import java.util.ArrayList;
@@ -19,10 +20,8 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 public abstract class AFComponent implements AbstractComponent{
 
     private Activity activity;
-    private String name;
+    private AFClassInfo componentInfo;
     private ViewGroup view;
-    private LayouDefinitions layoutDefinitions;
-    private LayoutOrientation layoutOrientation;
     private List<AFField> fields;
     private AFSwinxConnectionPack connectionPack;
     private Skin skin;
@@ -70,9 +69,6 @@ public abstract class AFComponent implements AbstractComponent{
     }
 
     //GETTERS
-    public String getName() {
-        return name;
-    }
 
     public Skin getSkin() {
         return skin;
@@ -92,19 +88,6 @@ public abstract class AFComponent implements AbstractComponent{
 
     public ViewGroup getView() {
         return view;
-    }
-
-    public LayoutOrientation getLayoutOrientation() {
-        return layoutOrientation;
-    }
-
-    public LayouDefinitions getLayoutDefinitions() {
-        return layoutDefinitions;
-    }
-
-    //SETTERS
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setActivity(Activity activity) {
@@ -127,13 +110,11 @@ public abstract class AFComponent implements AbstractComponent{
         this.view = view;
     }
 
-    public void setLayoutDefinitions(LayouDefinitions layoutDefinitions) {
-        this.layoutDefinitions = layoutDefinitions;
+    public AFClassInfo getComponentInfo() {
+        return componentInfo;
     }
 
-    public void setLayoutOrientation(LayoutOrientation layoutOrientation) {
-        this.layoutOrientation = layoutOrientation;
+    public void setComponentInfo(AFClassInfo componentInfo) {
+        this.componentInfo = componentInfo;
     }
-
-
 }

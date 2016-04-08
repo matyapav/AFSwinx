@@ -82,8 +82,7 @@ namespace AFWinPhone.components.types
                         {
                             data = "";
                         }
-                        AbstractWidgetBuilder builder = WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-                        builder.setData(field, data);
+                        field.getWidgetBuilder().setData(data);
                         row.Add(road + key, field.getActualData().ToString());
                     }
                 }
@@ -177,12 +176,12 @@ namespace AFWinPhone.components.types
             panel.Background = new SolidColorBrush(getSkin().getListItemBackgroundColor());
             
             Grid layout = new Grid();
-            for (int j = 0; j < getLayoutDefinitions().getNumberOfColumns(); j++)
+            for (int j = 0; j < getComponentInfo().getLayout().getLayoutDefinition().getNumberOfColumns(); j++)
             {
-                if (getLayoutOrientation().Equals(LayoutOrientation.AXISX))
+                if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISX))
                 {
                     layout.ColumnDefinitions.Add(new ColumnDefinition());
-                }else if (getLayoutOrientation().Equals(LayoutOrientation.AXISY))
+                }else if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISY))
                 {
                     layout.RowDefinitions.Add(new RowDefinition());                    
                 }
@@ -218,7 +217,7 @@ namespace AFWinPhone.components.types
                    
                     layout.RowDefinitions.Add(new RowDefinition());
                     Grid.SetRow(textName, row);
-                    Grid.SetColumnSpan(textName, getLayoutDefinitions().getNumberOfColumns());
+                    Grid.SetColumnSpan(textName, getComponentInfo().getLayout().getLayoutDefinition().getNumberOfColumns());
                     layout.Children.Add(textName);
                 }
                 else
@@ -240,17 +239,17 @@ namespace AFWinPhone.components.types
                         getSkin().getListItemTextPaddingTop(),
                         getSkin().getListItemTextPaddingRight(), getSkin().getListItemTextPaddingBottom());
 
-                    int numberOfColumns = getLayoutDefinitions().getNumberOfColumns();
+                    int numberOfColumns = getComponentInfo().getLayout().getLayoutDefinition().getNumberOfColumns();
 
                     if ((i - 1)%numberOfColumns == 0)
                     {
-                        if (getLayoutOrientation().Equals(LayoutOrientation.AXISX))
+                        if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISX))
                         {
                             layout.RowDefinitions.Add(new RowDefinition());
                             row++;
                             column = 0;
                         }
-                        else if (getLayoutOrientation().Equals(LayoutOrientation.AXISY))
+                        else if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISY))
                         {
                             layout.ColumnDefinitions.Add(new ColumnDefinition());
                             column++;
@@ -261,11 +260,11 @@ namespace AFWinPhone.components.types
                     Grid.SetColumn(text, column);
                     layout.Children.Add(text);
 
-                    if (getLayoutOrientation().Equals(LayoutOrientation.AXISX))
+                    if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISX))
                     {
                         column++;
                     }
-                    else if (getLayoutOrientation().Equals(LayoutOrientation.AXISY))
+                    else if (getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISY))
                     {
                         row++;
                     }

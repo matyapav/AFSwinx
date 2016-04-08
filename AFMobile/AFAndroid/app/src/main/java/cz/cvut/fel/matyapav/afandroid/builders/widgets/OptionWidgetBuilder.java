@@ -18,8 +18,8 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
  */
 public class OptionWidgetBuilder extends BasicWidgetBuilder {
 
-    public OptionWidgetBuilder(Skin skin, AFFieldInfo properties) {
-        super(skin, properties);
+    public OptionWidgetBuilder(Skin skin, AFField field) {
+        super(skin, field);
     }
 
     @Override
@@ -28,14 +28,14 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
         radioGroup.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         radioGroup.setOrientation(RadioGroup.VERTICAL); //TODO change according to layout parameters
         int numberOfOptions;
-        if(getProperties().getOptions() != null && !getProperties().getOptions().isEmpty()) {
-            numberOfOptions = getProperties().getOptions().size();
+        if(getField().getFieldInfo().getOptions() != null && !getField().getFieldInfo().getOptions().isEmpty()) {
+            numberOfOptions = getField().getFieldInfo().getOptions().size();
             RadioButton[] options = new RadioButton[numberOfOptions];
             for (int i = 0; i < numberOfOptions; i++) {
                 options[i] = new RadioButton(activity);
                 options[i].setTextColor(getSkin().getFieldColor());
                 options[i].setTypeface(getSkin().getFieldFont());
-                options[i].setText(getProperties().getOptions().get(i).getValue());
+                options[i].setText(getField().getFieldInfo().getOptions().get(i).getValue());
                 options[i].setId(i + 100);
                 radioGroup.addView(options[i]);
             }
@@ -54,7 +54,7 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
             radioGroup.addView(options[0]);
             radioGroup.addView(options[1]);
         }
-        if(getProperties().getReadOnly()){
+        if(getField().getFieldInfo().getReadOnly()){
             radioGroup.setEnabled(false);
         }
         return radioGroup;
@@ -62,12 +62,12 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
 
     //TODO REWRITE
     @Override
-    public void setData(AFField field, Object value) {
+    public void setData( Object value) {
 
-        RadioGroup group = (RadioGroup) field.getFieldView();
+        RadioGroup group = (RadioGroup) getField().getFieldView();
         if(value == null){
             group.clearCheck();
-            field.setActualData(value);
+            getField().setActualData(value);
             return;
         }
         for (int i = 0; i < group.getChildCount(); i++) {
@@ -76,7 +76,7 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
                     || (Boolean.valueOf(value.toString()) == true && i==0)
                     || (Boolean.valueOf(value.toString()) == false && i==1)){
                 btn.setChecked(true);
-                field.setActualData(value);
+                getField().setActualData(value);
                 break;
             }
         };
@@ -84,8 +84,8 @@ public class OptionWidgetBuilder extends BasicWidgetBuilder {
     }
 
     @Override
-    public Object getData(AFField field) {
-        RadioGroup group = (RadioGroup) field.getFieldView();
+    public Object getData() {
+        RadioGroup group = (RadioGroup)  getField().getFieldView();
         for (int i = 0; i < group.getChildCount(); i++) {
             RadioButton btn = (RadioButton) group.getChildAt(i);
             if(btn.isChecked()){

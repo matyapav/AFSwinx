@@ -7,12 +7,12 @@ namespace AFWinPhone.builders.widgets
     abstract class BasicBuilder : AbstractWidgetBuilder
     {
         private Skin skin;
-        private AFFieldInfo properties;
+        private AFField field;
 
-        public BasicBuilder(Skin skin, AFFieldInfo properties)
+        public BasicBuilder(Skin skin, AFField field)
         {
             this.skin = skin;
-            this.properties = properties;
+            this.field = field;
         }
 
         public Skin getSkin()
@@ -20,13 +20,13 @@ namespace AFWinPhone.builders.widgets
             return skin;
         }
 
-        public AFFieldInfo getProperties()
+        public AFField getField()
         {
-            return properties;
+            return field;
         }
 
         public abstract FrameworkElement buildFieldView();
-        public abstract void setData(AFField field, object value);
-        public abstract object getData(AFField field);
+        public abstract void setData(object value);
+        public abstract object getData();
     }
 }

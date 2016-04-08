@@ -12,10 +12,8 @@ namespace AFWinPhone.components.types
 {
     public abstract class AFComponent : AbstractComponent
     {
-        private String name;
+        private AFClassInfo componentInfo;
         private FrameworkElement view;
-        private LayoutDefinitions layoutDefinitions;
-        private LayoutOrientation layoutOrientation;
         private List<AFField> fields;
         private AFSwinxConnectionPack connectionPack;
         private Skin skin;
@@ -72,10 +70,9 @@ namespace AFWinPhone.components.types
             return res;
         }
 
-        //GETTERS
-        public String getName()
+        public AFClassInfo getComponentInfo()
         {
-            return name;
+            return componentInfo;
         }
 
         public Skin getSkin()
@@ -98,22 +95,6 @@ namespace AFWinPhone.components.types
             return this.view;
         }
 
-        public LayoutOrientation getLayoutOrientation()
-        {
-            return this.layoutOrientation;
-        }
-
-        public LayoutDefinitions getLayoutDefinitions()
-        {
-            return this.layoutDefinitions;
-        }
-
-        //SETTERS
-        public void setName(String name)
-        {
-            this.name = name;
-        }
-
         public void setConnectionPack(AFSwinxConnectionPack connectionPack)
         {
             this.connectionPack = connectionPack;
@@ -134,14 +115,9 @@ namespace AFWinPhone.components.types
             this.view = view;
         }
 
-        public void setLayoutDefinitions(LayoutDefinitions layoutDefinitions)
+        public void setComponentInfo(AFClassInfo classInfo)
         {
-            this.layoutDefinitions = layoutDefinitions;
-        }
-
-        public void setLayoutOrientation(LayoutOrientation layoutOrientation)
-        {
-            this.layoutOrientation = layoutOrientation;
+            this.componentInfo = classInfo;
         }
 
         public abstract void insertData(string dataResponse, StringBuilder road);

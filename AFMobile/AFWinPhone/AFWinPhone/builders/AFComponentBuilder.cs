@@ -74,15 +74,6 @@ namespace AFWinPhone.builders
             }
             if (classDef != null)
             {
-                if (!parsingInnerClass)
-                { //set following properties only once at the beginning
-                    component.setName(classDef.getClassName());
-                    if (classDef.getLayout() != null)
-                    {
-                        component.setLayoutDefinitions(classDef.getLayout().getLayoutDefinition());
-                        component.setLayoutOrientation(classDef.getLayout().getLayoutOrientation());
-                    }
-                }
                 //fieldsView = (TableLayout) buildLayout(classDef, activity);
                 FieldBuilder builder = new FieldBuilder();
                 foreach (AFFieldInfo field in classDef.getFieldInfos())
@@ -118,6 +109,7 @@ namespace AFWinPhone.builders
             //componentView.setLayoutParams(getSkin().getTopLayoutParams());
             JSONParser parser = new JSONDefinitionParser();
             AFClassInfo classDef = parser.parse(modelResponse, false);
+            component.setComponentInfo(classDef);
             prepareComponent(classDef, component, 0, false, new StringBuilder());
             FrameworkElement view = buildComponentView(component);
             componentView.Children.Add(view);

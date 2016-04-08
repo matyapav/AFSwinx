@@ -50,7 +50,7 @@ namespace AFWinPhone.components.types
                         //System.err.println("FIELD" + field);
                         if (field != null)
                         {
-                            setFieldValue(field, Utils.TryToGetValueFromJson(jsonObject[key]));
+                            field.getWidgetBuilder().setData(Utils.TryToGetValueFromJson(jsonObject[key]));
                         }
                     }
                 }
@@ -63,20 +63,12 @@ namespace AFWinPhone.components.types
 
         }
 
-        private void setFieldValue(AFField field, Object val)
-        {
-            WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).setData(field, val);
-        }
-
-
         public override AFDataHolder reserialize()
         {
             AFDataHolder dataHolder = new AFDataHolder();
             foreach (AFField field in getFields())
             {
-                AbstractWidgetBuilder fieldBuilder =
-                        WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-                Object data = fieldBuilder.getData(field);
+                Object data = field.getWidgetBuilder().getData();
                 
                 //little workaroud to fit in server //TODO if ever this thing will be released delete this!!
                 if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.NUMBERDOUBLEFIELD))
@@ -189,8 +181,7 @@ namespace AFWinPhone.components.types
         {
             foreach (AFField field in getFields())
             {
-                AbstractWidgetBuilder builder = WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-                builder.setData(field, field.getActualData());
+                field.getWidgetBuilder().setData(field.getActualData());
             }
         }
 
@@ -208,7 +199,7 @@ namespace AFWinPhone.components.types
             AFField field = getFieldById(id);
             if (field != null)
             {
-                return WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).getData(field);
+                return field.getWidgetBuilder().getData();
             }
             return null;
         }
@@ -216,7 +207,7 @@ namespace AFWinPhone.components.types
         public void setDataToFieldWithId(String id, Object data)
         {
             AFField field = getFieldById(id);
-            WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).setData(field, data);
+            field.getWidgetBuilder().setData(data);
         }
 
 

@@ -12,7 +12,7 @@ namespace AFWinPhone.builders.widgets
 {
     class TextWidgetBuilder : BasicBuilder
     {
-        public TextWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public TextWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
         }
 
@@ -22,8 +22,8 @@ namespace AFWinPhone.builders.widgets
             text.Foreground = new SolidColorBrush(getSkin().getFieldColor());
             text.FontFamily = getSkin().getFieldFont();
             text.FontSize = getSkin().getFieldFontSize();
-            addInputType(text, getProperties().getWidgetType());
-            if (getProperties().isReadOnly())
+            addInputType(text, getField().getFieldInfo().getWidgetType());
+            if (getField().getFieldInfo().isReadOnly())
             {
                 text.IsEnabled = false;
                 text.Foreground = new SolidColorBrush(Colors.LightGray);
@@ -31,23 +31,23 @@ namespace AFWinPhone.builders.widgets
             return text;
         }
 
-        public override void setData(AFField field, Object value)
+        public override void setData(Object value)
         {
             if (value != null)
             {
-                ((TextBox)field.getFieldView()).Text = value.ToString();
-                field.setActualData(value);
+                ((TextBox)getField().getFieldView()).Text = value.ToString();
+                getField().setActualData(value);
             }
             else {
-                ((TextBox)field.getFieldView()).Text = "";
-                field.setActualData("");
+                ((TextBox)getField().getFieldView()).Text = "";
+                getField().setActualData("");
             }
 
         }
 
-        public override Object getData(AFField field)
+        public override Object getData()
         {
-            return ((TextBox)field.getFieldView()).Text;
+            return ((TextBox)getField().getFieldView()).Text;
         }
 
         private void addInputType(TextBox field, SupportedWidgets widgetType)

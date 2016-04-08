@@ -56,7 +56,7 @@ public class CustomListAdapter extends BaseAdapter {
             //vertical layer for text
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(skin.getListContentWidth(), LayoutParams.WRAP_CONTENT);
             LinearLayout layout = new LinearLayout(context);
-            if (list.getLayoutOrientation().equals(LayoutOrientation.AXISX)) {
+            if (list.getComponentInfo().getLayout().getLayoutOrientation().equals(LayoutOrientation.AXISX)) {
                 layout.setOrientation(LinearLayout.VERTICAL);
             } else {
                 layout.setOrientation(LinearLayout.HORIZONTAL);
@@ -73,7 +73,7 @@ public class CustomListAdapter extends BaseAdapter {
 
             //if it will be twocolumns layout prepare orientation
             int setOfFieldsOrientation;
-            if (list.getLayoutOrientation().equals(LayoutOrientation.AXISX)) { //AXIS X
+            if (list.getComponentInfo().getLayout().getLayoutOrientation().equals(LayoutOrientation.AXISX)) { //AXIS X
                 setOfFieldsOrientation = LinearLayout.HORIZONTAL;
             } else { //AXIS Y
                 setOfFieldsOrientation = LinearLayout.VERTICAL;
@@ -105,7 +105,7 @@ public class CustomListAdapter extends BaseAdapter {
                             skin.getListItemTextPaddingRight(), skin.getListItemTextPaddingBottom());
 
                     int numberOfColumns;
-                    if(list.getLayoutDefinitions().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
+                    if(list.getComponentInfo().getLayout().getLayoutDefinition().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
                         numberOfColumns = 2;
                     }else{
                         numberOfColumns = 1;

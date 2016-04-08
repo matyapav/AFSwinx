@@ -25,7 +25,7 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.DefaultSkin;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
-import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
+import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
@@ -82,13 +82,6 @@ public abstract class AFComponentBuilder<T> {
             numberOfInnerClasses = 0;
         }
         if(classDef != null) {
-            if(!parsingInnerClass) { //set following properties only once at the beginning
-                component.setName(classDef.getName());
-                if(classDef.getLayout() != null) {
-                    component.setLayoutDefinitions(classDef.getLayout().getLayoutDefinition());
-                    component.setLayoutOrientation(classDef.getLayout().getLayoutOrientation());
-                }
-            }
             //fieldsView = (TableLayout) buildLayout(classDef, activity);
             FieldBuilder builder = new FieldBuilder();
             for (AFFieldInfo field : classDef.getFieldInfo()) {
@@ -117,8 +110,10 @@ public abstract class AFComponentBuilder<T> {
 
         LinearLayout componentView = new LinearLayout(getActivity());
         componentView.setLayoutParams(getSkin().getTopLayoutParams());
-        JSONParser parser = new JSONDefinitionParser();
+        JSONDefinitionParser parser = new JSONDefinitionParser();
         AFClassInfo classDef = parser.parse(modelResponse, false);
+
+        component.setComponentInfo(classDef);
         prepareComponent(classDef, component, 0, false, new StringBuilder());
         View view = buildComponentView(component);
         componentView.addView(view);
@@ -129,7 +124,7 @@ public abstract class AFComponentBuilder<T> {
     protected String getModelResponse() throws Exception{
         AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
         if(modelConnection != null) {
-            RequestTask task = new RequestTask(modelConnection.getHttpMethod(), modelConnection.getContentType(),
+            RequestMaker task = new RequestMaker(modelConnection.getHttpMethod(), modelConnection.getContentType(),
                     modelConnection.getSecurity(), null, Utils.getConnectionEndPoint(modelConnection));
 
             Object modelResponse = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get(); //make it synchronous to wait for response
@@ -145,7 +140,7 @@ public abstract class AFComponentBuilder<T> {
     protected String getDataResponse() throws Exception{
         AFSwinxConnection dataConnection = connectionPack.getDataConnection();
         if(dataConnection != null) {
-            RequestTask getData = new RequestTask(dataConnection.getHttpMethod(), dataConnection.getContentType(),
+            RequestMaker getData = new RequestMaker(dataConnection.getHttpMethod(), dataConnection.getContentType(),
                     dataConnection.getSecurity(), null, Utils.getConnectionEndPoint(dataConnection));
             Object response = getData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
             if (response instanceof Exception) {

@@ -20,8 +20,8 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 public class TextWidgetBuilder extends BasicWidgetBuilder {
 
 
-    public TextWidgetBuilder(Skin skin, AFFieldInfo properties) {
-        super(skin, properties);
+    public TextWidgetBuilder(Skin skin, AFField field) {
+        super(skin, field);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class TextWidgetBuilder extends BasicWidgetBuilder {
         EditText text = new EditText(activity);
         text.setTextColor(getSkin().getFieldColor());
         text.setTypeface(getSkin().getFieldFont());
-        addInputType(text, getProperties().getWidgetType());
-        if(getProperties().getReadOnly()){
+        addInputType(text, getField().getFieldInfo().getWidgetType());
+        if(getField().getFieldInfo().getReadOnly()){
             text.setInputType(InputType.TYPE_NULL);
             text.setTextColor(Color.LTGRAY);
         }
@@ -38,31 +38,31 @@ public class TextWidgetBuilder extends BasicWidgetBuilder {
     }
 
     @Override
-    public void setData(final AFField field, final Object value) {
+    public void setData(final Object value) {
         if(value != null) {
-            ((EditText) field.getFieldView()).setText(value.toString());
-            field.setActualData(value);
+            ((EditText) getField().getFieldView()).setText(value.toString());
+            getField().setActualData(value);
 
             //TODO zvazit tuhle feature .. non editable texty nejdou posunout v pripade, ze je user nevidi cele.
-            if(field.getFieldInfo().getReadOnly()) {
-                field.getFieldView().setOnLongClickListener(new View.OnLongClickListener() {
+            if(getField().getFieldInfo().getReadOnly()) {
+                getField().getFieldView().setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        Toast.makeText(field.getFieldView().getContext(), value.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getField().getFieldView().getContext(), value.toString(), Toast.LENGTH_SHORT).show();
                         return true;
                     }
                 });
             }
         }else{
-            ((EditText) field.getFieldView()).setText("");
-            field.setActualData("");
+            ((EditText) getField().getFieldView()).setText("");
+            getField().setActualData("");
         }
 
     }
 
     @Override
-    public Object getData(AFField field) {
-        return ((EditText)field.getFieldView()).getText().toString();
+    public Object getData() {
+        return ((EditText)getField().getFieldView()).getText().toString();
     }
 
     private void addInputType(EditText field, SupportedWidgets widgetType){

@@ -5,7 +5,7 @@ import com.tomscz.afrest.rest.dto.AFClassInfo;
 /**
  * Created by Pavel on 17.12.2015.
  */
-public interface JSONParser {
+public interface JSONParser<T> {
 
-    AFClassInfo parse(String jsonStrToBeParsed, boolean parsingInnerClass);
+    T parse(String jsonStrToBeParsed, boolean parsingInnerClass);
 }

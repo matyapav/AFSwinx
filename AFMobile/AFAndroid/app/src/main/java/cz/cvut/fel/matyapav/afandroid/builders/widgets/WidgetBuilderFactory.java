@@ -4,6 +4,7 @@ import com.tomscz.afrest.commons.SupportedWidgets;
 import com.tomscz.afrest.rest.dto.AFFieldInfo;
 
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
+import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
@@ -21,23 +22,23 @@ public class WidgetBuilderFactory {
     }
 
 
-    public AbstractWidgetBuilder getFieldBuilder(AFFieldInfo properties, Skin skin){
-        if(Utils.isFieldWritable(properties.getWidgetType())){
-            return new TextWidgetBuilder(skin, properties);
+    public AbstractWidgetBuilder getWidgetBuilder(AFField field, Skin skin){
+        if(Utils.isFieldWritable(field.getFieldInfo().getWidgetType())){
+            return new TextWidgetBuilder(skin, field);
         }
-        if(properties.getWidgetType().equals(SupportedWidgets.CALENDAR)) {
-            return new DateWidgetBuilder(skin, properties);
+        if(field.getFieldInfo().getWidgetType().equals(SupportedWidgets.CALENDAR)) {
+            return new DateWidgetBuilder(skin, field);
         }
-        if(properties.getWidgetType().equals(SupportedWidgets.OPTION)){
-            return new OptionWidgetBuilder(skin, properties);
+        if(field.getFieldInfo().getWidgetType().equals(SupportedWidgets.OPTION)){
+            return new OptionWidgetBuilder(skin, field);
         }
-        if(properties.getWidgetType().equals(SupportedWidgets.DROPDOWNMENU)){
-            return new DropDownWidgetBuilder(skin, properties);
+        if(field.getFieldInfo().getWidgetType().equals(SupportedWidgets.DROPDOWNMENU)){
+            return new DropDownWidgetBuilder(skin, field);
         }
-        if(properties.getWidgetType().equals(SupportedWidgets.CHECKBOX)){
-            return new CheckboxWidgetBuilder(skin, properties);
+        if(field.getFieldInfo().getWidgetType().equals(SupportedWidgets.CHECKBOX)){
+            return new CheckboxWidgetBuilder(skin, field);
         }
-        System.err.println("BUILDER FOR "+properties.getWidgetType()+" NOT FOUND");
+        System.err.println("BUILDER FOR "+field.getFieldInfo().getWidgetType()+" NOT FOUND");
         return null;
     }
 }

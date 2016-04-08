@@ -24,8 +24,8 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
  */
 public class DropDownWidgetBuilder extends BasicWidgetBuilder {
 
-    public DropDownWidgetBuilder(Skin skin, AFFieldInfo properties) {
-        super(skin, properties);
+    public DropDownWidgetBuilder(Skin skin, AFField field) {
+        super(skin, field);
     }
 
     @Override
@@ -37,18 +37,18 @@ public class DropDownWidgetBuilder extends BasicWidgetBuilder {
                     convertOptionsIntoList(), getSkin());
             spinner.setAdapter(dataAdapter);
         }
-        if(getProperties().getReadOnly()){
+        if(getField().getFieldInfo().getReadOnly()){
             spinner.setEnabled(false);
         }
         return spinner;
     }
 
     @Override
-    public void setData(AFField field, Object value) {
-        Spinner spinner = (Spinner) field.getFieldView();
+    public void setData(Object value) {
+        Spinner spinner = (Spinner) getField().getFieldView();
         if(value == null){
             spinner.setSelection(0);
-            field.setActualData(spinner.getSelectedItem());
+            getField().setActualData(spinner.getSelectedItem());
             return;
         }
         if(value.toString().equals("true")){
@@ -56,8 +56,8 @@ public class DropDownWidgetBuilder extends BasicWidgetBuilder {
         }else if(value.toString().equals("false")){
             value = Localization.translate("option.no");
         }
-        if(field.getFieldInfo().getOptions() != null) {
-            for (AFOptions option : field.getFieldInfo().getOptions()) {
+        if(getField().getFieldInfo().getOptions() != null) {
+            for (AFOptions option : getField().getFieldInfo().getOptions()) {
                 if(option.getKey().equals(value)){
                     value = Localization.translate(option.getValue());
                     break;
@@ -67,18 +67,18 @@ public class DropDownWidgetBuilder extends BasicWidgetBuilder {
         for (int i = 0; i < spinner.getCount(); i++) {
             if(spinner.getItemAtPosition(i).toString().equals(value)){
                 spinner.setSelection(i);
-                field.setActualData(spinner.getSelectedItem());
+                getField().setActualData(spinner.getSelectedItem());
                 return;
             }
         }
-        field.setActualData(value);
+        getField().setActualData(value);
     }
 
     @Override
-    public Object getData(AFField field) {
-        Spinner spinner = (Spinner) field.getFieldView();
-        if(field.getFieldInfo().getOptions() != null) {
-            for (AFOptions option : field.getFieldInfo().getOptions()) {
+    public Object getData() {
+        Spinner spinner = (Spinner) getField().getFieldView();
+        if(getField().getFieldInfo().getOptions() != null) {
+            for (AFOptions option : getField().getFieldInfo().getOptions()) {
                 if(Localization.translate(option.getValue()).equals(spinner.getSelectedItem().toString())){
                     return option.getKey();
                 }
@@ -96,8 +96,8 @@ public class DropDownWidgetBuilder extends BasicWidgetBuilder {
     private List<String> convertOptionsIntoList(){
         List<String> list = new ArrayList<>();
         int i = 0;
-        if(getProperties().getOptions() != null){
-            for (AFOptions option : getProperties().getOptions()) {
+        if(getField().getFieldInfo().getOptions() != null){
+            for (AFOptions option : getField().getFieldInfo().getOptions()) {
                 if(option.getValue().toString().equals("true")){
                     list.add(Localization.translate("option.yes"));
                 }else if(option.getValue().toString().equals("false")){

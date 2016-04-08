@@ -14,7 +14,7 @@ namespace AFWinPhone.builders.widgets
     {
         private String dateFormat;
 
-        public DateWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public DateWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
             this.dateFormat = "dd.MM.yyyy"; //Default date format
         }
@@ -33,7 +33,7 @@ namespace AFWinPhone.builders.widgets
             datePicker.FontSize = getSkin().getFieldFontSize();
             //note .. do not set color - should be according to wp theme
 
-            if (getProperties().isReadOnly())
+            if (getField().getFieldInfo().isReadOnly())
             {
                 datePicker.IsEnabled = false;
                 datePicker.Foreground = new SolidColorBrush(Colors.LightGray);
@@ -41,23 +41,23 @@ namespace AFWinPhone.builders.widgets
             return datePicker;
         }
 
-        public override void setData(AFField field, Object value)
+        public override void setData(Object value)
         {
-            DatePicker dateText = (DatePicker)field.getFieldView();
+            DatePicker dateText = (DatePicker)getField().getFieldView();
             DateTime? date = Utils.ParseDate(value.ToString());
             if (date != null)
             {
                 dateText.Date = date.Value;
-                field.setActualData(date.Value.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture));
+                getField().setActualData(date.Value.ToString("dd.MM.yyyy", CultureInfo.InvariantCulture));
             }
             else {
                 //parsing totally failed maybe exception
             }
         }
 
-        public override Object getData(AFField field)
+        public override Object getData()
         {
-            DatePicker dateText = (DatePicker)field.getFieldView();
+            DatePicker dateText = (DatePicker)getField().getFieldView();
             DateTimeOffset? date = dateText.Date;
             if (date != null)
             {

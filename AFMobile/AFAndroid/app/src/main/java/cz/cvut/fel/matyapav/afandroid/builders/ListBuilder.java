@@ -24,7 +24,7 @@ public class ListBuilder extends AFComponentBuilder<ListBuilder> {
         String modelResponse = getModelResponse();
         //create form from response
         AFList list = (AFList) buildComponent(modelResponse, SupportedComponents.LIST);
-        //fill it with data (if there are some)
+        //fill it with data (if there are some)zz
         String data = getDataResponse();
         if(data != null) {
             list.insertData(data);

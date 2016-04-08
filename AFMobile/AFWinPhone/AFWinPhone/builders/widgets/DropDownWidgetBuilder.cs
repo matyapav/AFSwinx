@@ -11,7 +11,7 @@ namespace AFWinPhone.builders.widgets
     class DropDownWidgetBuilder : BasicBuilder
     {
 
-        public DropDownWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public DropDownWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
         }
 
@@ -27,20 +27,20 @@ namespace AFWinPhone.builders.widgets
             {
                 comboBox.ItemsSource = optionsList;
             }
-            if (getProperties().isReadOnly())
+            if (getField().getFieldInfo().isReadOnly())
             {
                 comboBox.IsEnabled = false;
             }
             return comboBox;
         }
 
-        public override object getData(AFField field)
+        public override object getData()
         {
-            ComboBox comboBox = (ComboBox)field.getFieldView();
+            ComboBox comboBox = (ComboBox)getField().getFieldView();
             comboBox.FontSize = getSkin().getFieldFontSize();
-            if (field.getFieldInfo().getOptions() != null)
+            if (getField().getFieldInfo().getOptions() != null)
             {
-                foreach (AFOptions option in field.getFieldInfo().getOptions())
+                foreach (AFOptions option in getField().getFieldInfo().getOptions())
                 {
                     if (Localization.translate(option.getValue()).Equals(comboBox.SelectedItem.ToString()))
                     {
@@ -61,13 +61,13 @@ namespace AFWinPhone.builders.widgets
             }
         }
 
-        public override void setData(AFField field, object value)
+        public override void setData(object value)
         {
-            ComboBox comboBox = (ComboBox)field.getFieldView();
+            ComboBox comboBox = (ComboBox)getField().getFieldView();
             if (value == null)
             {
                 comboBox.SelectedIndex = 0;
-                field.setActualData(comboBox.SelectedItem);
+                getField().setActualData(comboBox.SelectedItem);
                 return;
             }
             if (value.ToString().ToLower().Equals("true"))
@@ -78,9 +78,9 @@ namespace AFWinPhone.builders.widgets
             {
                 value = Localization.translate("option.no");
             }
-            if (field.getFieldInfo().getOptions() != null)
+            if (getField().getFieldInfo().getOptions() != null)
             {
-                foreach (AFOptions option in field.getFieldInfo().getOptions())
+                foreach (AFOptions option in getField().getFieldInfo().getOptions())
                 {
                     if (option.getKey().Equals(value))
                     {
@@ -94,19 +94,19 @@ namespace AFWinPhone.builders.widgets
                 if (comboBox.Items[i].ToString().Equals(value))
                 {
                     comboBox.SelectedIndex = i;
-                    field.setActualData(comboBox.SelectedItem);
+                    getField().setActualData(comboBox.SelectedItem);
                     return;
                 }
             }
-            field.setActualData(value);
+            getField().setActualData(value);
         }
 
         private List<String> convertOptionsIntoList()
         {
             List<String> list = new List<String>();
-            if (getProperties().getOptions() != null)
+            if (getField().getFieldInfo().getOptions() != null)
             {
-                foreach (AFOptions option in getProperties().getOptions())
+                foreach (AFOptions option in getField().getFieldInfo().getOptions())
                 {
                     if (option.getValue().Equals("true"))
                     {

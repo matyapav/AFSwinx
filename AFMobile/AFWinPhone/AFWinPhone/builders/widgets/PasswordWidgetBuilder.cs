@@ -9,7 +9,7 @@ namespace AFWinPhone.builders.widgets
 {
     class PasswordWidgetBuilder : BasicBuilder
     {
-        public PasswordWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public PasswordWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
         }
 
@@ -19,7 +19,7 @@ namespace AFWinPhone.builders.widgets
             password.Foreground = new SolidColorBrush(getSkin().getFieldColor());
             password.FontFamily = getSkin().getFieldFont();
             password.FontSize = getSkin().getFieldFontSize();
-            if (getProperties().isReadOnly())
+            if (getField().getFieldInfo().isReadOnly())
             {
                 password.IsEnabled = false;
                 password.Foreground = new SolidColorBrush(Colors.LightGray);
@@ -27,21 +27,21 @@ namespace AFWinPhone.builders.widgets
             return password;
         }
 
-        public override object getData(AFField field)
+        public override object getData()
         {
-            return ((PasswordBox)field.getFieldView()).Password;
+            return ((PasswordBox)getField().getFieldView()).Password;
         }
 
-        public override void setData(AFField field, object value)
+        public override void setData(object value)
         {
             if (value != null)
             {
-                ((PasswordBox)field.getFieldView()).Password = value.ToString();
-                field.setActualData(value);
+                ((PasswordBox)getField().getFieldView()).Password = value.ToString();
+                getField().setActualData(value);
             }
             else {
-                ((PasswordBox)field.getFieldView()).Password = "";
-                field.setActualData("");
+                ((PasswordBox)getField().getFieldView()).Password = "";
+                getField().setActualData("");
             }
         }
     }

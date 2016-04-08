@@ -78,8 +78,7 @@ public class AFList extends AFComponent {
                 AFField field = getFieldById(road + key);
                 if (field != null) {
                     String data = jsonObject.get(key).toString();
-                    AbstractWidgetBuilder builder = WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-                    builder.setData(field, data);
+                    field.getWidgetBuilder().setData(data);
                     row.put(road + key, field.getActualData().toString());
                 }
             }

@@ -11,6 +11,11 @@ namespace ShowcaseWP.skins
             return 0;
         }
 
+        public override Color getListItemTextColor()
+        {
+            return Colors.Chocolate;
+        }
+
         public override Color getListItemNameColor()
         {
             return Colors.Chocolate;
@@ -34,6 +39,11 @@ namespace ShowcaseWP.skins
         public override VerticalAlignment getListVerticalAlignment()
         {
             return VerticalAlignment.Top;
+        }
+
+        public override Color getListItemBackgroundColor()
+        {
+            return Colors.Azure;
         }
     }
 }

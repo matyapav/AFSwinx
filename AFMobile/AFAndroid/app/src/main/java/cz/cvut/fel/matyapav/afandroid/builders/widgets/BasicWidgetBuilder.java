@@ -3,6 +3,7 @@ package cz.cvut.fel.matyapav.afandroid.builders.widgets;
 import com.tomscz.afrest.rest.dto.AFFieldInfo;
 
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
+import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 
 /**
  * Created by Pavel on 24.02.2016.
@@ -10,18 +11,18 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 abstract class BasicWidgetBuilder implements AbstractWidgetBuilder {
 
     private Skin skin;
-    private AFFieldInfo properties;
+    private AFField field;
 
-    public BasicWidgetBuilder(Skin skin, AFFieldInfo properties) {
+    public BasicWidgetBuilder(Skin skin, AFField field) {
         this.skin = skin;
-        this.properties = properties;
+        this.field = field;
     }
 
     public Skin getSkin() {
         return skin;
     }
 
-    public AFFieldInfo getProperties() {
-        return properties;
+    public AFField getField() {
+        return field;
     }
 }

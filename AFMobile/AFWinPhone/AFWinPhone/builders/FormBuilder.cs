@@ -38,7 +38,7 @@ namespace AFWinPhone.builders
             formView.Margin = new Thickness(getSkin().getComponentMarginLeft(), getSkin().getComponentMarginTop(),
                 getSkin().getComponentMarginRight(), getSkin().getComponentMarginBottom());
             //set form layout orientation
-            if (form.getLayoutOrientation().Equals(LayoutOrientation.AXISX))
+            if (form.getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISX))
             { //AXIS X
                 formView.Orientation = Orientation.Vertical;
             }
@@ -48,7 +48,7 @@ namespace AFWinPhone.builders
 
             //set fields layout orientation
             Orientation setOfFieldsOrientation;
-            if (form.getLayoutOrientation().Equals(LayoutOrientation.AXISX))
+            if (form.getComponentInfo().getLayout().getLayoutOrientation().Equals(LayoutOrientation.AXISX))
             { //AXIS X
                 setOfFieldsOrientation = Orientation.Horizontal;
             }
@@ -57,7 +57,7 @@ namespace AFWinPhone.builders
             }
 
             //determine layout
-            int numberOfColumns = form.getLayoutDefinitions().getNumberOfColumns();
+            int numberOfColumns = form.getComponentInfo().getLayout().getLayoutDefinition().getNumberOfColumns();
 
             int i = 0;
             StackPanel setOfFields = null; ;

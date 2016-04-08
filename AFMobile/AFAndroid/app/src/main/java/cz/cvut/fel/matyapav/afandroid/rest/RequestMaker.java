@@ -21,7 +21,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 /**
  * Created by Pavel on 14.02.2016.
  */
-public class RequestTask extends AsyncTask<String,Integer,Object> {
+public class RequestMaker extends AsyncTask<String,Integer,Object> {
 
     HeaderType headerType;
     HttpMethod httpMethod;
@@ -29,8 +29,8 @@ public class RequestTask extends AsyncTask<String,Integer,Object> {
     String address;
     Object data;
 
-    public RequestTask(HttpMethod method, HeaderType headerType,
-                       ConnectionSecurity security, Object data, String url) {
+    public RequestMaker(HttpMethod method, HeaderType headerType,
+                        ConnectionSecurity security, Object data, String url) {
         this.headerType = headerType;
         this.httpMethod = method;
         this.security = security;

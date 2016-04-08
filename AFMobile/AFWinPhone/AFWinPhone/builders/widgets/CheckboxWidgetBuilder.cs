@@ -9,7 +9,7 @@ namespace AFWinPhone.builders.widgets
 {
     class CheckboxWidgetBuilder : BasicBuilder
     {
-        public CheckboxWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public CheckboxWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
         }
 
@@ -18,24 +18,23 @@ namespace AFWinPhone.builders.widgets
             CheckBox checkBox = new CheckBox();
             checkBox.FontSize = getSkin().getFieldFontSize();
             checkBox.Foreground = new SolidColorBrush(getSkin().getFieldColor());
-            //checkBox.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            if (getProperties().isReadOnly())
+            if (getField().getFieldInfo().isReadOnly())
             {
                 checkBox.IsEnabled = false;
             }
             return checkBox;
         }
 
-        public override void setData(AFField field, Object value)
+        public override void setData(Object value)
         {
-            CheckBox box = (CheckBox)field.getFieldView();
+            CheckBox box = (CheckBox)getField().getFieldView();
             box.IsChecked = Convert.ToBoolean(value.ToString());
-            field.setActualData(value);
+            getField().setActualData(value);
         }
 
-        public override Object getData(AFField field)
+        public override Object getData()
         {
-            CheckBox box = (CheckBox)field.getFieldView();
+            CheckBox box = (CheckBox)getField().getFieldView();
             return box.IsChecked.ToString().ToLower();
         }
     }

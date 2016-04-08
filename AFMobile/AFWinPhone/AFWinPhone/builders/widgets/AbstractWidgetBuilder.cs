@@ -4,13 +4,13 @@ using Windows.UI.Xaml;
 
 namespace AFWinPhone.builders.widgets
 {
-    interface AbstractWidgetBuilder
+    public interface AbstractWidgetBuilder
     {
 
         FrameworkElement buildFieldView();
 
-        void setData(AFField field, Object value);
+        void setData(Object value);
 
-        Object getData(AFField field);
+        Object getData();
     }
 }

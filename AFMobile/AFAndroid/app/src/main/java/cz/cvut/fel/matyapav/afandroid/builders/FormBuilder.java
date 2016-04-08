@@ -42,7 +42,7 @@ public class FormBuilder extends AFComponentBuilder<FormBuilder>{
                 getSkin().getComponentMarginRight(), getSkin().getComponentMarginBottom());
         formView.setLayoutParams(params);
         //set form layout orientation
-        if(form.getLayoutOrientation().equals(LayoutOrientation.AXISX)){ //AXIS X
+        if(form.getComponentInfo().getLayout().getLayoutOrientation().equals(LayoutOrientation.AXISX)){ //AXIS X
             formView.setOrientation(LinearLayout.VERTICAL);
         }else { //AXIS Y
             formView.setOrientation(LinearLayout.HORIZONTAL);
@@ -50,7 +50,7 @@ public class FormBuilder extends AFComponentBuilder<FormBuilder>{
 
         //set fields layout orientation
         int setOfFieldsOrientation;
-        if(form.getLayoutOrientation().equals(LayoutOrientation.AXISX)){ //AXIS X
+        if(form.getComponentInfo().getLayout().getLayoutOrientation().equals(LayoutOrientation.AXISX)){ //AXIS X
             setOfFieldsOrientation = LinearLayout.HORIZONTAL;
         }else{ //AXIS Y
             setOfFieldsOrientation = LinearLayout.VERTICAL;
@@ -58,7 +58,7 @@ public class FormBuilder extends AFComponentBuilder<FormBuilder>{
 
         //determine layout
         int numberOfColumns;
-        if(form.getLayoutDefinitions().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
+        if(form.getComponentInfo().getLayout().getLayoutDefinition().equals(LayouDefinitions.TWOCOLUMNSLAYOUT)){
             numberOfColumns = 2;
         }else {
             numberOfColumns = 1;

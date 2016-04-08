@@ -10,7 +10,7 @@ namespace AFWinPhone.builders.widgets
 {
     class OptionWidgetBuilder : BasicBuilder
     {
-        public OptionWidgetBuilder(Skin skin, AFFieldInfo properties) : base(skin, properties)
+        public OptionWidgetBuilder(Skin skin, AFField field) : base(skin, field)
         {
         }
 
@@ -21,9 +21,9 @@ namespace AFWinPhone.builders.widgets
             radioGroup.VerticalAlignment = VerticalAlignment.Top;
             radioGroup.Orientation = Orientation.Vertical;
             int numberOfOptions;
-            if (getProperties().getOptions() != null && getProperties().getOptions().Any())
+            if (getField().getFieldInfo().getOptions() != null && getField().getFieldInfo().getOptions().Any())
             {
-                numberOfOptions = getProperties().getOptions().Count;
+                numberOfOptions = getField().getFieldInfo().getOptions().Count;
                 RadioButton[] options = new RadioButton[numberOfOptions];
                 String groupName = Guid.NewGuid().ToString();
                 for (int i = 0; i < numberOfOptions; i++)
@@ -31,9 +31,9 @@ namespace AFWinPhone.builders.widgets
                     options[i] = new RadioButton();
                     options[i].FontFamily = getSkin().getFieldFont();
                     options[i].FontSize = getSkin().getFieldFontSize();
-                    options[i].Content = getProperties().getOptions()[i].getValue();
+                    options[i].Content = getField().getFieldInfo().getOptions()[i].getValue();
                     options[i].GroupName = groupName;
-                    if (getProperties().isReadOnly())
+                    if (getField().getFieldInfo().isReadOnly())
                     {
                         options[i].IsEnabled = false;
                     }
@@ -52,7 +52,7 @@ namespace AFWinPhone.builders.widgets
                 options[1].FontFamily = getSkin().getFieldFont();
                 options[1].FontSize = getSkin().getFieldFontSize();
                 options[1].Content = Localization.translate("option.no");
-                if (getProperties().isReadOnly())
+                if (getField().getFieldInfo().isReadOnly())
                 {
                     options[0].IsEnabled = false;
                     options[1].IsEnabled = false;
@@ -64,17 +64,17 @@ namespace AFWinPhone.builders.widgets
             return radioGroup;
         }
 
-        public override void setData(AFField field, Object value)
+        public override void setData(Object value)
         {
 
-            StackPanel group = (StackPanel) field.getFieldView();
+            StackPanel group = (StackPanel) getField().getFieldView();
             if (value == null)
             {
                 foreach (RadioButton btn in group.Children)
                 {
                     btn.IsChecked = false;
                 }
-                field.setActualData(value);
+                getField().setActualData(value);
                 return;
             }
             for (int i = 0; i < group.Children.Count; i++)
@@ -85,16 +85,16 @@ namespace AFWinPhone.builders.widgets
                         || (Utils.TryToConvertIntoBoolean(value.ToString()) == false && i == 1))
                 {
                     btn.IsChecked = true;
-                    field.setActualData(value);
+                    getField().setActualData(value);
                     break;
                 }
             };
 
         }
 
-        public override Object getData(AFField field)
+        public override Object getData()
         {
-            StackPanel group = (StackPanel) field.getFieldView();
+            StackPanel group = (StackPanel) getField().getFieldView();
       
             for (int i = 0; i < group.Children.Count; i++)
             {

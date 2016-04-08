@@ -20,33 +20,33 @@ namespace AFWinPhone.builders.widgets
         }
 
 
-        public AbstractWidgetBuilder getFieldBuilder(AFFieldInfo properties, Skin skin)
+        public AbstractWidgetBuilder getFieldBuilder(AFField field, Skin skin)
         {
-            if (Utils.IsFieldWritable(properties.getWidgetType()))
+            if (Utils.IsFieldWritable(field.getFieldInfo().getWidgetType()))
             {
-                return new TextWidgetBuilder(skin, properties);
+                return new TextWidgetBuilder(skin, field);
             }
-            if (properties.getWidgetType().Equals(SupportedWidgets.CALENDAR))
+            if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.CALENDAR))
             {
-                return new DateWidgetBuilder(skin, properties);
+                return new DateWidgetBuilder(skin, field);
             }
-            if (properties.getWidgetType().Equals(SupportedWidgets.OPTION))
+            if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.OPTION))
             {
-                return new OptionWidgetBuilder(skin, properties);
+                return new OptionWidgetBuilder(skin, field);
             }
-            if (properties.getWidgetType().Equals(SupportedWidgets.DROPDOWNMENU))
+            if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.DROPDOWNMENU))
             {
-                return new DropDownWidgetBuilder(skin, properties);
+                return new DropDownWidgetBuilder(skin, field);
             }
-            if (properties.getWidgetType().Equals(SupportedWidgets.CHECKBOX))
+            if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.CHECKBOX))
             {
-                return new CheckboxWidgetBuilder(skin, properties);
+                return new CheckboxWidgetBuilder(skin, field);
             }
-            if (properties.getWidgetType().Equals(SupportedWidgets.PASSWORD))
+            if (field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.PASSWORD))
             {
-                return new PasswordWidgetBuilder(skin, properties);
+                return new PasswordWidgetBuilder(skin, field);
             }
-            Debug.WriteLine("BUILDER FOR " + properties.getWidgetType() + " NOT FOUND");
+            Debug.WriteLine("BUILDER FOR " + field.getFieldInfo().getWidgetType() + " NOT FOUND");
             return null;
         }
     }

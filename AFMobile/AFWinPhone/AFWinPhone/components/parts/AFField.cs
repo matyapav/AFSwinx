@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using AFWinPhone.builders.widgets;
 
 namespace AFWinPhone.components.parts
 {
@@ -18,6 +19,7 @@ namespace AFWinPhone.components.parts
         private TextBlock errorView;
         private FrameworkElement completeView;
         private Object actualData;
+        private AbstractWidgetBuilder widgetBuilder;
 
         private AFComponent parent;
 
@@ -132,6 +134,16 @@ namespace AFWinPhone.components.parts
         public AFComponent getParent()
         {
             return this.parent;
+        }
+
+        public AbstractWidgetBuilder getWidgetBuilder()
+        {
+            return this.widgetBuilder;
+        }
+
+        public void setWidgetBuilder(AbstractWidgetBuilder widgetBuilder)
+        {
+            this.widgetBuilder = widgetBuilder;
         }
 
 

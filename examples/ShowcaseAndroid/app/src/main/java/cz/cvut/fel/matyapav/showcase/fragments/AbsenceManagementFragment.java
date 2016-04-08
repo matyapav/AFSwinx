@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 import cz.cvut.fel.matyapav.afandroid.AFAndroid;
+import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFForm;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFList;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
@@ -64,13 +65,13 @@ public class AbsenceManagementFragment extends Fragment {
         //build security constraints
         HashMap<String, String> securityConstrains = ShowCaseUtils.getUserCredentials(getActivity());
 
-        connectionResource = getResources().openRawResource(R.raw.connection); //must be called again
         try {
             AFList list = AFAndroid.getInstance().getListBuilder().initBuilder(getActivity(),
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST, connectionResource,
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST_CONNECTION_KEY,
                     securityConstrains).setSkin(new AbsenceManagementListSkin(getContext())).createComponent();
             layout.addView(list.getView());
+            connectionResource = getResources().openRawResource(R.raw.connection); //must be called again
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM, connectionResource,
                     ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM_CONNECTION_KEY,
@@ -79,6 +80,7 @@ public class AbsenceManagementFragment extends Fragment {
             Button button = new Button(getActivity());
             button.setText(Localization.translate("button.perform"));
             button.setOnClickListener(onPerformButtonClick);
+
             layout.addView(form.getView());
             layout.addView(button);
         } catch (Exception e) {

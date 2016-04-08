@@ -12,7 +12,7 @@ public interface AbstractWidgetBuilder {
 
     View buildFieldView(Activity activity);
 
-    void setData(AFField field, Object value);
+    void setData(Object value);
 
-    Object getData(AFField field);
+    Object getData();
 }

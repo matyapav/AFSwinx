@@ -1,20 +1,12 @@
 package cz.cvut.fel.matyapav.afandroid;
 
-import android.app.Activity;
-import android.os.AsyncTask;
-
 import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
-import com.tomscz.afswinx.rest.connection.ConnectionSecurity;
-import com.tomscz.afswinx.rest.connection.HeaderType;
-import com.tomscz.afswinx.rest.connection.HttpMethod;
-import com.tomscz.afswinx.rest.connection.SecurityMethod;
 
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 import static org.junit.Assert.assertEquals;

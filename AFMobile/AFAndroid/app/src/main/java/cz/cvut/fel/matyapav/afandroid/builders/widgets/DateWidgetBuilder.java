@@ -28,8 +28,8 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
 
     private String dateFormat;
 
-    public DateWidgetBuilder(Skin skin, AFFieldInfo properties){
-        super(skin, properties);
+    public DateWidgetBuilder(Skin skin, AFField field){
+        super(skin, field);
         this.dateFormat = "dd.MM.yyyy"; //Default date format
     }
 
@@ -65,7 +65,7 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
             }
         });
 
-        if(getProperties().getReadOnly()){
+        if(getField().getFieldInfo().getReadOnly()){
             dateText.setInputType(InputType.TYPE_NULL);
             dateText.setTextColor(Color.LTGRAY);
         }
@@ -73,21 +73,21 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
     }
 
     @Override
-    public void setData(AFField field, Object value) {
-        EditText dateText = (EditText) field.getFieldView();
+    public void setData(Object value) {
+        EditText dateText = (EditText) getField().getFieldView();
         SimpleDateFormat outputFormatter = new SimpleDateFormat("dd.MM.yyyy");
         Date date = Utils.parseDate(String.valueOf(value));
         if(date != null) {
             dateText.setText(outputFormatter.format(date));
-            field.setActualData(outputFormatter.format(date));
+            getField().setActualData(outputFormatter.format(date));
         }else{
             //parsing totally failed maybe exception
         }
     }
 
     @Override
-    public Object getData(AFField field) {
-        EditText dateText = (EditText) field.getFieldView();
+    public Object getData() {
+        EditText dateText = (EditText) getField().getFieldView();
         SimpleDateFormat serverFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         Date date = Utils.parseDate(dateText.getText().toString());
         if(date != null) {

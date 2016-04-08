@@ -22,7 +22,7 @@ import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 /**
  * Created by Pavel on 17.12.2015.
  */
-public class JSONDefinitionParser implements JSONParser {
+public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
 
     @Override
     public AFClassInfo parse(String classInfoJson, boolean parsingInnerClass){

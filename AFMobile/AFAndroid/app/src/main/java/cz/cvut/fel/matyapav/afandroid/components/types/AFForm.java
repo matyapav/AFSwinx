@@ -16,11 +16,9 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
-import cz.cvut.fel.matyapav.afandroid.rest.RequestTask;
+import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
@@ -65,16 +63,14 @@ public class AFForm extends AFComponent {
     }
 
     private void setFieldValue(AFField field, Object val){
-        WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).setData(field, val);
+        field.getWidgetBuilder().setData(val);
     }
 
     @Override
     public AFDataHolder reserialize() {
         AFDataHolder dataHolder = new AFDataHolder();
         for (AFField field : getFields()) {
-            AbstractWidgetBuilder fieldBuilder =
-                    WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-            Object data = fieldBuilder.getData(field);
+            Object data = field.getWidgetBuilder().getData();
             String propertyName = field.getId();
             // Based on dot notation determine road. Road is used to add object to its right place
             String[] roadTrace = propertyName.split("\\.");
@@ -131,7 +127,7 @@ public class AFForm extends AFComponent {
             return false;
         }
         System.err.println("SEND CONNECTION " + Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
-        RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
+        RequestMaker sendTask = new RequestMaker(getConnectionPack().getSendConnection().getHttpMethod(), getConnectionPack().getSendConnection().getContentType(),
                 getConnectionPack().getSendConnection().getSecurity(), data, Utils.getConnectionEndPoint(getConnectionPack().getSendConnection()));
         Object response = sendTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
         if (response instanceof Exception) {
@@ -166,8 +162,7 @@ public class AFForm extends AFComponent {
 
     public void resetData() {
         for (AFField field: getFields()) {
-            AbstractWidgetBuilder builder = WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin());
-            builder.setData(field, field.getActualData());
+            field.getWidgetBuilder().setData(field.getActualData());
         }
     }
 
@@ -181,13 +176,13 @@ public class AFForm extends AFComponent {
     public Object getDataFromFieldWithId(String id){
         AFField field = getFieldById(id);
         if(field != null){
-            return WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).getData(field);
+            return field.getWidgetBuilder().getData();
         }
         return null;
     }
 
     public void setDataToFieldWithId(String id, Object data){
         AFField field = getFieldById(id);
-        WidgetBuilderFactory.getInstance().getFieldBuilder(field.getFieldInfo(), getSkin()).setData(field, data);
+        field.getWidgetBuilder().setData(data);
     }
 }
