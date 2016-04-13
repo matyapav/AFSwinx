@@ -135,7 +135,7 @@ namespace AFWinPhone.components.types
         }
 
        
-        public async Task<Boolean> sendData()
+        public override async Task<Boolean> sendData()
         {
             if (getConnectionPack().getSendConnection() == null)
             {
@@ -149,15 +149,15 @@ namespace AFWinPhone.components.types
             }
             Debug.WriteLine("SEND CONNECTION " +
                             Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
-            RequestTask sendTask = new RequestTask(getConnectionPack().getSendConnection().getHttpMethod(),
+            RequestMaker sendMaker = new RequestMaker(getConnectionPack().getSendConnection().getHttpMethod(),
                 getConnectionPack().getSendConnection().getContentType(),
                 getConnectionPack().getSendConnection().getSecurity(), data,
                 Utils.GetConnectionEndPoint(getConnectionPack().getSendConnection()));
-            await sendTask.doRequest();
+            await sendMaker.doRequest();
             return true;
         }
 
-        private Object generateSendData()
+        public override Object generateSendData()
         {
             // before building data and sending, validate actual data
             bool isValid = validateData();

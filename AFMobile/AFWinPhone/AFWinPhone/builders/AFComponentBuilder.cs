@@ -33,7 +33,14 @@ namespace AFWinPhone.builders
             this.componentKeyName = componentKeyName;
             this.pathToConnectionResource = pathToConnectionResource;
             this.connectionKey = connectionKey;
-            this.skin = new DefaultSkin();
+            if (AfWindowsPhone.getInstance().getDefaultSkin() == null)
+            {
+                this.skin = new DefaultSkin();
+            }
+            else
+            {
+                this.skin = AfWindowsPhone.getInstance().getDefaultSkin();
+            }
             return this;
         }
 
@@ -44,7 +51,14 @@ namespace AFWinPhone.builders
             this.pathToConnectionResource = pathToConnectionResource;
             this.connectionKey = connectionKey;
             this.connectionParameters = connectionParameters;
-            this.skin = new DefaultSkin();
+            if (AfWindowsPhone.getInstance().getDefaultSkin() == null)
+            {
+                this.skin = new DefaultSkin();
+            }
+            else
+            {
+                this.skin = AfWindowsPhone.getInstance().getDefaultSkin();
+            }
             return this;
         }
 
@@ -98,53 +112,26 @@ namespace AFWinPhone.builders
             Debug.WriteLine("NUMBER OF ELEMENTS IN COMPONENT " + component.getFields().Count);
         }
 
-        protected AFComponent buildComponent(String modelResponse, SupportedComponents type)
+        protected void buildComponent(AFComponent component)
         {
-            AFComponent component = AFComponentFactory.getInstance().getComponentByType(type);
-
-            component.setConnectionPack(connectionPack);
-            component.setSkin(skin);
 
             StackPanel componentView = new StackPanel();
             //componentView.setLayoutParams(getSkin().getTopLayoutParams());
             JSONParser parser = new JSONDefinitionParser();
+
+            var modelTask = Task.Run(component.getModelResponse);
+            modelTask.Wait();
+            String modelResponse = modelTask.Result;
+
             AFClassInfo classDef = parser.parse(modelResponse, false);
             component.setComponentInfo(classDef);
             prepareComponent(classDef, component, 0, false, new StringBuilder());
             FrameworkElement view = buildComponentView(component);
             componentView.Children.Add(view);
             component.setView(componentView);
-            return component;
         }
 
-        protected async Task<String> getModelResponse()
-        {
-            AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
-            if (modelConnection != null)
-            {
-                RequestTask task = new RequestTask(modelConnection.getHttpMethod(), modelConnection.getContentType(),
-                        modelConnection.getSecurity(), null, Utils.GetConnectionEndPoint(modelConnection));
-
-                String modelResponse = await task.doRequest();
-                return modelResponse;
-            }
-            else {
-                throw new Exception("No model connection available. Did you call initializeConnections() before?");
-            }
-        }
-
-        protected async Task<String> getDataResponse()
-        {
-            AFSwinxConnection dataConnection = connectionPack.getDataConnection();
-            if (dataConnection != null)
-            {
-                RequestTask getData = new RequestTask(dataConnection.getHttpMethod(), dataConnection.getContentType(),
-                        dataConnection.getSecurity(), null, Utils.GetConnectionEndPoint(dataConnection));
-                String response = await getData.doRequest();
-                return response;
-            }
-            return null;
-        }
+    
 
         public abstract AFComponent createComponent();
 
@@ -171,5 +158,10 @@ namespace AFWinPhone.builders
             return this;
         }
 
+
+        public AFSwinxConnectionPack getConnectionPack()
+        {
+            return connectionPack;
+        }
     }
 }

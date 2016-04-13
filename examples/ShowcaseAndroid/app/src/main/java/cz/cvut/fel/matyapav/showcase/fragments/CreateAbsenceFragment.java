@@ -29,8 +29,7 @@ public class CreateAbsenceFragment extends Fragment {
     private View.OnClickListener onCreateAbsenceClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm createAbsenceForm = (AFForm) AFAndroid.getInstance().getCreatedComponents()
-                    .get(ShowcaseConstants.ABSENCE_ADD_FORM);
+            AFForm createAbsenceForm = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_ADD_FORM);
             if(createAbsenceForm != null){
                 try {
                     if(createAbsenceForm.sendData()) {

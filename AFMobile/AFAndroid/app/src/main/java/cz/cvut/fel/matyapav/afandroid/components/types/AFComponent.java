@@ -1,11 +1,13 @@
 package cz.cvut.fel.matyapav.afandroid.components.types;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.view.ViewGroup;
 
 import com.tomscz.afrest.layout.definitions.LayouDefinitions;
 import com.tomscz.afrest.layout.definitions.LayoutOrientation;
 import com.tomscz.afrest.rest.dto.AFClassInfo;
+import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
+import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
+import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
  * Created by Pavel on 13.02.2016.
@@ -66,6 +70,36 @@ public abstract class AFComponent implements AbstractComponent{
             }
         }
         return res;
+    }
+
+    public String getModelResponse() throws Exception{
+        AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
+        if(modelConnection != null) {
+            RequestMaker task = new RequestMaker(modelConnection.getHttpMethod(), modelConnection.getContentType(),
+                    modelConnection.getSecurity(), null, Utils.getConnectionEndPoint(modelConnection));
+
+            Object modelResponse = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get(); //make it synchronous to wait for response
+            if (modelResponse instanceof Exception) {
+                throw (Exception) modelResponse;
+            }
+            return (String) modelResponse;
+        }else{
+            throw new Exception("No model connection available. Did you call initializeConnections() before?");
+        }
+    }
+
+    public String getDataResponse() throws Exception{
+        AFSwinxConnection dataConnection = connectionPack.getDataConnection();
+        if(dataConnection != null) {
+            RequestMaker getData = new RequestMaker(dataConnection.getHttpMethod(), dataConnection.getContentType(),
+                    dataConnection.getSecurity(), null, Utils.getConnectionEndPoint(dataConnection));
+            Object response = getData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+            if (response instanceof Exception) {
+                throw (Exception) response;
+            }
+            return (String) response;
+        }
+        return null;
     }
 
     //GETTERS

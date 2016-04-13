@@ -21,11 +21,12 @@ public class ListBuilder extends AFComponentBuilder<ListBuilder> {
     @Override
     public AFList createComponent() throws Exception {
         initializeConnections();
-        String modelResponse = getModelResponse();
+        AFList list = new AFList(getActivity(), getConnectionPack(), getSkin());
+
         //create form from response
-        AFList list = (AFList) buildComponent(modelResponse, SupportedComponents.LIST);
+        buildComponent(list);
         //fill it with data (if there are some)zz
-        String data = getDataResponse();
+        String data = list.getDataResponse();
         if(data != null) {
             list.insertData(data);
         }

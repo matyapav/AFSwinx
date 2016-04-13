@@ -17,11 +17,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using AFWinPhone;
 using AFWinPhone.components.types;
 using AFWinPhone.utils;
 using ShowcaseWP.skins;
 using ShowcaseWP.utils;
+using AfWindowsPhone = AFWinPhone.AfWindowsPhone;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -49,7 +49,7 @@ namespace ShowcaseWP.pages
 
             try
             {
-                var absenceList = (AFList)AfWindowsPhone.getInstance().getListBuilder()
+                var absenceList = (AFList) AfWindowsPhone.getInstance().getListBuilder()
                     .initBuilder(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST, "connection.xml",
                         ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST_CONNECTION_KEY,
                         ShowcaseUtils.getUserCredentials()).setSkin(new AbsenceManagementSkin())
@@ -88,12 +88,9 @@ namespace ShowcaseWP.pages
 
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
-            if (
-                AfWindowsPhone.getInstance()
-                    .getCreatedComponents()
-                    .ContainsKey(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM))
-            {
-            var form = (AFForm) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM];
+           
+            var form = (AFForm) AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
+                if(form != null) { 
                 try
                 {
                     var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
@@ -120,23 +117,18 @@ namespace ShowcaseWP.pages
                 }
             }
         }
+    
 
         private void AbsenceManagementPage_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (
-                AfWindowsPhone.getInstance()
-                    .getCreatedComponents()
-                    .ContainsKey(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST) &&
-                AfWindowsPhone.getInstance()
-                    .getCreatedComponents()
-                    .ContainsKey(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM))
-            {
-                var absenceForm = (AFForm) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM];
-                var absenceList = (AFList) AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST];
-                var position = absenceList.getListView().Items.IndexOf(e.ClickedItem);
-                absenceForm.insertData(absenceList.getDataFromItemOnPosition(position));
-                absenceForm.hideErrors();
-            }
+            
+                var absenceForm = (AFForm) AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
+                var absenceList = (AFList) AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST);
+                if(absenceForm != null && absenceList != null) { 
+                    var position = absenceList.getListView().Items.IndexOf(e.ClickedItem);
+                    absenceForm.insertData(absenceList.getDataFromItemOnPosition(position));
+                    absenceForm.hideErrors();
+                }
         }
 
 

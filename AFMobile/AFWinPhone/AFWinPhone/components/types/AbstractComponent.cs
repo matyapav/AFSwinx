@@ -2,6 +2,7 @@
 using AFWinPhone.rest.holder;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AFWinPhone.components.types
 {
@@ -14,6 +15,14 @@ namespace AFWinPhone.components.types
         bool validateData();
 
         AFDataHolder reserialize();
+
+        Task<String> getModelResponse();
+
+        Task<String> getDataResponse();
+
+        Object generateSendData();
+
+        Task<Boolean> sendData();
 
     }
 }

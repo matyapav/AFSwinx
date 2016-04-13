@@ -27,7 +27,7 @@ public class ParserTest {
     @Test
     public void testParseFieldInfo() throws Exception {
 
-        JSONParser parser = new JSONDefinitionParser();
+        JSONDefinitionParser parser = new JSONDefinitionParser();
         String wellFormedPersonJson = getWellFormedJson();
         AFClassInfo actual = parser.parse(wellFormedPersonJson, false);
 
@@ -61,7 +61,7 @@ public class ParserTest {
 
     @Test
     public void testParseFieldInfo_Corrupted() throws Exception{
-        JSONParser parser = new JSONDefinitionParser();
+        JSONDefinitionParser parser = new JSONDefinitionParser();
         String corruptedPersonJson = "{\"classInfo\":{\"name\":\"person\",\"****CORRUPTED FILE****";
         AFClassInfo actual = parser.parse(corruptedPersonJson, false);
         assertNull(actual);

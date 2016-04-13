@@ -1,11 +1,26 @@
-\begin{thebibliography}{20}
+\begin{thebibliography}{34}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[and()]{android-themes}
+\bibitem[and({\natexlab{a}})]{android-intro}
+\emph{Introduction to Android} [online]. [cit.~09.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/guide/index.html}.
+
+\bibitem[and({\natexlab{b}})]{android-lin-layout}
+\emph{Linear Layout} [online]. [cit.~13.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/guide/topics/ui/layout/linear.html}.
+
+\bibitem[and({\natexlab{c}})]{android-sdks}
+\emph{Platform Versions} [online]. [cit.~09.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/about/dashboards/index.html}.
+
+\bibitem[and({\natexlab{d}})]{android-themes}
 \emph{Styles and Themes} [online]. [cit.~26.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{http://developer.android.com/guide/topics/ui/themes.html}.
@@ -18,14 +33,38 @@
 \emph{AspectFaces framework} [online]. [cit.~23.\,03.\,2016].
 \newblock Dostupn{\'{e}} z: \url{http://www.aspectfaces.com/overview}.
 
+\bibitem[asy()]{asynctask}
+\emph{AsyncTask} [online]. [cit.~12.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/reference/android/os/AsyncTask.html}.
+
+\bibitem[fac()]{factorypattern}
+\emph{Factory pattern} [online]. [cit.~13.\,04.\,2016].
+\newblock Dostupn{\'{e}} z: \url{http://www.oodesign.com/factory-pattern.html}.
+
+\bibitem[gla()]{glassfish}
+\emph{GlassFish Server Open Source Edition Quick Start Guide, Release 4.0}
+  [online].
+\newblock Dostupn{\'{e}} z:
+  \url{https://glassfish.java.net/docs/4.0/quick-start-guide.pdf}.
+
 \bibitem[gso()]{gson}
 \emph{Gson User Guide} [online]. [cit.~01.\,04.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{https://github.com/google/gson/blob/master/UserGuide.md}.
 
+\bibitem[htt()]{httpclientremoval}
+\emph{Android 6.0 Changes} [online]. [cit.~12.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html}.
+
 \bibitem[jso()]{json}
 \emph{Introducing JSON} [online]. [cit.~01.\,04.\,2016].
 \newblock Dostupn{\'{e}} z: \url{http://www.json.org/}.
+
+\bibitem[met()]{metadata}
+\emph{Metadata} [online]. [cit.~09.\,04.\,2016].
+\newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Metadata}.
 
 \bibitem[ora()]{oracle-ws}
 \emph{What Are RESTful Web Services?} [online]. [cit.~22.\,03.\,2016].
@@ -50,7 +89,17 @@
 \emph{Web service} [online]. [cit.~22.\,03.\,2016].
 \newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Web_service}.
 
-\bibitem[wp-()]{wp-themes}
+\bibitem[wp-({\natexlab{a}})]{wp-grid}
+ [online]. [cit.~13.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.controls.grid.aspx}.
+
+\bibitem[wp-({\natexlab{b}})]{wp-httpclient}
+\emph{HttpClient class} [online]. [cit.~12.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://msdn.microsoft.com/library/windows/apps/windows.web.http.httpclient.aspx}.
+
+\bibitem[wp-({\natexlab{c}})]{wp-themes}
 \emph{Themes for Windows Phone} [online]. [cit.~26.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{https://msdn.microsoft.com/en-us/library/windows/apps/ff402557(v=vs.105).aspx}.
@@ -61,6 +110,13 @@ ABLESON, F.
   [cit.~23.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{http://www.ibm.com/developerworks/xml/tutorials/x-andddyntut}.
+
+\bibitem[AdDuplex()]{wp-statistics}
+ADDUPLEX.
+\newblock \emph{AdDuplex Windows Phone Statistics Report - January, 2016}
+  [online].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.slideshare.net/adduplex/adduplex-windows-phone-statistics-report-march-2016}.
 
 \bibitem[Arlow -- Neustadt(2008)Arlow, Neustadt]{UmlArlow}
 ARLOW, J. -- NEUSTADT, I.
@@ -104,6 +160,19 @@ CERNY, T. -- DONAHOO, M.~J. -- SONG, E.
 \newblock Dostupn{\'{e}} z: \url{http://doi.acm.org/10.1145/2513228.2513278}.
 \newblock ISBN 978-1-4503-2348-2.
 
+\bibitem[Gamma et~al.(1995)Gamma, Helm, Johnson,, Vlissides]{gamma}
+GAMMA, E. et~al.
+\newblock \emph{Design Patterns: Elements of Reusable Object-Oriented
+  Software}.
+\newblock Reading, MA~: Addison-Wesley, 1995.
+\newblock ISBN 978-0-201-63361-0.
+
+\bibitem[Hans~Dockter()]{gradle}
+HANS~DOCKTER, A.~M.
+\newblock \emph{Gradle User Guide} [online]. [cit.~11.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://docs.gradle.org/current/userguide/userguide.html}.
+
 \bibitem[Jenkov()]{ws-formats}
 JENKOV, J.
 \newblock \emph{Web Service Message Formats} [online]. [cit.~23.\,03.\,2016].
@@ -115,6 +184,13 @@ SOMMERVILLE, I.
 \newblock \emph{Software engineering}.
 \newblock ~: Addison-Wesley, 9 edition, 2011.
 \newblock ISBN 978-0-13-703515-1.
+
+\bibitem[Taka()]{wp-csharp}
+TAKA, D.
+\newblock \emph{An Introduction to Windows Phone 8.1 Development} [online].
+  [cit.~26.\,03.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.sitepoint.com/introduction-windows-phone-8-1-development}.
 
 \bibitem[Tomášek(2015)]{tomasek-thesis}
 TOMášEK, M.

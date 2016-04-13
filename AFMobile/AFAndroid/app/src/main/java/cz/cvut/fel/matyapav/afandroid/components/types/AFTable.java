@@ -123,6 +123,16 @@ public class AFTable extends AFComponent {
     }
 
     @Override
+    public boolean sendData() throws Exception {
+        throw new UnsupportedOperationException("Table is read only");
+    }
+
+    @Override
+    public Object generateSendData() {
+        throw new UnsupportedOperationException("Table is read only");
+    }
+
+    @Override
     public AFDataHolder reserialize() {
         throw new UnsupportedOperationException("Table is read only");
     }

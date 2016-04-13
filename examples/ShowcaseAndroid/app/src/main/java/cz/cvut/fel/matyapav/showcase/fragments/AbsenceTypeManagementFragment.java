@@ -38,7 +38,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
     private View.OnClickListener onCountryChooseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm chooseCountryForm = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.CHOOSE_COUNTRY_FORM);
+            AFForm chooseCountryForm = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.CHOOSE_COUNTRY_FORM);
             String country = chooseCountryForm.reserialize().getPropertiesAndValues().get(ShowcaseConstants.COUNTRY_KEY);
             setCountryId(Integer.parseInt(country));
             setSelectedCountryName(chooseCountryForm.getDataFromFieldWithId(ShowcaseConstants.COUNTRY_KEY).toString());
@@ -49,7 +49,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
     private View.OnClickListener onPerformBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(form != null) {
                 try {
                     if(form.sendData()) {
@@ -72,7 +72,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
     private View.OnClickListener onResetBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(form != null) {
                 form.resetData();
                 form.hideErrors();
@@ -82,7 +82,7 @@ public class AbsenceTypeManagementFragment extends Fragment {
     private View.OnClickListener onClearBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(form != null) {
                 form.clearData();
                 form.hideErrors();
@@ -168,8 +168,8 @@ public class AbsenceTypeManagementFragment extends Fragment {
             absenceTypeManagementLayout.addView(btns);
 
             //connect list and form
-            final AFList absenceTypeList = (AFList) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_LIST);
-            final AFForm absenceTypeForm = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            final AFList absenceTypeList = (AFList) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_TYPE_LIST);
+            final AFForm absenceTypeForm = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
             if(absenceTypeList != null && absenceTypeForm != null) {
                 absenceTypeList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

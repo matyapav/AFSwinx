@@ -34,7 +34,7 @@ public class CountriesFragment extends Fragment {
     private View.OnClickListener onCountryPerformListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.COUNTRY_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.COUNTRY_FORM);
             if (form != null) {
                 try {
                     if(form.sendData()){
@@ -52,7 +52,7 @@ public class CountriesFragment extends Fragment {
     private View.OnClickListener onCountryResetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.COUNTRY_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.COUNTRY_FORM);
             if(form != null) {
                 form.resetData();
                 form.hideErrors();
@@ -63,7 +63,7 @@ public class CountriesFragment extends Fragment {
     private View.OnClickListener onCountryClearListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.COUNTRY_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.COUNTRY_FORM);
             if(form != null) {
                 form.clearData();
                 form.hideErrors();
@@ -111,8 +111,8 @@ public class CountriesFragment extends Fragment {
         }
 
         //connect list and form
-        final AFList countryList = (AFList) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.COUNTRY_LIST);
-        final AFForm countryForm = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.COUNTRY_FORM);
+        final AFList countryList = (AFList) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.COUNTRY_LIST);
+        final AFForm countryForm = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.COUNTRY_FORM);
 
         if(countryList != null && countryForm != null) {
             countryList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {

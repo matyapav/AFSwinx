@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
     private View.OnClickListener onLoginButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.LOGIN_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.LOGIN_FORM);
             if (form != null) {
                 try {
                     if(form.sendData()) {

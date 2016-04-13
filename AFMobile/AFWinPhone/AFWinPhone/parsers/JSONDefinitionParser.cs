@@ -92,7 +92,7 @@ namespace AFWinPhone.parsers
                 if (fieldInfo.getWidgetType().Equals(SupportedWidgets.NUMBERFIELD) || fieldInfo.getWidgetType().Equals(SupportedWidgets.NUMBERDOUBLEFIELD))
                 {
                     AFValidationRule numberRule = new AFValidationRule();
-                    numberRule.setValidationType("NUMBER");
+                    numberRule.setValidationType(SupportedValidations.NUMBER);
                     numberRule.setValue("");
                     fieldInfo.addRule(numberRule);
                 }
@@ -196,7 +196,7 @@ namespace AFWinPhone.parsers
         private AFValidationRule createRule(JsonObject ruleJson)
         {
             AFValidationRule rule = new AFValidationRule();
-            rule.setValidationType((String) Utils.TryToGetValueFromJson(ruleJson[Constants.VALIDATION_TYPE]));
+            rule.setValidationType(Utils.ValueOf<SupportedValidations>(typeof(SupportedValidations), (String) Utils.TryToGetValueFromJson(ruleJson[Constants.VALIDATION_TYPE])));
             rule.setValue((String) Utils.TryToGetValueFromJson(ruleJson[Constants.VALUE]));
             return rule;
         }

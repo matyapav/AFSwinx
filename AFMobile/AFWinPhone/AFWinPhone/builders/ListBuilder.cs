@@ -14,13 +14,11 @@ namespace AFWinPhone.builders
         public override AFComponent createComponent()
         {
             initializeConnections();
-            var modelTask = Task.Run(getModelResponse);
-            modelTask.Wait();
-            String modelResponse = modelTask.Result;
+            AFList list = new AFList(getConnectionPack(), getSkin());
             //create list from response
-            AFList list = (AFList)buildComponent(modelResponse, SupportedComponents.LIST);
+            buildComponent(list);
             //fill it with data (if there are some)
-            var dataTask = Task.Run(getDataResponse);
+            var dataTask = Task.Run(list.getDataResponse);
             dataTask.Wait();
             String data = dataTask.Result;
             if (data != null)

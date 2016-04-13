@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity
             savedInstanceState = getIntent().getExtras().getBundle("bundle");
         }
         super.onCreate(savedInstanceState);
+
         //set localization
+        getThisActivity().getPackageName();
         Localization.setContext(getThisActivity());
         Localization.setPathToStrings("cz.cvut.fel.matyapav.showcase");
 
@@ -173,6 +175,7 @@ public class MainActivity extends AppCompatActivity
         finish();
         startActivity(intent);
     }
+
 
 
 }

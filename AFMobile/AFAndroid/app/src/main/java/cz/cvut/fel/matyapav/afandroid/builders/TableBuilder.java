@@ -23,15 +23,14 @@ import cz.cvut.fel.matyapav.afandroid.utils.Utils;
  */
 public class TableBuilder extends AFComponentBuilder<TableBuilder> {
 
-
     @Override
     public AFTable createComponent() throws Exception {
         initializeConnections();
-        String modelResponse = getModelResponse();
+        AFTable table = new AFTable(getActivity(), getConnectionPack(), getSkin());
         //create form from response
-        AFTable table = (AFTable) buildComponent(modelResponse, SupportedComponents.TABLE);
+        buildComponent(table);
         //fill it with data (if there are some)
-        String data = getDataResponse();
+        String data = table.getDataResponse();
         if(data != null) {
             table.insertData(data);
         }

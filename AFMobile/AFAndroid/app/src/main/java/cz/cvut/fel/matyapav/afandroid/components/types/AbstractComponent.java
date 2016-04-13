@@ -12,7 +12,15 @@ public interface AbstractComponent {
 
     SupportedComponents getComponentType();
 
+    String getModelResponse() throws Exception;
+
+    String getDataResponse() throws Exception;
+
     boolean validateData();
+
+    boolean sendData() throws Exception;
+
+    Object generateSendData();
 
     AFDataHolder reserialize();
 

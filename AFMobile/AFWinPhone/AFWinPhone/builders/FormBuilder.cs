@@ -14,13 +14,11 @@ namespace AFWinPhone.builders
         public override AFComponent createComponent()
         {
             this.initializeConnections();
-            var modelTask = Task.Run(getModelResponse);
-            modelTask.Wait();
-            String modelResponse = modelTask.Result;
+            AFForm form = new AFForm(getConnectionPack(), getSkin());
 
-            AFForm form = (AFForm)this.buildComponent(modelResponse, SupportedComponents.FORM);
+            buildComponent(form);
 
-            var dataTask = Task.Run(getDataResponse);
+            var dataTask = Task.Run(form.getDataResponse);
             dataTask.Wait();
             String data = dataTask.Result;
             if (data != null)

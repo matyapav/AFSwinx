@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
     private View.OnClickListener onPersonUpdateBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.PROFILE_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.PROFILE_FORM);
             if (form != null) {
                 try {
                     if(form.sendData()) {
@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents().get(ShowcaseConstants.PROFILE_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.PROFILE_FORM);
             if(form != null){
                 form.resetData();
                 form.hideErrors();

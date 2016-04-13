@@ -1,32 +1,24 @@
 package cz.cvut.fel.matyapav.afandroid.builders;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.tomscz.afrest.commons.SupportedComponents;
 import com.tomscz.afrest.rest.dto.AFClassInfo;
 import com.tomscz.afrest.rest.dto.AFFieldInfo;
-import com.tomscz.afswinx.rest.connection.AFSwinxConnection;
 import com.tomscz.afswinx.rest.connection.AFSwinxConnectionPack;
 import com.tomscz.afswinx.rest.connection.ConnectionParser;
-
-import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.HashMap;
 
+import cz.cvut.fel.matyapav.afandroid.AFAndroid;
 import cz.cvut.fel.matyapav.afandroid.builders.widgets.FieldBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
-import cz.cvut.fel.matyapav.afandroid.components.types.AFComponentFactory;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.DefaultSkin;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
-import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
-import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
-import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
  * Created by Pavel on 19.02.2016.
@@ -47,7 +39,11 @@ public abstract class AFComponentBuilder<T> {
         this.componentKeyName = componentKeyName;
         this.connectionResource = connectionResource;
         this.connectionKey = connectionKey;
-        this.skin = new DefaultSkin(activity);
+        if(AFAndroid.getInstance().getDefaulSkin() == null) {
+            this.skin = new DefaultSkin(activity);
+        }else{
+            this.skin = AFAndroid.getInstance().getDefaulSkin();
+        }
         return (T) this;
     }
 
@@ -58,7 +54,11 @@ public abstract class AFComponentBuilder<T> {
         this.connectionResource = connectionResource;
         this.connectionKey = connectionKey;
         this.connectionParameters = connectionParameters;
-        this.skin = new DefaultSkin(activity);
+        if(AFAndroid.getInstance().getDefaulSkin() == null) {
+            this.skin = new DefaultSkin(activity);
+        }else{
+            this.skin = AFAndroid.getInstance().getDefaulSkin();
+        }
         return (T) this;
     }
 
@@ -102,53 +102,17 @@ public abstract class AFComponentBuilder<T> {
         System.err.println("NUMBER OF ELEMENTS IN COMPONENT " + component.getFields().size());
     }
 
-    protected AFComponent buildComponent(String modelResponse, SupportedComponents type) throws JSONException {
-        AFComponent component = AFComponentFactory.getInstance().getComponentByType(type);
-        component.setActivity(getActivity());
-        component.setConnectionPack(connectionPack);
-        component.setSkin(skin);
-
+    protected void buildComponent(AFComponent component) throws Exception {
         LinearLayout componentView = new LinearLayout(getActivity());
         componentView.setLayoutParams(getSkin().getTopLayoutParams());
         JSONDefinitionParser parser = new JSONDefinitionParser();
-        AFClassInfo classDef = parser.parse(modelResponse, false);
+        AFClassInfo classDef = parser.parse(component.getModelResponse(), false);
 
         component.setComponentInfo(classDef);
         prepareComponent(classDef, component, 0, false, new StringBuilder());
         View view = buildComponentView(component);
         componentView.addView(view);
         component.setView(componentView);
-        return component;
-    }
-
-    protected String getModelResponse() throws Exception{
-        AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
-        if(modelConnection != null) {
-            RequestMaker task = new RequestMaker(modelConnection.getHttpMethod(), modelConnection.getContentType(),
-                    modelConnection.getSecurity(), null, Utils.getConnectionEndPoint(modelConnection));
-
-            Object modelResponse = task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get(); //make it synchronous to wait for response
-            if (modelResponse instanceof Exception) {
-                throw (Exception) modelResponse;
-            }
-            return (String) modelResponse;
-        }else{
-            throw new Exception("No model connection available. Did you call initializeConnections() before?");
-        }
-    }
-
-    protected String getDataResponse() throws Exception{
-        AFSwinxConnection dataConnection = connectionPack.getDataConnection();
-        if(dataConnection != null) {
-            RequestMaker getData = new RequestMaker(dataConnection.getHttpMethod(), dataConnection.getContentType(),
-                    dataConnection.getSecurity(), null, Utils.getConnectionEndPoint(dataConnection));
-            Object response = getData.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-            if (response instanceof Exception) {
-                throw (Exception) response;
-            }
-            return (String) response;
-        }
-        return null;
     }
 
     public abstract AFComponent createComponent() throws Exception;
@@ -172,5 +136,7 @@ public abstract class AFComponentBuilder<T> {
         return skin;
     }
 
-
+    public AFSwinxConnectionPack getConnectionPack() {
+        return connectionPack;
+    }
 }

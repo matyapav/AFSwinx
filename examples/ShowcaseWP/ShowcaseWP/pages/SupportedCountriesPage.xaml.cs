@@ -103,13 +103,11 @@ namespace ShowcaseWP.pages
 
         private void OnItemClick(object sender, ItemClickEventArgs itemClickEventArgs)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_LIST) &&
-                AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_FORM))
-            {
-                var countryForm =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
-                var countryList =
-                    (AFList)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_LIST];
+            var countryForm =
+                (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
+            var countryList =
+                (AFList)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_LIST);
+            if(countryForm != null && countryList != null) { 
                 var position = countryList.getListView().Items.IndexOf(itemClickEventArgs.ClickedItem);
                 countryForm.insertData(countryList.getDataFromItemOnPosition(position));
                 countryForm.hideErrors();
@@ -118,9 +116,8 @@ namespace ShowcaseWP.pages
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_FORM))
-            {
-                var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
+            var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
+            if(form != null) { 
                 form.clearData();
                 form.hideErrors();
             }
@@ -128,9 +125,9 @@ namespace ShowcaseWP.pages
 
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_FORM))
+            var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
+            if (form != null)
             {
-                var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
                 form.resetData();
                 form.hideErrors();
             }
@@ -138,32 +135,32 @@ namespace ShowcaseWP.pages
 
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.COUNTRY_FORM))
+            var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
+            if (form != null)
             {
-                var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.COUNTRY_FORM];
-                    try
+                try
+                {
+                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                    progressbar.Text = Localization.translate("please.wait");
+                    await progressbar.ShowAsync();
+                    if (await form.sendData())
                     {
-                        var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                        progressbar.Text = Localization.translate("please.wait");
-                        await progressbar.ShowAsync();
-                        if (await form.sendData())
-                        {
-                            await progressbar.HideAsync();
-                            await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
-                            //refresh page
-                            Frame.GoBack();
-                            Frame.GoForward();
-                        }
-                        else
-                        {
-                            await progressbar.HideAsync();
-                        }
+                        await progressbar.HideAsync();
+                        await new MessageDialog(Localization.translate("addOrUpdate.success")).ShowAsync();
+                        //refresh page
+                        Frame.GoBack();
+                        Frame.GoForward();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
-                        Debug.WriteLine(ex.StackTrace);
+                        await progressbar.HideAsync();
                     }
+                }
+                catch (Exception ex)
+                {
+                    await new MessageDialog(Localization.translate("addOrUpdate.failed")).ShowAsync();
+                    Debug.WriteLine(ex.StackTrace);
+                }
             }
         }
 

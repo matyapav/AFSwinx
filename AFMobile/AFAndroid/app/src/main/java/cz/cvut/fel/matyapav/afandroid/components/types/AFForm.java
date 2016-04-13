@@ -117,6 +117,7 @@ public class AFForm extends AFComponent {
     }
 
     /*TROCHU POUPRAVENA MARTINOVA METODA*/
+    @Override
     public boolean sendData() throws Exception{
         if (getConnectionPack().getSendConnection() == null) {
             throw new IllegalStateException(
@@ -137,7 +138,8 @@ public class AFForm extends AFComponent {
     }
 
     /*MARTINOVA METODA*/
-    private Object generateSendData() {
+    @Override
+    public Object generateSendData() {
         // before building data and sending, validate actual data
         boolean isValid = validateData();
         if (!isValid) {

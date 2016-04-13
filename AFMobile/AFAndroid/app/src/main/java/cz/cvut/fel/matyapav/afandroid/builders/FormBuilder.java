@@ -22,13 +22,14 @@ public class FormBuilder extends AFComponentBuilder<FormBuilder>{
     @Override
     public AFForm createComponent() throws Exception {
         initializeConnections();
-        String modelResponse = getModelResponse();
+        AFForm form = new AFForm(getActivity(), getConnectionPack(), getSkin());
+        form.getModelResponse();
         //create form from response
-        AFForm form = (AFForm) buildComponent(modelResponse, SupportedComponents.FORM);
+        buildComponent(form);
         //fill it with data (if there are some)
-        String data = getDataResponse();
+        String data = form.getDataResponse();
         if(data != null) {
-            form.insertData(data);
+            form.insertData(form.getDataResponse());
         }
         AFAndroid.getInstance().addCreatedComponent(getComponentKeyName(), form);
         return form;

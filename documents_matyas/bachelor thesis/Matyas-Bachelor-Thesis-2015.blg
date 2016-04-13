@@ -2,11 +2,11 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: Matyas-Bachelor-Thesi
 A level-1 auxiliary file: pages/1_uvod.aux
 A level-1 auxiliary file: pages/2_popisproblemu.aux
 A level-1 auxiliary file: pages/3_analyza.aux
+A level-1 auxiliary file: pages/4_implementace.aux
 The style file: csplainnat.bst
 A level-1 auxiliary file: pages/prilohy/zkratky.aux
 A level-1 auxiliary file: pages/prilohy/uml_a_obrazky.aux
 Database file #1: reference.bib
-Warning--I didn't find a database entry for "https://en.wikipedia.org/wiki/Metadata"
 Warning--I didn't find a database entry for "infodp"
 Warning--to sort, need author or key in uiTypes
 Warning--to sort, need author or key in wiki-ws
@@ -17,6 +17,16 @@ Warning--to sort, need author or key in gson
 Warning--to sort, need author or key in aspect-faces
 Warning--to sort, need author or key in phpdbform
 Warning--to sort, need author or key in apache-cordova
+Warning--to sort, need author or key in metadata
 Warning--to sort, need author or key in android-themes
 Warning--to sort, need author or key in wp-themes
-(There were 13 warnings)
+Warning--to sort, need author or key in android-intro
+Warning--to sort, need author or key in android-sdks
+Warning--to sort, need author or key in glassfish
+Warning--to sort, need author or key in asynctask
+Warning--to sort, need author or key in httpclientremoval
+Warning--to sort, need author or key in wp-httpclient
+Warning--to sort, need author or key in factorypattern
+Warning--to sort, need author or key in android-lin-layout
+Warning--to sort, need author or key in wp-grid
+(There were 22 warnings)

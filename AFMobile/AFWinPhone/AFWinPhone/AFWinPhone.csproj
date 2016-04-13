@@ -96,7 +96,6 @@
     <Compile Include="builders\widgets\TextWidgetBuilder.cs" />
     <Compile Include="builders\widgets\WidgetBuilderFactory.cs" />
     <Compile Include="components\parts\Layout.cs" />
-    <Compile Include="components\types\AFComponentFactory.cs" />
     <Compile Include="components\parts\AFField.cs" />
     <Compile Include="components\parts\AFClassInfo.cs" />
     <Compile Include="components\parts\AFFieldInfo.cs" />
@@ -140,7 +139,7 @@
     <Compile Include="rest\holder\AFData.cs" />
     <Compile Include="rest\holder\AFDataHolder.cs" />
     <Compile Include="rest\holder\AFDataPack.cs" />
-    <Compile Include="rest\RequestTask.cs" />
+    <Compile Include="rest\RequestMaker.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\Localization.cs" />
     <Compile Include="utils\Utils.cs" />

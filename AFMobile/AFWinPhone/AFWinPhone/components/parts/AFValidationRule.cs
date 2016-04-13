@@ -1,22 +1,23 @@
 ﻿using System;
+using AFWinPhone.enums;
 
 namespace AFWinPhone.components.parts
 {
     public class AFValidationRule
     {
-        private String validationType;
+        private SupportedValidations validationType;
         private String value;
 
         public AFValidationRule()
         {
         }
 
-        public String getValidationType()
+        public SupportedValidations getValidationType()
         {
             return this.validationType;
         }
 
-        public void setValidationType(String validationType)
+        public void setValidationType(SupportedValidations validationType)
         {
             this.validationType = validationType;
         }

@@ -87,10 +87,9 @@ namespace ShowcaseWP.pages
 
         private void ResetButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.PROFILE_FORM))
-            {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.PROFILE_FORM];
+            AFForm form =
+                (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.PROFILE_FORM);
+            if(form != null) { 
                 form.resetData();
                 form.hideErrors();
             }
@@ -98,10 +97,10 @@ namespace ShowcaseWP.pages
 
         private async void UpdateButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.PROFILE_FORM))
+            AFForm form =
+                (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.PROFILE_FORM);
+            if (form != null)
             {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.PROFILE_FORM];
                 try
                 {
                     var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;

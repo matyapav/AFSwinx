@@ -79,34 +79,33 @@ namespace ShowcaseWP.pages
 
         private async void AddButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_ADD_FORM))
+            AFForm form =
+                (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_ADD_FORM);
+            if(form != null) { 
+            try
             {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_ADD_FORM];
-                try
+                var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
+                progressbar.Text = Localization.translate("please.wait");
+                await progressbar.ShowAsync();
+                if (await form.sendData())
                 {
-                    var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
-                    progressbar.Text = Localization.translate("please.wait");
-                    await progressbar.ShowAsync();
-                    if (await form.sendData())
-                    {
-                        await new MessageDialog(Localization.translate("add.success")).ShowAsync();
-                        await progressbar.HideAsync();
-                        Frame.GoBack();
-                        Frame.GoForward();
-                    }
-                    else
-                    {
-                        await progressbar.HideAsync();
-                    }
+                    await new MessageDialog(Localization.translate("add.success")).ShowAsync();
+                    await progressbar.HideAsync();
+                    Frame.GoBack();
+                    Frame.GoForward();
                 }
-                catch (Exception ex)
+                else
                 {
-                    await new MessageDialog(Localization.translate("add.failed")).ShowAsync();
-                    Debug.WriteLine(ex.StackTrace);
+                    await progressbar.HideAsync();
                 }
             }
+            catch (Exception ex)
+            {
+                await new MessageDialog(Localization.translate("add.failed")).ShowAsync();
+                Debug.WriteLine(ex.StackTrace);
+            }
         }
+   }
 
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -36,6 +37,16 @@ namespace AFWinPhone.components.types
         public override SupportedComponents getComponentType()
         {
             return SupportedComponents.LIST;
+        }
+
+        public override object generateSendData()
+        {
+            throw new NotImplementedException("List is read only");
+        }
+
+        public override Task<Boolean> sendData()
+        {
+            throw new NotImplementedException("List is read only");
         }
 
         public override void insertData(String dataResponse, StringBuilder road)

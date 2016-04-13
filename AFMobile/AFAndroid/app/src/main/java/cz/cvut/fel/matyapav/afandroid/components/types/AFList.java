@@ -96,6 +96,16 @@ public class AFList extends AFComponent {
     }
 
     @Override
+    public boolean sendData() throws Exception {
+        throw new UnsupportedOperationException("List is read only");
+    }
+
+    @Override
+    public Object generateSendData() {
+        throw new UnsupportedOperationException("List is read only");
+    }
+
+    @Override
     public AFDataHolder reserialize() {
         throw new UnsupportedOperationException("List is read only");
     }

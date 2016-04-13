@@ -11,7 +11,7 @@ using Windows.Web.Http.Headers;
 
 namespace AFWinPhone.rest
 {
-    class RequestTask
+    class RequestMaker
     {
         private HeaderType headerType;
         private HttpMethod httpMethod;
@@ -19,7 +19,7 @@ namespace AFWinPhone.rest
         private String address;
         private Object data;
 
-        public RequestTask(HttpMethod method, HeaderType headerType,
+        public RequestMaker(HttpMethod method, HeaderType headerType,
                            ConnectionSecurity security, Object data, String url)
         {
             this.headerType = headerType;

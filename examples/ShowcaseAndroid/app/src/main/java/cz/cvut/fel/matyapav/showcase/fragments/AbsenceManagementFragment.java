@@ -34,8 +34,7 @@ public class AbsenceManagementFragment extends Fragment {
     private View.OnClickListener onPerformButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AFForm form = (AFForm) AFAndroid.getInstance().getCreatedComponents()
-                    .get(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
+            AFForm form = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
             if(form != null){
                 try {
                     if(form.sendData()) {
@@ -89,10 +88,8 @@ public class AbsenceManagementFragment extends Fragment {
         }
 
         //connect list and form
-        final AFList absenceList = (AFList) AFAndroid.getInstance().getCreatedComponents()
-                .get(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST);
-        final AFForm absenceForm = (AFForm) AFAndroid.getInstance().getCreatedComponents()
-                .get(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
+        final AFList absenceList = (AFList) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_LIST);
+        final AFForm absenceForm = (AFForm) AFAndroid.getInstance().getCreateComponentByName(ShowcaseConstants.ABSENCE_INSTANCE_EDIT_FORM);
 
         if(absenceList != null) {
             absenceList.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {

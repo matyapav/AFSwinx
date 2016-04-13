@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "cz.cvut.fel.matyapav.showcase"
-        minSdkVersion 16
+        minSdkVersion 11
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"

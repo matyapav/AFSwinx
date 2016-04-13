@@ -6,7 +6,10 @@ using AFWinPhone.rest.holder;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using AFWinPhone.rest;
+using AFWinPhone.utils;
 
 namespace AFWinPhone.components.types
 {
@@ -119,6 +122,38 @@ namespace AFWinPhone.components.types
         {
             this.componentInfo = classInfo;
         }
+
+        public async Task<String> getModelResponse()
+        {
+            AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
+            if (modelConnection != null)
+            {
+                RequestMaker maker = new RequestMaker(modelConnection.getHttpMethod(), modelConnection.getContentType(),
+                        modelConnection.getSecurity(), null, Utils.GetConnectionEndPoint(modelConnection));
+
+                String modelResponse = await maker.doRequest();
+                return modelResponse;
+            }
+            else {
+                throw new Exception("No model connection available. Did you call initializeConnections() before?");
+            }
+        }
+
+        public async Task<String> getDataResponse()
+        {
+            AFSwinxConnection dataConnection = connectionPack.getDataConnection();
+            if (dataConnection != null)
+            {
+                RequestMaker getData = new RequestMaker(dataConnection.getHttpMethod(), dataConnection.getContentType(),
+                        dataConnection.getSecurity(), null, Utils.GetConnectionEndPoint(dataConnection));
+                String response = await getData.doRequest();
+                return response;
+            }
+            return null;
+        }
+
+        public abstract object generateSendData();
+        public abstract Task<Boolean> sendData();
 
         public abstract void insertData(string dataResponse, StringBuilder road);
         public abstract SupportedComponents getComponentType();

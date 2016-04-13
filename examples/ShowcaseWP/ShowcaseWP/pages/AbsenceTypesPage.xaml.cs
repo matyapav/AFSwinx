@@ -59,13 +59,11 @@ namespace ShowcaseWP.pages
 
         private void OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_TYPE_LIST) &&
-                AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_TYPE_FORM))
-            {
                 AFForm absenceTypeForm =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
+                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
                 AFList absenceTypesList =
-                    (AFList)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_LIST];
+                    (AFList)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_TYPE_LIST);
+                if(absenceTypeForm != null && absenceTypesList != null) { 
                 int position = absenceTypesList.getListView().Items.IndexOf(e.ClickedItem);
                 absenceTypeForm.insertData(absenceTypesList.getDataFromItemOnPosition(position));
                 absenceTypeForm.hideErrors();
@@ -76,34 +74,33 @@ namespace ShowcaseWP.pages
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_TYPE_FORM))
-            {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
+            AFForm form =
+                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            if(form != null) { 
                 form.clearData();
                 form.hideErrors();
             }
-            ;
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_TYPE_FORM))
+
+            AFForm form =
+                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            if (form != null)
             {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
                 form.resetData();
                 form.hideErrors();
             }
-            ;
         }
 
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.ABSENCE_TYPE_FORM))
+
+            AFForm form =
+               (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.ABSENCE_TYPE_FORM);
+            if (form != null)
             {
-                AFForm form =
-                    (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.ABSENCE_TYPE_FORM];
                 try
                 {
                     var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;

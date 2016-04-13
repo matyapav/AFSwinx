@@ -142,9 +142,9 @@ namespace ShowcaseWP.pages
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (AfWindowsPhone.getInstance().getCreatedComponents().ContainsKey(ShowcaseConstants.LOGIN_FORM))
-            {
-                var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponents()[ShowcaseConstants.LOGIN_FORM];
+           
+            var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.LOGIN_FORM);
+            if(form != null) { 
                 var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;
                 progressbar.Text = Localization.translate("please.wait");
                 try
