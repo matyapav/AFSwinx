@@ -20,27 +20,27 @@ namespace AFWinPhone.components.parts
 
         public AFValidator getValidator(AFValidationRule rule)
         {
-            if (rule.getValidationType().Equals(SupportedValidations.REQUIRED.getValidationType()) && Utils.TryToConvertIntoBoolean(rule.getValue()))
+            if (rule.getValidationType().Equals(SupportedValidations.REQUIRED) && Utils.TryToConvertIntoBoolean(rule.getValue()))
             {
                 return new RequiredValidator();
             }
-            if (rule.getValidationType().Equals(SupportedValidations.MAXLENGTH.getValidationType()))
+            if (rule.getValidationType().Equals(SupportedValidations.MAXLENGTH))
             {
                 return new MaxCharsValidator();
             }
-            if (rule.getValidationType().Equals(SupportedValidations.MAX.getValidationType()))
+            if (rule.getValidationType().Equals(SupportedValidations.MAX))
             {
                 return new MaxValueValidator();
             }
-            if (rule.getValidationType().Equals(SupportedValidations.MIN.getValidationType()))
+            if (rule.getValidationType().Equals(SupportedValidations.MIN))
             {
                 return new MinValueValidator();
             }
-            if (rule.getValidationType().Equals(SupportedValidations.LESSTHAN.getValidationType()))
+            if (rule.getValidationType().Equals(SupportedValidations.LESSTHAN))
             {
                 return new LessThanValidator();
             }
-            if (rule.getValidationType().Equals(SupportedValidations.NUMBER.getValidationType()))
+            if (rule.getValidationType().Equals(SupportedValidations.NUMBER))
             {
                 return new NumberValidator();
             }
