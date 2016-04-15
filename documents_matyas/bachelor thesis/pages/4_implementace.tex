@@ -97,7 +97,7 @@ CheckBoxWidgetBuilder & checkBox &
 Zaškrtávací políčko reprezentující hodnotu true nebo false podle toho, zda je nebo není zaškrtnuto. \\
 \hline
 TextWidgetBuilder & textField &
-Builder pro textové pole. Lze mu nastavit typ vstupu, podle kterého se změní klávesnice pro zadávání znaků například na číselnou. V Android frameworku lze použít i pro pole s heslem. \\
+Builder pro textové pole. Lze mu nastavit typ vstupu, podle kterého se změní klávesnice pro zadávání znaků například na číselnou, tedy používá si i pro widget typy NUMBERFIELD a NUMBERDOUBLEFIELD. V Android frameworku lze použít i pro pole s heslem. \\
 \hline
 PasswordWidgetBuilder & password &
 Pole pro hesla. Text, který uživatel dovnitř napíše je převeden na zástupné znaky. Tento builder se vyskytuje pouze ve WP verzi frameworku, Android verze k tomuto účelu používá TextWidgetBuilder \\
@@ -110,7 +110,7 @@ Vytvoří skupinu radiobuttonů, z které lze vybrat jednu hodnotu. Pokud nejsou
 \end{table}
 
 \subsubsection{Skiny}
-Skiny neupravují pouze vzhled aktivního prvku, ale také vzhled labelu, validačních chyb nebo i celé komponenty. Lze nastavit grafické vlastností jako je barva textu, pozadí, velikost textu a jeho font, ale také rozměry celé komponenty. Ve frameworcích existuje rozhraní Skin, které deifnuje všechny nastavitelné vlastnosti. Už bylo zmíněno, že skiny se musí nastavit před tvořením komponenty jejímu builderu. Toto nastavení je ale volitelné a tak existuje třída DefaultSkin, která toto rozhraní implementuje a definuje základní vzhled, který se použije nespecifikuje-li vývojář jinak. Vývojář pravděpodobně nebude chtít předělat úplně celý vzhled, ale ppuze některé části skinu. K tomuto mu stačí dědit od třídy DefaultSkin a pouze přetížit metody udávající vlastnosti, které chce změnit.
+Skiny neupravují pouze vzhled aktivního prvku, ale také vzhled labelu, validačních chyb nebo i celé komponenty. Lze nastavit grafické vlastností jako je barva textu, pozadí, velikost textu a jeho font, ale také rozměry celé komponenty. Ve frameworcích existuje rozhraní Skin, které deifnuje všechny nastavitelné vlastnosti. Už bylo zmíněno, že skiny se musí nastavit před tvořením komponenty jejímu builderu. Toto nastavení je ale volitelné a tak existuje třída DefaultSkin, která toto rozhraní implementuje a definuje základní vzhled, který se použije nespecifikuje-li vývojář jinak. Vývojář pravděpodobně nebude chtít předělat úplně celý vzhled, ale ppuze některé části skinu. K tomuto mu stačí dědit od třídy DefaultSkin a pouze přetížit metody udávající vlastnosti, které chce změnit. 
 
 \subsubsection{Layouty}
 Při vytváření grafické reprezentace komponenty, server definuje, jak se její jednotlivé části v rámci komponenty uspořádají. V případě formuláře je nutné uspořádat pole tak, aby byl formulář přehledný a dobře použitelný. V případě listu jde hlavně o přehlednost, neboť jednotlivé položky listu by byly při větším obsahu moc vysoké a nevzhledné. Server definuje osu, podle které jsou komponenty vykreslovány, počet sloupců a pozici labelu \cite{tomasek-thesis}. Layout lze určit buď celé komponentě, ten na obrázku \ref{img:metadataClass} reprezentován třídou TopLevelLayout nebo pouze části komponenty tj. poli, který je na obrázku reprezentován třídou Layout. V případě layoutu komponenty je pouze definována osa a počet sloupců, layout jednotlivých polí přidává pozici labelu. Hodnoty, kterých jednotlivé vlastnosti nabývají jsou popsány pomocí následujících výčtových typů, které lze vidět i na obrázku \ref{img:metadataClass}.
@@ -125,15 +125,104 @@ Layouty jsou v jednotlivých klientských frameworcích interpretovány různě.
 Důležitým aspektem je také pořadí jednotlivých částí komponenty. To definuje server a v metadatech se informace o polích objeví už v daném pořadí, které je třeba zachovat. Proto bylo nutné použít k uskladnění kolekci, která zachovává pořadí svých prvků, takovou je například List \cite{tomasek-thesis}.
 
 \subsubsection{Lokalizace}
-Jelikož se mohou v metadatech objevit i texty pro překlad, bylo třeba naimplementovat třídu Localization, která se stará o překlady těchto textů. Třída disponuje samoutnou funkcí pro překlad a funkcí pro změnu jazyku. V Androidu se typicky lokalizační texty umisťují do souboru strings.xml ve složce values. Pro Windows Phone je to obdobné. Zde se texty vkládají do souborů Resources.resw, které jsou umístěny ve složce s názvem jazyku ve složce Strings. S tímto umístěním textů oba frameworky počítají, u Android verze je sice možnost nadefinovat jiný balíček, ve kterém by se texty měly hledat, ale stále se předpokládá umístění ve values/strings.xml. Třída Localization se dá využít i pro překlad jiných textů i mimo framework a to i v rámci XML šablon, ve kterých je vytvořeno statické UI. Při startu aplikace se použije jazyk zařízení. Pokud by pro daný jazyk neexistovaly předklady, je vhodné mít defaultní soubory s texty, které se v tomto případě použijí.
+Jelikož se mohou v metadatech objevit i texty pro překlad, bylo třeba naimplementovat třídu Localization, která se stará o překlady těchto textů. Třída disponuje samoutnou funkcí pro překlad a funkcí pro změnu jazyku. V Androidu se typicky lokalizační texty umisťují do souboru strings.xml ve složce values. Pro Windows Phone je to obdobné. Zde se texty vkládají do souborů Resources.resw, které jsou umístěny ve složce s názvem jazyku ve složce Strings. S tímto umístěním textů oba frameworky počítají, u Android verze je sice možnost nadefinovat jiný balíček, ve kterém by se texty měly hledat, ale stále se předpokládá umístění ve values/strings.xml. Pokud není překlad nalezen, je vrácena hodnota klíče, který se hledal. Třída Localization se dá využít i pro překlad jiných textů i mimo framework a to i v rámci XML šablon, ve kterých je vytvořeno statické UI. Při startu aplikace se použije jazyk zařízení. Pokud by pro daný jazyk neexistovaly předklady, je vhodné mít defaultní soubory s texty, které se v tomto případě použijí.
 
 \subsection{Práce s komponentami}
 Vytvořená komponenta disponuje různými funkcemi, které umožňují s ní dále pracovat. Pro formulář jsou to metody pro odeslání, validaci, resetování nebo vyčištění formuláře. List je komponenta, která by měla pouze zobrazovat data, proto s ní nejde provést ani moc akcí. Obsahuje však důležitou funkci, pomocí které lze získat obsah jedné položky listu, který lze pak využít například pro naplnění formuláře. 
 
-Nejdůležitější funkcí je však odeslání formuláře, který je zobrazen na sekvenčním diagramu \ref{img:sdFormSend}. K tomuto účelu má formulář metodu sendData. V rámci této metody se nejdříve zjistí, zda vývojář pro komponentu nadefinoval v XML souboru s připojeními část označenou uzlem <send>, který definuje, kam se budou data odesílat a jehož struktura lze vidět v ukázce kódu \ref{code:xmlSource}. Komponenty mají atribut connectionPack typu AFSwinxConnectionPack, který obsahuje všechna definována připojení. V případě, že vývojář specifikoval uzel <send> se v tomto atributu formuláře objeví i připojení na zdroj, který přijímá uživatelský vstup. Pokud připojení nadefinované není vyhodí se výjimka, která je propagována k vývojáři, který s ní dle svého uvážení naloži. Pokud připojení existuje, vygenerují se z formuláře data ve formátu, které server dokáže zpracovat. Klient nezná přesně objekty, které se odeslání na serveru vytvoří či upraví, zná ale jejich strukturu, která stačí k tomu, aby byla vytvořena data, která server dokáže přijmout. V rámci generování dat proběhne nejdříve jejich validace, která je blíže popsána v sekci níže. Pokud data nejsou validní vrací metoda sendData hodnotu false, která určuje, že se odesílání nezdařilo. Samotný proces generování dat byl převzat z frameworku AFSwinx. Ten využívá pro znovupostavení dat object typu BaseRestBuilder disponující metodou reserialize. \cite{tomasek-thesis}. BaseRestBuilder je implementován prozatím jen třídou JSONBuilder, která dokáže z formuláře vytvořit JSON soubor a použije se v případě, že server požaduje JSON formát. Další formáty nejsou prozatím podporovány. Metoda reserialize, kterou builder dat používá, již očekává vyparsovaná data z komponenty uložená v objektu typu AFDataHolder. Vytvoření těchto dat provádí komponenta sama. Uživatelský vstup získává z aktivní prvků, ke kterým má skrz kolekci polí typu AFField přístup. Data se získávají z aktivního prvku pomocí widget builderu, který aktivní prvek vytvořil a na který má AFField referenci.  Každý AFField má svůj unikátní identifikátor, který lze využít pro zjištění pozice proměnné v objektu na serveru, který má odeslání formuláře ovlivnit. Pokud indentifikátor obsahuje tečku, znamená to, že dané pole je částí reprezentace neprimitivního datového typu, tedy vnitřní třídy a k té je třeba hodnotu promenné přidat. Pokud v identifikátoru tečka není, znamená to, že jsme na správném místě a do mapy AFDataHolder se přidá nová proměná s hodnotou \cite{tomasek-thesis}. Android verze využívá již naimplementovaný JSON Builder, který využívá k sestavení dat framework GSON \cite{gson}.Ve Windows Phone verzi musel být builder dat přepsán a využívá Windows knihovnu pro práci s JSON soubory. Po vytvoření dat stačí data odeslat na definovaný zdroj na serveru pomocí třídy RequestMaker, která byla popsána výše. Jak už bylo zmíněno, v rámci procesu odeslání může dojít k výjimkám, které jsou předány vývojáři ke zpracování. 
+\subsubsection{Odeslání, reset a vyčištění formuláře}
+Nejdůležitější funkcí je však odeslání formuláře, který je zobrazen na sekvenčním diagramu \ref{img:sdFormSend}. K tomuto účelu má formulář metodu sendData. V rámci této metody se nejdříve zjistí, zda vývojář pro komponentu nadefinoval v XML souboru s připojeními část označenou uzlem <send>, který definuje, kam se budou data odesílat a jehož struktura lze vidět v ukázce kódu \ref{code:xmlSource}. Komponenty mají atribut connectionPack typu AFSwinxConnectionPack, který obsahuje všechna definována připojení. V případě, že vývojář specifikoval uzel <send> se v tomto atributu formuláře objeví i připojení na zdroj, který přijímá uživatelský vstup. 
+
+Pokud připojení nadefinované není vyhodí se výjimka, která je propagována k vývojáři, který s ní dle svého uvážení naloži. Pokud připojení existuje, vygenerují se z formuláře data ve formátu, které server dokáže zpracovat. Klient nezná přesně objekty, které se odeslání na serveru vytvoří či upraví, zná ale jejich strukturu, která stačí k tomu, aby byla vytvořena data, která server dokáže přijmout. V rámci generování dat proběhne nejdříve jejich validace, která je blíže popsána v sekci níže. Pokud data nejsou validní vrací metoda sendData hodnotu false, která určuje, že se odesílání nezdařilo. Samotný proces generování dat byl převzat z frameworku AFSwinx. Ten využívá pro znovupostavení dat object typu BaseRestBuilder disponující metodou reserialize. \cite{tomasek-thesis}. 
+
+BaseRestBuilder je implementován prozatím jen třídou JSONBuilder, která dokáže z formuláře vytvořit JSON soubor a použije se v případě, že server požaduje JSON formát. Další formáty nejsou prozatím podporovány. Metoda reserialize, kterou builder dat používá, již očekává vyparsovaná data z komponenty uložená v objektu typu AFDataHolder. Vytvoření těchto dat provádí komponenta sama. Uživatelský vstup získává z aktivní prvků, ke kterým má skrz kolekci polí typu AFField přístup. Data se získávají z aktivního prvku pomocí widget builderu, který aktivní prvek vytvořil a na který má AFField referenci.  Každý AFField má svůj unikátní identifikátor, který lze využít pro zjištění pozice proměnné v objektu na serveru, který má odeslání formuláře ovlivnit. Pokud indentifikátor obsahuje tečku, znamená to, že dané pole je částí reprezentace neprimitivního datového typu, tedy vnitřní třídy a k té je třeba hodnotu promenné přidat. Pokud v identifikátoru tečka není, znamená to, že jsme na správném místě a do mapy AFDataHolder se přidá nová proměná s hodnotou \cite{tomasek-thesis}. Android verze využívá již naimplementovaný JSON Builder, který využívá k sestavení dat framework GSON \cite{gson}.Ve Windows Phone verzi musel být builder dat přepsán a využívá Windows knihovnu pro práci s JSON soubory. Po vytvoření dat stačí data odeslat na definovaný zdroj na serveru pomocí třídy RequestMaker, která byla popsána výše. Jak už bylo zmíněno, v rámci procesu odeslání může dojít k výjimkám, které jsou předány vývojáři ke zpracování. 
 
 Odeslání formuláře je tedy jednoduché, stačí definovat zdroj v XML souboru a pak například jako reakci na stiknutí tlačítka zavolat metodu sendData. Dále je nutné, aby aplikace nespadla, ošetřit výjimky, které mohou při odesílání nastat. V případě, že nenastane žádná výjimka, data jsou validní a povede se je z formuláře vygenerovat, může vývojář navázat na odeslání další akci. Vývojáři je tedy celý proces odeslání schován a nemusí se jím vůbec zabývat, díky čehož je použití frameworku snadné. Nevýhodou však je, že je vývojář omezen na použití nabízených funkcí frameworku a nemůže do procesu odeslání nijak zasahovat \cite{tomasek-thesis}. 
 
 Dalšími funkcemi, které formulář nabízí je resetování a vyčištění formuláře. Reset formuláře provede obnovení aktuálních dat ve formuláři. Pokud je tedy formulář naplněn nějakými daty a uživatel data změní, lze se k původním nezměneným datům před odesláním formuláře vrátit. Vyčištění formuláře pak nastaví aktivní prvky formuláře na prázdné.
 
 \subsubsection{Validace a Validátory}
+Formulář se před odesláním dat na server validuje. Pro každé pole ve formuláři může být nadefinováno 0 až N validačních pravidel, které vznikají na základě datových nebo bussiness omezení. Hlavním účelem validací je zajistit, aby byla tato omezení splněna a nedošlo při odeslání k chybě. Chyba by například nastala, pokud server očekává pouze celočíselnou hodnotu a přijde mu místo ní textový řetězec. Na Android platformě existuje vůči některým chybám určitá prevence. Příkladem je pole, které vzniklo z atributu typu integer, jež má být reprezentováno typem widgetu Numberfield. V takovém případě framework použije widget Textfield a určí, že lze zadat pouze čísla, změní se tedy nabízená klávesnice, na které uživatel může zadat opravdu jen čísla od 0 do 9 a navíc do pole nelze zkropírovat nic jiného než čísla. WP také změní typ klávesnice, už však dovoluje do pole zkopírovat jiné znaky a nemá jako Android různé klávesnice pro celé a desetinné číslo.
+
+Ke každému pravidlu existuje validátor, který umí pravidlo prověřit. Tabulka \ref{table:validations} zobrazuje seznam podporovaných validátorů, ke kterým pravidlům patří a jejich stručný popis. Proces validování formuláře byl již zobrazen na obrázku \ref{img:sdFormSend}. Nejprve se projdou všechna pole formuláře, což jsou objekty typu AFField. AFField obsahuje pravidla, což jsou objekty typu AFValidationRule, které je pro každé pole nutno proiterovat, vyhledat k nim příslušný validátor a provést validaci. Zisk příslušného validátoru probíhá pomocí tovární třídy ValidatorFactory, podobně jako zisk konktrétního widget builderu, který byl popsán dříve. Validátory implementují rozhraní AFValidator, které disponuje metodou validate, která vrací boolean určující, zda validace proběhla úspěšně či ne. Této metodě je předáván StringBuilder, obsahující chybové hlášky pro dané pole, tedy každé pole má svůj StringBuilder. Pokud alespoň jedna z validací selže, vytvoří se label, do kterého se nastaví hlášky ze StringBuilderu a tento label se uživateli zobrazí. Vývojář má možnost upravit chybové hlášky, které se zobrazují uživateli. V tabulce \ref{table:validations} lze v popisu nalézt klíče jednotlivých chybových hlášek, které je potřeba vývojářem přeložit.
+
+\begin{table}[h!]
+\begin{center}
+\caption{Podporované validace}
+\label{table:validations}
+\begin{tabular}{|p{3.5cm}|p{4.5cm}|p{7cm}|}
+\hline
+\textbf{Validátor} & \textbf{Pravidlo} & \textbf{Popis} \\
+\hline
+RequiredValidator & 
+REQUIRED & Použije se, pokud má být pole povinné. Pokud je pole prázné, vypisuje hlášku, která vzniká přeložením klíče validation.required. \\
+\hline
+MaxValueValidator &
+MAX & Používá se na číselná pole, které mají svou hodnotu omezenou shora nějakým číslem. Pokud hodnota překročí definované číslo, vypisuje hlášku, která vzniká přeložením klíče validation.maxval. \\
+\hline
+MinValueValidator & MIN &
+Používá se na číselná pole, které mají svou hodnotu omezenou zdole nějakým číslem. Pokud je hodnota menší než definované číslo, vypisuje hlášku, která vzniká přeložením klíče validation.minval \\
+\hline
+MaxCharsValidator & MAXLENGTH &
+Použíje se, pokud počet znaků v poli překročí danou hodnotu. Pokud dojde k překročení, vypisuje hlášku, která vzniká přeložením klíče validation.maxchars.\\
+\hline
+NumberValidator & Pole vzniklo z atributu typu integer nebo double &
+Kontroluje, zda jsou vloženy celočíselné hodnoty, pro integer nebo desetinná čísla pro double. V případě, že má být v poli celé číslo a je tam něco jiného, vypisuje se hláška, která vzniká přeložením klíče validation.integer. V případě double je to klíč validation.double. 
+Tento validátor bylo nutní použít pouze ve WP frameworku, neboť Android disponuje prevencí, která byla popsána výše.\\
+\hline
+LessThanValidator & LESSTHAN &
+Porovnává dvě pole s datumy. Pokud v poli, které obsahuje toto pravidlo není menší hodnota než v poli, jehož identifikátor je definován hodnotou tohoto pravidla, vypisuje se hláška, který vzniká přeložením klíče validation.lessthan.  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Úprava AFSwinx a AFRest}
+V rámci úpravy existujících frameworků AFSwinx a AFRest \cite{tomasek-thesis} bylo požadováno umožnit porovnání dvou polí s datumy ve smyslu menší rovno než, které se použije v případě, že mají v aplikaci existovat dvě pole s datumy, z nichž jedno může obsahovat pouze dřívější nebo stejné datum než datum v druhém poli. Proto bylo vytvořeno validační pravidlo LESSTHAN, které lze najít v tabulce \ref{table:validations}. K vytvoření tohoto pravidla bylo nutné urpavit nejen zmíněné frameworky, ale také serverovou část aplikace. Pro realizaci pravidla bylo rozhodnuto vytvořit novou anotac @UILessThan, která lze přidat k atributům entity typu datum na serveru. V anotaci je nutno definovat identifikátor druhého pole, se kterým se má pole označené anotací porovnávat. K vytvoření anotace bylo dle dokumentace AspectFaces \cite{aspect-faces} potřeba vytvořit v AFRest nový anotační deskriptor a zaregistrovat ho v konfiguračním souboru aspectfaces-config.xml na serveru. Tím se zajistí, že si anotace všimně inspekce modelu. Aby se však anotace projevila i v metadatech, která přichází ze serveru, navíc ještě v části s validačními pravidly, bylo nutné ještě upravit šablonu date.xml, která se používá při generování metadat o atributu typu datum. Upravená šablona je v ukázce kódu \ref{code:dateXml}.
+
+\begin{lstlisting}[caption=Upravená šablona date.xml,
+label={code:dateXml}, basicstyle=\footnotesize]
+<widget>
+	<widgetType>calendar</widgetType>
+	<fieldName>$field$</fieldName>
+	<label>$label$</label>
+	<readonly>false</readonly>
+	<validations>
+		<required>$required$</required>
+		<lessthan>$lessthan$</lessthan>
+	</validations>
+	<fieldLayout>
+		<layoutOrientation>$layoutOrientation$</layoutOrientation>
+		<labelPossition>$labelPossition$</labelPossition>
+		<layout>$layout$</layout>
+	</fieldLayout>
+</widget>
+\end{lstlisting}
+
+Další úprava se týkala výčtového typu frameworku AFRest, který obsahuje podporované validace. K validaci bylo nutné vytvořit validátory ve všech existujících klientských frameworcích, tedy nejen v Android a WP verzi, ale také v AFSwinx, jež interpretuje UI pro Swing aplikace \cite{tomasek-thesis}. Nakonec byla anotace umístěna k atributům v serverových entitách, kterých se to týkalo, příklad použití lze vidět v úkázce kódu \ref{code:uiLessThanUsage}.
+
+\begin{lstlisting}[caption=Ukázka použití anotace @UILessThan,
+label={code:uiLessThanUsage}, basicstyle=\footnotesize]
+@Entity
+public class AbsenceInstance {
+	...
+	@Temporal(value = TemporalType.DATE)
+	private Date startDate;
+	@Temporal(value = TemporalType.DATE)
+	private Date endDate;
+	...
+	@UILessThan(value="endDate")
+	public Date getStartDate() {
+        	return startDate;
+	}
+	...
+}
+\end{lstlisting}
+
+\section{Porovnání přístupů}
+V Android a WindowsPhone aplikacích lze GUI vytvářet buď za pomocí kódu v příslušném programovacím jazyce nebo staticky za pomocí XML šablon. V obou případěch platí, že musí vývojář každý prvek GUI nadefinovat, naplnit daty a pokud má být na prvek navázána nějaká akce, musí naimplementovat i ji. V případě formuláře tedy musí obvykle vytvořit dané aktivní prvky s popisky, element pro zobrazení validačních chyb a tlačítko pro odeslání formuláře. K tomu musí naprogramovat logiku validací, získání dat z formuláře a pokud má být formulář předvyplněn daty, tak i způsob jeho naplnění. Jesliže jsou navíc data získávána ze serveru, je nutné naimplementovat připojení na server, jak se data získají a reprezentují a způsob jejich odeslání na server. To vše znamená pro vývojáře spoustu kódu, který musí napsat, zvlášť když se komponenta objevuje na více místech v aplikaci. 
+
+Pokud jsou komponenty vytvářeny frameworkem, většina částí, které musí klasicky programátor řešit, za něj provádí framework. Při tvorbě komponent stačí vývojáři nadefinovat zdroje, ze kterých se má formulář vytvořit, naplnit daty nebo kam se má odeslat a pomocí frameworku komponentu vytvořit a vložit do GUI. Za pomocí frameworku se vygenerují aktivní prvky i s jejich popisky podle toho, co udává server. Server také určí validace k nimž framework vytvoří validátory a řeší i zobrazení případných validačních chyb. V případě formuláře definuje i jak se z něj získají data a jak se mají odeslat na server. Připojení na server také není potřeba implementovat. 
+
+To vše vede k výrazné redukci kódu, což je nepochybně výhodou. Další výhodou je, že je GUI definováno serverem a reaguje tedy automaticky na změny například na serveru. Nevýhodou však je, že je vývojář omezen na funkce, které framework nabízí a využití frameworku požaduje mít server, který poskytuje definice komponent. Tedy při nasazení na existující aplikaci nestačí jen použít framework na straně klienta, ale je nutné výrazně upravit serverovou část. V případě klasického přístupu není nutné při tvorbě klienta server měnit a vývojář klienta pouze serveru přizpůsobuje. Také je nespornou výhodou, že má vývojář na komponenty plnou kontrolu a daleko větší možnosti jak s ní naložit, například co se úpravy vzhledu týče.
+  
