@@ -8,12 +8,21 @@ import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 19.02.2016.
+ * Factory class which is used for picking corresponding widget builder based on widget type.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class WidgetBuilderFactory {
 
     private static WidgetBuilderFactory instance = null;
 
+    /**
+     * Gets the instance of WidgetBuilderFactory
+     *
+     * @return instance of factory
+     */
     public static synchronized WidgetBuilderFactory getInstance() {
         if(instance == null){
             instance = new WidgetBuilderFactory();
@@ -21,7 +30,13 @@ public class WidgetBuilderFactory {
         return instance;
     }
 
-
+    /**
+     * Gets corresponding widget builder based on input type
+     *
+     * @param field holds information about input type
+     * @param skin passed to builders to define look of widgets
+     * @return corresponding widget builder
+     */
     public AbstractWidgetBuilder getWidgetBuilder(AFField field, Skin skin){
         if(Utils.isFieldWritable(field.getFieldInfo().getWidgetType())){
             return new TextWidgetBuilder(skin, field);

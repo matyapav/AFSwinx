@@ -14,23 +14,31 @@ import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFList;
 
 /**
- * Created by Pavel on 24.02.2016.
+ * This class is responsible for creating a list component, which presents bigger amount of data to user.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ListBuilder extends AFComponentBuilder<ListBuilder> {
 
     @Override
     public AFList createComponent() throws Exception {
+        //long start = System.currentTimeMillis();
         initializeConnections();
         AFList list = new AFList(getActivity(), getConnectionPack(), getSkin());
 
         //create form from response
         buildComponent(list);
+        //long mezicas = (System.currentTimeMillis() - start);
+        // System.err.println("Mezicas buildeni" + mezicas);
         //fill it with data (if there are some)zz
         String data = list.getDataResponse();
         if(data != null) {
             list.insertData(data);
         }
         AFAndroid.getInstance().addCreatedComponent(getComponentKeyName(), list);
+        //System.err.println("Celkovy cas buildeni " + (System.currentTimeMillis() - start));
         return list;
     }
 

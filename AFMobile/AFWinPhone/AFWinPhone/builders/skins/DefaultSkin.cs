@@ -4,6 +4,11 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.skins
 {
+    /// <summary>
+    /// This class represents default implementation of {@link Skin} interface and will be used
+    ///if user did not specify own skin.User's skins should extends this class because
+    ///it gives ability to define only needed parts of skin.
+    /// </summary>
     public class DefaultSkin : Skin
     {
         public virtual int getComponentMarginBottom()

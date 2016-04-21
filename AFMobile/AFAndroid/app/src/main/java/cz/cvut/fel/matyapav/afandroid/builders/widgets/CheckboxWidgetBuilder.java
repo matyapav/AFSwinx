@@ -12,7 +12,11 @@ import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 
 /**
- * Created by Pavel on 15.02.2016.
+ * This class is responsible for building checkbox element.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class CheckboxWidgetBuilder extends BasicWidgetBuilder {
 

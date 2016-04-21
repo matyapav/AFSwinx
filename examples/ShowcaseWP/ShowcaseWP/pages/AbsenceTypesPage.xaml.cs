@@ -56,7 +56,11 @@ namespace ShowcaseWP.pages
         }
 
 
-
+        /// <summary>
+        /// Handles list on item click event. Fills data from clicked list item into the form.
+        /// </summary>
+        /// <param name="sender">clicked list item</param>
+        /// <param name="e">clicked list item arguments</param>
         private void OnItemClick(object sender, ItemClickEventArgs e)
         {
                 AFForm absenceTypeForm =
@@ -71,7 +75,11 @@ namespace ShowcaseWP.pages
             }
         }
 
-
+        /// <summary>
+        /// Handles event fired when clicked on clear button. Clears the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             AFForm form =
@@ -82,6 +90,11 @@ namespace ShowcaseWP.pages
             }
         }
 
+        /// <summary>
+        /// Handles event fired when clicked on reset button. Resets the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
 
@@ -94,6 +107,11 @@ namespace ShowcaseWP.pages
             }
         }
 
+        /// <summary>
+        /// Handles event fired when clicked on performs button. Sends the form to server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
 

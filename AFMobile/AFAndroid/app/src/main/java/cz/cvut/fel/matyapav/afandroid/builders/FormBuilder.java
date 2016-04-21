@@ -1,5 +1,6 @@
 package cz.cvut.fel.matyapav.afandroid.builders;
 
+import android.net.wifi.p2p.WifiP2pManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,24 +15,34 @@ import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.components.types.AFForm;
 
 /**
- * Builds for from class definition
- * Created by Pavel on 26.12.2015.
+ * This class if responsible for building form component, which should mainly hadle user input.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class FormBuilder extends AFComponentBuilder<FormBuilder>{
 
     @Override
     public AFForm createComponent() throws Exception {
+        //long start = System.currentTimeMillis();
+
         initializeConnections();
         AFForm form = new AFForm(getActivity(), getConnectionPack(), getSkin());
         form.getModelResponse();
         //create form from response
         buildComponent(form);
+
+       // long mezicas = (System.currentTimeMillis() - start);
+       // System.err.println("Mezicas buildeni "+ mezicas + " ms");
+
         //fill it with data (if there are some)
         String data = form.getDataResponse();
         if(data != null) {
             form.insertData(form.getDataResponse());
         }
         AFAndroid.getInstance().addCreatedComponent(getComponentKeyName(), form);
+        //System.err.println("Celkovy cas buildeni "+ (System.currentTimeMillis()-start) + " ms");
         return form;
     }
 

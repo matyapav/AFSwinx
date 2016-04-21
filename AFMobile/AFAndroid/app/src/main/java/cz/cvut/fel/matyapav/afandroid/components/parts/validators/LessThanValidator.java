@@ -11,7 +11,11 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 02.03.2016.
+ * Validates LESSTHAN rule, which checks if value in one field is less or equal than value in other field.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class LessThanValidator implements AFValidator {
 

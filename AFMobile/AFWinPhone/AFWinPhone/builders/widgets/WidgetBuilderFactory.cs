@@ -6,10 +6,17 @@ using System.Diagnostics;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    ///  Factory class which is used for picking corresponding widget builder based on widget type.
+    /// </summary>
     class WidgetBuilderFactory
     {
         private static WidgetBuilderFactory instance = null;
 
+        /// <summary>
+        /// Gets the instance of WidgetBuilderFactory
+        /// </summary>
+        /// <returns>instance of factory</returns>
         public static WidgetBuilderFactory getInstance()
         {
             if (instance == null)
@@ -19,7 +26,12 @@ namespace AFWinPhone.builders.widgets
             return instance;
         }
 
-
+        /// <summary>
+        /// Gets corresponding widget builder based on input type
+        /// </summary>
+        /// <param name="field">holds information about input type</param>
+        /// <param name="skin">passed to builders to define look of widgets</param>
+        /// <returns>corresponding widget builder</returns>
         public AbstractWidgetBuilder getFieldBuilder(AFField field, Skin skin)
         {
             if (Utils.IsFieldWritable(field.getFieldInfo().getWidgetType()))

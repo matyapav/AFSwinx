@@ -4,11 +4,17 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.components.parts
 {
+    /// <summary>
+    /// Factory class to determine which validator should be picked based on validation rule.
+    /// </summary>
     class ValidatorFactory
     {
         private static ValidatorFactory instance = null;
 
-
+        /// <summary>
+        /// Gets instance of validator factory.
+        /// </summary>
+        /// <returns>instance of validator factory</returns>
         public static ValidatorFactory getInstance()
         {
             if (instance == null)
@@ -18,6 +24,11 @@ namespace AFWinPhone.components.parts
             return instance;
         }
 
+        /// <summary>
+        /// Gets corresponding validator for specific validation rule.
+        /// </summary>
+        /// <param name="rule">specific validation rule</param>
+        /// <returns>corresponding validator</returns>
         public AFValidator getValidator(AFValidationRule rule)
         {
             if (rule.getValidationType().Equals(SupportedValidations.REQUIRED) && Utils.TryToConvertIntoBoolean(rule.getValue()))

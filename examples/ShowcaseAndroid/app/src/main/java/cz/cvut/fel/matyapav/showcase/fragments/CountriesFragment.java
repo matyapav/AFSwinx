@@ -27,10 +27,17 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 
 /**
- * Created by Pavel on 23.02.2016.
+ * Supported countries screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class CountriesFragment extends Fragment {
 
+    /**
+     * On perform button click handler. Adds or updates country
+     */
     private View.OnClickListener onCountryPerformListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -49,6 +56,9 @@ public class CountriesFragment extends Fragment {
         }
     };
 
+    /**
+     * On reset button click handler. Resets country form.
+     */
     private View.OnClickListener onCountryResetListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -60,6 +70,9 @@ public class CountriesFragment extends Fragment {
         }
     };
 
+    /**
+     * On clear button click handler. Clears country form.
+     */
     private View.OnClickListener onCountryClearListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

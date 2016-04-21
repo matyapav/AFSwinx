@@ -3,6 +3,8 @@ A level-1 auxiliary file: pages/1_uvod.aux
 A level-1 auxiliary file: pages/2_popisproblemu.aux
 A level-1 auxiliary file: pages/3_analyza.aux
 A level-1 auxiliary file: pages/4_implementace.aux
+A level-1 auxiliary file: pages/5_testovani.aux
+A level-1 auxiliary file: pages/6_zaver.aux
 The style file: csplainnat.bst
 A level-1 auxiliary file: pages/prilohy/zkratky.aux
 A level-1 auxiliary file: pages/prilohy/uml_a_obrazky.aux
@@ -29,4 +31,6 @@ Warning--to sort, need author or key in wp-httpclient
 Warning--to sort, need author or key in factorypattern
 Warning--to sort, need author or key in android-lin-layout
 Warning--to sort, need author or key in wp-grid
-(There were 22 warnings)
+Warning--to sort, need author or key in junit
+Warning--to sort, need author or key in vs-unit
+(There were 24 warnings)

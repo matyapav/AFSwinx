@@ -18,7 +18,11 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowCaseUtils;
 import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 /**
- * Created by Pavel on 26.02.2016.
+ * My absences screen.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class MyAbsencesFragment extends Fragment {
 

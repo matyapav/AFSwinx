@@ -1,6 +1,5 @@
 package cz.cvut.fel.matyapav.afandroid.parsers;
 
-import com.tomscz.afrest.commons.SupportedProperties;
 import com.tomscz.afrest.commons.SupportedValidations;
 import com.tomscz.afrest.commons.SupportedWidgets;
 import com.tomscz.afrest.layout.Layout;
@@ -20,7 +19,11 @@ import org.json.JSONObject;
 import cz.cvut.fel.matyapav.afandroid.utils.Constants;
 
 /**
- * Created by Pavel on 17.12.2015.
+ * Parser for component definition in JSON format
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
 
@@ -66,6 +69,13 @@ public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
         return definition;
     }
 
+    /**
+     * Parses information about one field in component.
+     *
+     * @param field field information wrapped in JSONObject
+     * @return field info wrapped in {@link AFFieldInfo} object
+     * @throws JSONException thrown if there war error during parsing field info
+     */
     private AFFieldInfo parseFieldInfo(JSONObject field) throws JSONException {
         System.out.println("PARSING FIELD " + field.getString(Constants.ID));
         AFFieldInfo fieldInfo = new AFFieldInfo();
@@ -100,6 +110,13 @@ public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
         return fieldInfo;
     }
 
+    /**
+     * Parses and creates layout properties of whole component
+     *
+     * @param layoutJson JSON object with layout properties
+     * @return Layout of whole component
+     * @throws JSONException thrown if any error happened during parsing layout properties.
+     */
     private TopLevelLayout createTopLayoutProperties(JSONObject layoutJson) throws JSONException {
         TopLevelLayout layoutProp = new TopLevelLayout();
         if(layoutJson == null){
@@ -127,6 +144,13 @@ public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
         return layoutProp;
     }
 
+    /**
+     * Parses and creates layout properties of component field.
+     *
+     * @param layoutJson JSON object with layout properties
+     * @return layout of the field
+     * @throws JSONException thrown if any error happened during parsing layout properties.
+     */
     private Layout createLayoutProperties(JSONObject layoutJson) throws JSONException{
         Layout layoutProp = new Layout();
         if(layoutJson == null){
@@ -161,6 +185,13 @@ public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
         return layoutProp;
     }
 
+    /**
+     * Parses and creates validation rule
+     *
+     * @param ruleJson JSON object which contains info about validation rule
+     * @return created validation rule
+     * @throws JSONException thrown if any error happened during parsing validation rule.
+     */
     private AFValidationRule createRule(JSONObject ruleJson) throws JSONException {
         if(ruleJson != null) {
             String validationType = ruleJson.optString(Constants.VALIDATION_TYPE);
@@ -171,6 +202,13 @@ public class JSONDefinitionParser implements JSONParser<AFClassInfo> {
         }
     }
 
+    /**
+     * Parses and creates option, from which user can choose.
+     *
+     * @param optionJson JSON object which contains info about option
+     * @return created option
+     * @throws JSONException thrown if any error happened during parsing option.
+     */
     private AFOptions createOption(JSONObject optionJson) throws JSONException {
         if(optionJson != null) {
             String key = optionJson.optString(Constants.KEY);

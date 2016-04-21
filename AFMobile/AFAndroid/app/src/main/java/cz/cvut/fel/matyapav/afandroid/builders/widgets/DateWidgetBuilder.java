@@ -22,7 +22,11 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 14.02.2016.
+ * This class is responsible for building datepicker component.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class DateWidgetBuilder extends BasicWidgetBuilder {
 
@@ -46,8 +50,6 @@ public class DateWidgetBuilder extends BasicWidgetBuilder {
         dateText.setFocusable(false);
         dateText.setClickable(true);
 
-        //TODO umoznit clear
-        //TODO kdyz nastavim ve swingu datum tak se zobrazuje datum o jeden den nizsi
         dateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

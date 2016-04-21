@@ -19,6 +19,10 @@ using AFWinPhone.builders.widgets;
 
 namespace AFWinPhone.builders
 {
+    /// <summary>
+    /// This class defines common parts of all component builders. Specific component builders must extend
+    /// </summary>
+    /// <typeparam name="T">Concrete type of builder</typeparam>
     public abstract class AFComponentBuilder<T>
     {
         private AFSwinxConnectionPack connectionPack;
@@ -28,6 +32,14 @@ namespace AFWinPhone.builders
         private String pathToConnectionResource;
         private Dictionary<String, String> connectionParameters;
 
+        /// <summary>
+        /// Initializes builder for component. This method should be used if getting definition of component
+        /// from server does not need additional parameters like user credentials.
+        /// </summary>
+        /// <param name="componentKeyName">user defined name of component</param>
+        /// <param name="pathToConnectionResource">path to XML file with defined connections</param>
+        /// <param name="connectionKey">used to get specific connection definition from connection resource file.</param>
+        /// <returns>concrete builder</returns>
         public AFComponentBuilder<T> initBuilder(String componentKeyName, String pathToConnectionResource, String connectionKey)
         {
             this.componentKeyName = componentKeyName;
@@ -44,6 +56,15 @@ namespace AFWinPhone.builders
             return this;
         }
 
+        /// <summary>
+        /// Initializes builder for component. This method should be used if getting definition of component
+        /// from server needs additional parameters like user credentials
+        /// </summary>
+        /// <param name="componentKeyName">user defined name of component</param>
+        /// <param name="pathToConnectionResource">path to XML file with defined connections</param>
+        /// <param name="connectionKey">used to get specific connection definition from connection resource file.</param>
+        /// <param name="connectionParameters">additional parameters for connection like user credentials</param>
+        /// <returns>concrete builder</returns>
         public AFComponentBuilder<T> initBuilder(String componentKeyName, String pathToConnectionResource,
                          String connectionKey, Dictionary<String, String> connectionParameters)
         {
@@ -62,6 +83,11 @@ namespace AFWinPhone.builders
             return this;
         }
 
+        /// <summary>
+        /// Initializes connections for component. Creates and sets connections from specified file to builder.
+        /// Must be called before creating any part of component and after initialization of builder.
+        /// Exception throwed if not connection was specified, that means initialization of builder was not called.
+        /// </summary>
         protected void initializeConnections()
         {
             if (connectionPack == null && connectionKey != null && pathToConnectionResource != null)
@@ -80,6 +106,14 @@ namespace AFWinPhone.builders
             }
         }
 
+        /// <summary>
+        /// Prepares whole component especially its graphical representation which can be inserted in UI.
+        /// </summary>
+        /// <param name="classDef">information about component</param>
+        /// <param name="component">which component is being prepared</param>
+        /// <param name="numberOfInnerClasses">number of inner classes which actual class definition has</param>
+        /// <param name="parsingInnerClass">determines if preparing UI from inner class</param>
+        /// <param name="road">Passed to field buidlers. If not empty, field belongs to some inner class. This fact must be set into fields id.</param>
         protected void prepareComponent(AFClassInfo classDef, AFComponent component, int numberOfInnerClasses, bool parsingInnerClass, StringBuilder road)
         {
             if (parsingInnerClass)
@@ -112,6 +146,11 @@ namespace AFWinPhone.builders
             Debug.WriteLine("NUMBER OF ELEMENTS IN COMPONENT " + component.getFields().Count);
         }
 
+        /// <summary>
+        /// Builds and wraps component UI from class definition and sets it to component.
+        /// Exception thrown if there is some error during parsing component definition or building component view
+        /// </summary>
+        /// <param name="component">component its UI is being built wrapped and set.</param>
         protected void buildComponent(AFComponent component)
         {
 
@@ -131,10 +170,19 @@ namespace AFWinPhone.builders
             component.setView(componentView);
         }
 
-    
 
+        /// <summary>
+        /// Builder specific method which creates final version of component which is presented to user. Should be used by user to create component.
+        /// Exception thrown if there is an error during crating process. User must handle this exception.
+        /// </summary>
+        /// <returns>completely created component</returns>
         public abstract AFComponent createComponent();
 
+        /// <summary>
+        /// Builder specific method used only for building graphical representation of component.
+        /// </summary>
+        /// <param name="component">components its UI is being build.</param>
+        /// <returns>UI of component</returns>
         protected abstract FrameworkElement buildComponentView(AFComponent component);
 
         public String getComponentKeyName()
@@ -157,7 +205,6 @@ namespace AFWinPhone.builders
             this.skin = skin;
             return this;
         }
-
 
         public AFSwinxConnectionPack getConnectionPack()
         {

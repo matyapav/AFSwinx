@@ -60,7 +60,7 @@ namespace ShowcaseWP.pages
                 await progressbar.ShowAsync();
                 var previousCacheSize = Frame.CacheSize;
                 Frame.CacheSize = 0;
-                Localization.changeLanguage(SupportedLanguages.CZ);
+                Localization.changeLanguage("cs");
                 await Task.Delay(100);
                 Frame.Navigate(GetType());
                 if (Frame.CanGoBack)
@@ -76,7 +76,7 @@ namespace ShowcaseWP.pages
                 await progressbar.ShowAsync();
                 var previousCacheSize = Frame.CacheSize;
                 Frame.CacheSize = 0;
-                Localization.changeLanguage(SupportedLanguages.EN);
+                Localization.changeLanguage("en");
                 await Task.Delay(100);
                 Frame.Navigate(GetType());
                 if (Frame.CanGoBack)
@@ -118,6 +118,10 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
+        /// <summary>
+        /// Logs user in.
+        /// </summary>
+        /// <param name="form">login form</param>
         private void doLogin(AFForm form)
         {
             var usernameField = form.getFieldById("username");
@@ -140,6 +144,11 @@ namespace ShowcaseWP.pages
             //success
         }
 
+        /// <summary>
+        /// Handles login button click. Logs user in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
            

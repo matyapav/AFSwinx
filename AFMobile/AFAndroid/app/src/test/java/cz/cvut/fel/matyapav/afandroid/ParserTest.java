@@ -12,7 +12,6 @@ import com.tomscz.afrest.rest.dto.AFValidationRule;
 import org.junit.Test;
 
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
-import cz.cvut.fel.matyapav.afandroid.parsers.JSONParser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -20,7 +19,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Pavel on 24.03.2016.
+ * Constains test of parsers.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ParserTest {
 

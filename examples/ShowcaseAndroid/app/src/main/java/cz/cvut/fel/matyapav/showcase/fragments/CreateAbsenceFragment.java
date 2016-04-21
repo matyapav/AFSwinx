@@ -22,7 +22,11 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Create absence screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class CreateAbsenceFragment extends Fragment {
 

@@ -19,7 +19,11 @@ import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 13.02.2016.
+ * Common implementation of {@link AbstractComponent}. Implements common methods for each component.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public abstract class AFComponent implements AbstractComponent{
 
@@ -39,11 +43,20 @@ public abstract class AFComponent implements AbstractComponent{
         this.skin = skin;
     }
 
-    //this one should be used by users
+    /**
+     * Insert data method which should be used by end users.
+     *
+     * @param dataObject data to be inserted
+     */
     public void insertData(Object dataObject){
         insertData(dataObject.toString(), new StringBuilder());
     }
 
+    /**
+     * Adds a field in component.
+     *
+     * @param field field to be added
+     */
     public void addField(AFField field){
         if(fields == null){
             fields = new ArrayList<AFField>();
@@ -52,6 +65,12 @@ public abstract class AFComponent implements AbstractComponent{
         fields.add(field);
     }
 
+    /**
+     * Gets the field with defined identifier.
+     *
+     * @param id identifier of field
+     * @return corresponding field
+     */
     public AFField getFieldById(String id){
         for (AFField field: getFields()) {
             if(field.getId().equals(id)){
@@ -62,6 +81,11 @@ public abstract class AFComponent implements AbstractComponent{
         return null;
     }
 
+    /**
+     * Gets count of field which are visible to user.
+     *
+     * @return number of visible fields
+     */
     public int getVisibleFieldsCount(){
         int res = 0;
         for (AFField field: getFields()) {
@@ -72,6 +96,7 @@ public abstract class AFComponent implements AbstractComponent{
         return res;
     }
 
+    @Override
     public String getModelResponse() throws Exception{
         AFSwinxConnection modelConnection = connectionPack.getMetamodelConnection();
         if(modelConnection != null) {
@@ -88,6 +113,7 @@ public abstract class AFComponent implements AbstractComponent{
         }
     }
 
+    @Override
     public String getDataResponse() throws Exception{
         AFSwinxConnection dataConnection = connectionPack.getDataConnection();
         if(dataConnection != null) {
@@ -101,8 +127,6 @@ public abstract class AFComponent implements AbstractComponent{
         }
         return null;
     }
-
-    //GETTERS
 
     public Skin getSkin() {
         return skin;

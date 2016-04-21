@@ -14,21 +14,38 @@ using Windows.Data.Xml.Dom;
 
 namespace AFWinPhone.utils
 {
+    /// <summary>
+    /// Util methods used within the application.
+    /// </summary>
     public class Utils
     {
-
+        /// <summary>
+        /// Determines if field is writable based on widget type, that means user can write into it.
+        /// </summary>
+        /// <param name="widgetType">widget type of field</param>
+        /// <returns>true if the field is writable, false otherwise</returns>
         public static bool IsFieldWritable(SupportedWidgets widgetType)
         {
             return widgetType.Equals(SupportedWidgets.TEXTFIELD) || widgetType.Equals(SupportedWidgets.NUMBERFIELD)
                     || widgetType.Equals(SupportedWidgets.NUMBERDOUBLEFIELD);
         }
 
+        /// <summary>
+        /// Determine if field is number field, that means user can only write numbers in it.
+        /// </summary>
+        /// <param name="field">field to check</param>
+        /// <returns>true if field is number field, false otherwise</returns>
         public static bool IsFieldNumberField(AFField field)
         {
             return field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.NUMBERFIELD)
                     || field.getFieldInfo().getWidgetType().Equals(SupportedWidgets.NUMBERDOUBLEFIELD);
         }
 
+        /// <summary>
+        /// Gets connection end point URL made from parts saved in given connection.
+        /// </summary>
+        /// <param name="connection">holds all parts of end point</param>
+        /// <returns>string representing connection end point</returns>
         public static String GetConnectionEndPoint(AFSwinxConnection connection)
         {
             StringBuilder endPointBuilder = new StringBuilder();
@@ -53,6 +70,12 @@ namespace AFWinPhone.utils
             return endPointBuilder.ToString();
         }
 
+        /// <summary>
+        /// Determines if column in list should be invisible or not.
+        /// </summary>
+        /// <param name="column">specified column to check</param>
+        /// <param name="component">component to which should be column added</param>
+        /// <returns>true, if should be invisible, false otherwise</returns>
         public static bool ShouldBeInvisible(String column, AFComponent component)
         {
             foreach (AFField field in component.getFields())
@@ -65,6 +88,11 @@ namespace AFWinPhone.utils
             return true;
         }
 
+        /// <summary>
+        /// Parses string into date using ISO format or dd.MM.yyyy format.
+        /// </summary>
+        /// <param name="date">string representation of date</param>
+        /// <returns>parsed date if it was in one of formats, null if date is not in specified formats.</returns>
         public static DateTime? ParseDate(String date)
         {
             
@@ -91,6 +119,11 @@ namespace AFWinPhone.utils
             return null;
         }
 
+        /// <summary>
+        /// Builds Xml document from specified file.
+        /// </summary>
+        /// <param name="pathToFile">path to file which should be document builded from</param>
+        /// <returns>built xml document</returns>
         public  static XmlDocument BuildDocumentFromFile(String pathToFile)
         {
             XmlDocument doc = new XmlDocument();
@@ -105,6 +138,13 @@ namespace AFWinPhone.utils
             return doc;
         }
 
+        /// <summary>
+        /// Returns enumeration based on its value.
+        /// </summary>
+        /// <typeparam name="T">type of enumeration</typeparam>
+        /// <param name="clazz">class where should program look for</param>
+        /// <param name="value">value of enumeration</param>
+        /// <returns>Specific enumeration if found</returns>
         public static T ValueOf<T>(Type clazz, String value)
         {
             foreach (System.Reflection.FieldInfo field in clazz.GetRuntimeFields())
@@ -131,6 +171,11 @@ namespace AFWinPhone.utils
 
         }
 
+        /// <summary>
+        /// Tries to get value from Json file. Chooses suitable method for each value type that might show up in Json file.
+        /// </summary>
+        /// <param name="value">value which should be got</param>
+        /// <returns>value in specific value type</returns>
         public static Object TryToGetValueFromJson(IJsonValue value)
         {
             switch (value.ValueType)
@@ -152,6 +197,11 @@ namespace AFWinPhone.utils
             }
         }
 
+        /// <summary>
+        /// Converts String value into boolean
+        /// </summary>
+        /// <param name="value">value to be converted</param>
+        /// <returns>converted value, false if convertion failed</returns>
         public static bool TryToConvertIntoBoolean(String value)
         {
             try

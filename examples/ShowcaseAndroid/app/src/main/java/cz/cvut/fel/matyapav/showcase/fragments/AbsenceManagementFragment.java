@@ -25,12 +25,18 @@ import cz.cvut.fel.matyapav.showcase.skins.AbsenceManagementListSkin;
 import cz.cvut.fel.matyapav.showcase.utils.ShowCaseUtils;
 import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
-
 /**
- * Created by Pavel on 16.02.2016.
+ * Absence Management screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AbsenceManagementFragment extends Fragment {
 
+    /**
+     * On perform button click handler. Updates absence.
+     */
     private View.OnClickListener onPerformButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

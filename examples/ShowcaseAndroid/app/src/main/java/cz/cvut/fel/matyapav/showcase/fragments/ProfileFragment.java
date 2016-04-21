@@ -23,10 +23,17 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowCaseUtils;
 import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 /**
- * Created by Pavel on 16.02.2016.
+ * Profile screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ProfileFragment extends Fragment {
 
+    /**
+     * Handles update button click. Updates person.
+     */
     private View.OnClickListener onPersonUpdateBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -50,6 +57,9 @@ public class ProfileFragment extends Fragment {
         }
     };
 
+    /**
+     * Handles reset button click. Resets profile form.
+     */
     private View.OnClickListener onResetBtnClick = new View.OnClickListener() {
 
         @Override

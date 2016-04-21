@@ -8,6 +8,9 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.components.parts.validators
 {
+    /// <summary>
+    /// Validates if inserted value in field is number.
+    /// </summary>
     class NumberValidator : AFValidator
     {
         public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)

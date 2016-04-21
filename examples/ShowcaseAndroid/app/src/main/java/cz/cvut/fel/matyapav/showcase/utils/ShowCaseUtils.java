@@ -17,13 +17,23 @@ import cz.cvut.fel.matyapav.showcase.R;
 import cz.cvut.fel.matyapav.showcase.fragments.LoginFragment;
 
 /**
- * Created by Pavel on 20.02.2016.
+ * Util methods used within showcase application
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ShowCaseUtils {
 
     public static String PREFS_NAME = "preferences";
     public static int PRIVATE_MODE = 0;
 
+    /**
+     * Sets user in application preferences.
+     * @param activity currently running activity
+     * @param username user's username
+     * @param password user's password
+     */
     public static void setUserInPreferences(Activity activity, String username, String password){
         SharedPreferences mySharedPreferences= activity.getSharedPreferences(PREFS_NAME, PRIVATE_MODE); //0 is private mode
         SharedPreferences.Editor editor= mySharedPreferences.edit();
@@ -32,6 +42,10 @@ public class ShowCaseUtils {
         editor.commit();
     }
 
+    /**
+     * Removes user from application preferences
+     * @param activity currently running activity
+     */
     public static void clearUserInPreferences(Activity activity){
         SharedPreferences mySharedPreferences = activity.getSharedPreferences(PREFS_NAME, PRIVATE_MODE);
         SharedPreferences.Editor editor= mySharedPreferences.edit();
@@ -40,6 +54,11 @@ public class ShowCaseUtils {
         editor.commit();
     }
 
+    /**
+     * Gets user credentials from application preferences.
+     * @param activity currently running activity
+     * @return user credentials in hashmap
+     */
     public static HashMap<String, String> getUserCredentials(Activity activity){
         SharedPreferences mySharedPreferences = activity.getSharedPreferences(PREFS_NAME, PRIVATE_MODE);
         String username = mySharedPreferences.getString("username", null);
@@ -53,12 +72,21 @@ public class ShowCaseUtils {
         return null;
     }
 
+    /**
+     * Gets user login from application preferences.
+     * @param activity currently running acitivity
+     * @return username of logged user
+     */
     public static String getUserLogin(Activity activity){
         SharedPreferences mySharedPreferences = activity.getSharedPreferences(PREFS_NAME, PRIVATE_MODE);
         String username = mySharedPreferences.getString("username", null);
         return username;
     }
 
+    /**
+     * Refreshes current fragment.
+     * @param activity currently running acitvity
+     */
     public static void refreshCurrentFragment(FragmentActivity activity){
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         Fragment current = fragmentManager.findFragmentById(R.id.mainLayout);
@@ -70,11 +98,22 @@ public class ShowCaseUtils {
         fragmentManager.beginTransaction().detach(current).attach(current).commit();
     }
 
+    /**
+     * Converts dp units to pixel units.
+     * @param dps number of dp units to convert
+     * @param context current application context.
+     * @return
+     */
     public static int convertDpToPixels(int dps, Context context){
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dps * scale + 0.5f);
     }
 
+    /**
+     * Shows dialog with building failed message.
+     * @param activity currently running activity
+     * @param e exception which occured
+     */
     public static void showBuildingFailedDialog(Activity activity, Exception e){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
         alertDialog.setTitle(Localization.translate("error.building.failed"));

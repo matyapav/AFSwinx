@@ -6,6 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace AFWinPhone.components.parts.validators
 {
+    /// <summary>
+    /// Validates MAX rule, which checks if value in field is less or equal than value specified in rule.
+    /// </summary>
     class MaxValueValidator : AFValidator
     {
         public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)

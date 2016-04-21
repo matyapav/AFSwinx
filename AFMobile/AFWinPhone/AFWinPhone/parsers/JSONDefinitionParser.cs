@@ -7,6 +7,9 @@ using Windows.Data.Json;
 
 namespace AFWinPhone.parsers
 {
+    /// <summary>
+    /// Parser for component definition in JSON format.
+    /// </summary>
     public class JSONDefinitionParser : JSONParser
     {
         public AFClassInfo parse(String classInfoStr, bool parsingInnerClass)
@@ -57,6 +60,12 @@ namespace AFWinPhone.parsers
             return definition;
         }
 
+        /// <summary>
+        /// Parses information about one field in component.
+        /// Exception thrown if there war error during parsing field info.
+        /// </summary>
+        /// <param name="field">field information wrapped in JSONObject</param>
+        /// <returns>field info wrapped in AFFieldInfo object</returns>
         private AFFieldInfo parseFieldInfo(JsonObject field)
         {
             Debug.WriteLine("PARSING FIELD " + Utils.TryToGetValueFromJson(field[Constants.ID]));
@@ -114,6 +123,12 @@ namespace AFWinPhone.parsers
             return fieldInfo;
         }
 
+        /// <summary>
+        /// Parses and creates layout properties of whole component.
+        /// Exception thrown if any error happened during parsing layout properties
+        /// </summary>
+        /// <param name="layoutJson">JSON object with layout properties</param>
+        /// <returns>Layout of whole component</returns>
         private TopLevelLayout createTopLayoutProperties(JsonObject layoutJson)
         {
             TopLevelLayout layoutProp = new TopLevelLayout();
@@ -148,8 +163,12 @@ namespace AFWinPhone.parsers
             return layoutProp;
         }
 
-
-
+        /// <summary>
+        /// Parses and creates layout properties of component field.
+        /// Exception thrown if any error happened during parsing layout properties
+        /// </summary>
+        /// <param name="layoutJson">JSON object with layout properties</param>
+        /// <returns>layout of the field</returns>
         private Layout createLayoutProperties(JsonObject layoutJson)
         {
             Layout layoutProp = new Layout();
@@ -193,6 +212,12 @@ namespace AFWinPhone.parsers
             return layoutProp;
         }
 
+        /// <summary>
+        /// Parses and creates validation rule.
+        /// Exception thrown if any error happened during parsing validation rule
+        /// </summary>
+        /// <param name="ruleJson">JSON object which contains info about validation rule</param>
+        /// <returns>created validation rule</returns>
         private AFValidationRule createRule(JsonObject ruleJson)
         {
             AFValidationRule rule = new AFValidationRule();
@@ -201,6 +226,12 @@ namespace AFWinPhone.parsers
             return rule;
         }
 
+        /// <summary>
+        /// Parses and creates option, from which user can choose.
+        /// Exception thrown if any error happened during parsing option.
+        /// </summary>
+        /// <param name="optionJson">JSON object which contains info about option</param>
+        /// <returns> created option</returns>
         private AFOptions createOption(JsonObject optionJson)
         {
             AFOptions option = new AFOptions();

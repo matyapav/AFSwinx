@@ -12,7 +12,11 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 14.02.2016.
+ * Validates REQUIRED rule, which checks field is filled.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class RequiredValidator implements AFValidator {
 

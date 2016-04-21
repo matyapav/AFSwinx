@@ -28,13 +28,20 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Absence type management screen.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AbsenceTypeManagementFragment extends Fragment {
 
     private int countryId = -1;
     private String selectedCountryName;
 
+    /**
+     * On country choose handler. Chooses one one given countries form dropdown menu.
+     */
     private View.OnClickListener onCountryChooseListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -46,6 +53,9 @@ public class AbsenceTypeManagementFragment extends Fragment {
         }
     };
 
+    /**
+     * On perform button click handler. Adds or updates absence type.
+     */
     private View.OnClickListener onPerformBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -69,6 +79,9 @@ public class AbsenceTypeManagementFragment extends Fragment {
     };
 
 
+    /**
+     * On reset button click handler. Resets absence type form.
+     */
     private View.OnClickListener onResetBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,6 +92,10 @@ public class AbsenceTypeManagementFragment extends Fragment {
             }
         }
     };
+
+    /**
+     * On clear button click handler. Clears absence type form.
+     */
     private View.OnClickListener onClearBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

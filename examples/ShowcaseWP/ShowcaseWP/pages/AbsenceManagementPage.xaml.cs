@@ -84,8 +84,11 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
-
-
+        /// <summary>
+        /// Hadles perform click. Sends form to server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
            
@@ -118,7 +121,11 @@ namespace ShowcaseWP.pages
             }
         }
     
-
+        /// <summary>
+        /// Handles absence management list item click event. Fills absence management form with data in clicked lsit item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AbsenceManagementPage_ItemClick(object sender, ItemClickEventArgs e)
         {
             

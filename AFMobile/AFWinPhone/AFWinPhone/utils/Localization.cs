@@ -6,11 +6,18 @@ using Windows.Globalization;
 
 namespace AFWinPhone.utils
 {
+    /// <summary>
+    /// This class is responsible for translations of strings. Gives user also ability to change language.
+    /// </summary>
     public class Localization
     {
-        private static SupportedLanguages currentLanguage;
-        private static String pathToStrings; //must be set externally
+        private static String currentLanguage;
 
+        /// <summary>
+        /// Translates given resource. Looks for the texts in Strings/{lang folder}/Resources.resw file in the root package of application.
+        /// </summary>
+        /// <param name="resource">key to be translated</param>
+        /// <returns>Translation if key was found in localization texts, otherwise key is not translated and returned.</returns>
         public static String translate(String resource)
         {
             try
@@ -31,21 +38,19 @@ namespace AFWinPhone.utils
             }
         }
 
-        public static void changeLanguage(SupportedLanguages lang)
+        /// <summary>
+        /// Changes language of application.
+        /// </summary>
+        /// <param name="lang">Shortcut of language. Examples: English = en, Czech = cs etc.</param>
+        public static void changeLanguage(String lang)
         {
-            ApplicationLanguages.PrimaryLanguageOverride = lang.getLang();
+            ApplicationLanguages.PrimaryLanguageOverride = lang.ToLower();
             currentLanguage = lang;
         }
 
-        public static SupportedLanguages getCurrentLanguage()
+        public static String getCurrentLanguage()
         {
             return currentLanguage;
         }
-
-        public static void setPathToStrings(String path)
-        {
-            pathToStrings = path;
-        }
-
     }
 }

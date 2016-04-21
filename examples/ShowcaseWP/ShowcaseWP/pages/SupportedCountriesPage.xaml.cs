@@ -101,6 +101,11 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
+        /// <summary>
+        /// Handles countries list item click. Fill country form with data in clicked list item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="itemClickEventArgs"></param>
         private void OnItemClick(object sender, ItemClickEventArgs itemClickEventArgs)
         {
             var countryForm =
@@ -110,10 +115,14 @@ namespace ShowcaseWP.pages
             if(countryForm != null && countryList != null) { 
                 var position = countryList.getListView().Items.IndexOf(itemClickEventArgs.ClickedItem);
                 countryForm.insertData(countryList.getDataFromItemOnPosition(position));
-                countryForm.hideErrors();
             }
         }
 
+        /// <summary>
+        /// Handles clear button click. Clears country form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
@@ -123,6 +132,11 @@ namespace ShowcaseWP.pages
             }
         }
 
+        /// <summary>
+        /// Handles reset button click. Resets country form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);
@@ -133,6 +147,11 @@ namespace ShowcaseWP.pages
             }
         }
 
+        /// <summary>
+        /// Handles perform button click. Adds or updates country.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Perform_Click(object sender, RoutedEventArgs e)
         {
             var form = (AFForm)AfWindowsPhone.getInstance().getCreatedComponentByName(ShowcaseConstants.COUNTRY_FORM);

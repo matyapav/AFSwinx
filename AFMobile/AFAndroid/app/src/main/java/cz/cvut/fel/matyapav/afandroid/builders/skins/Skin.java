@@ -4,7 +4,11 @@ import android.graphics.Typeface;
 import android.view.ViewGroup;
 
 /**
- * Created by Pavel on 24.02.2016.
+ * This is skin interfaces. This interface is used to skin component based on user setting.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public interface Skin {
 

@@ -14,6 +14,10 @@ import cz.cvut.fel.matyapav.afandroid.components.types.AFComponent;
 
 /**
  * This class defines GUI of the field + operations with it like validation
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AFField {
 
@@ -33,6 +37,12 @@ public class AFField {
         this.fieldInfo = fieldInfo;
     }
 
+    /**
+     * Validates all rules connected with field. If any validation failed, validaiton element with
+     * erros messages is shown to user.
+     *
+     * @return true if all validations passed, false otherwise.
+     */
     public boolean validate() {
         boolean allValidationsFine = true;
         StringBuilder errorMsgs = new StringBuilder();
@@ -79,8 +89,6 @@ public class AFField {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     public TextView getErrorView() {
         return errorView;

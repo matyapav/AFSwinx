@@ -19,7 +19,12 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 14.02.2016.
+ * Class for making requests to server. Extends {@link AsyncTask} because request must be asynchronous
+ * and done in background.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class RequestMaker extends AsyncTask<String,Integer,Object> {
 

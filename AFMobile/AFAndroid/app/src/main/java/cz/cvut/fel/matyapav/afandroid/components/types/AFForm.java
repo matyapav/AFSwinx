@@ -22,7 +22,11 @@ import cz.cvut.fel.matyapav.afandroid.rest.RequestMaker;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 26.12.2015.
+ * Representing a form component.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AFForm extends AFComponent {
 
@@ -116,7 +120,6 @@ public class AFForm extends AFComponent {
         return allValidationsFine;
     }
 
-    /*TROCHU POUPRAVENA MARTINOVA METODA*/
     @Override
     public boolean sendData() throws Exception{
         if (getConnectionPack().getSendConnection() == null) {
@@ -137,7 +140,6 @@ public class AFForm extends AFComponent {
         return true;
     }
 
-    /*MARTINOVA METODA*/
     @Override
     public Object generateSendData() {
         // before building data and sending, validate actual data
@@ -156,18 +158,30 @@ public class AFForm extends AFComponent {
         return data;
     }
 
+    /**
+     * Hides validation errors.
+     *
+     */
     public void hideErrors(){
         for(AFField field : getFields()){
             field.getErrorView().setVisibility(View.GONE);
         }
     }
 
+    /**
+     * Resets data in form. If there were no data set, it just clears the form.
+     *
+     */
     public void resetData() {
         for (AFField field: getFields()) {
             field.getWidgetBuilder().setData(field.getActualData());
         }
     }
 
+    /**
+     * Clears the form - sets all fields to empty or default value.
+     *
+     */
     public void clearData() {
         for (AFField field: getFields()) {
             field.setActualData(null);
@@ -175,6 +189,12 @@ public class AFForm extends AFComponent {
         resetData();
     }
 
+    /**
+     * Gets data from field given by specified identifier.
+     *
+     * @param id identifier of field
+     * @return data from field
+     */
     public Object getDataFromFieldWithId(String id){
         AFField field = getFieldById(id);
         if(field != null){
@@ -183,6 +203,11 @@ public class AFForm extends AFComponent {
         return null;
     }
 
+    /**
+     * Sets data to field gived by specified identifier.
+     * @param id identifier of field
+     * @param data data to be set
+     */
     public void setDataToFieldWithId(String id, Object data){
         AFField field = getFieldById(id);
         field.getWidgetBuilder().setData(data);

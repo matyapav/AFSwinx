@@ -7,6 +7,9 @@ using AFWinPhone.components.types;
 
 namespace AFWinPhone.components.parts.validators
 {
+    /// <summary>
+    /// Validates LESSTHAN rule, which checks if value in one field is less or equal than value in other field.
+    /// </summary>
     class LessThanValidator : AFValidator
     {
         public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)

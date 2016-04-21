@@ -8,7 +8,13 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 /**
- * Created by Pavel on 24.02.2016.
+ * This class represents default implementation of {@link Skin} interface and will be used
+ * if user did not specify own skin. User's skins should extends this class because
+ * it gives ability to define only needed parts of skin.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class DefaultSkin implements Skin {
 

@@ -27,7 +27,15 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 20.02.2016.
+ * Represents table component. This component should be used only when there is space for it,
+ * that means table can be used on tablets but it is not suitable for mobile phones.
+ *
+ * This class was not fully debugged and probably won't be fully prepared for using. This component
+ * was replaced by {@link AFList}, but has been left in project for future needs.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AFTable extends AFComponent {
 

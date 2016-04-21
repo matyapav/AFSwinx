@@ -7,6 +7,9 @@ using Windows.UI;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// This class is responsible for building password widget.
+    /// </summary>
     class PasswordWidgetBuilder : BasicBuilder
     {
         public PasswordWidgetBuilder(Skin skin, AFField field) : base(skin, field)

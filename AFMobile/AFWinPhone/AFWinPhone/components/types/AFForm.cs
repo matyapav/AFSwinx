@@ -15,6 +15,9 @@ using Windows.UI.Xaml;
 
 namespace AFWinPhone.components.types
 {
+    /// <summary>
+    /// Representing a form component.
+    /// </summary>
     public class AFForm : AFComponent
     {
         public AFForm()
@@ -126,6 +129,9 @@ namespace AFWinPhone.components.types
 
         }
 
+        /// <summary>
+        /// Hides validation errors.
+        /// </summary>
         public void hideErrors()
         {
             foreach (var field in getFields())
@@ -134,7 +140,6 @@ namespace AFWinPhone.components.types
             }
         }
 
-       
         public override async Task<Boolean> sendData()
         {
             if (getConnectionPack().getSendConnection() == null)
@@ -177,6 +182,9 @@ namespace AFWinPhone.components.types
             return data;
         }
 
+        /// <summary>
+        /// Resets data in form. If there were no data set, it just clears the form.
+        /// </summary>
         public void resetData()
         {
             foreach (AFField field in getFields())
@@ -185,6 +193,9 @@ namespace AFWinPhone.components.types
             }
         }
 
+        /// <summary>
+        /// Clears the form - sets all fields to empty or default value.
+        /// </summary>
         public void clearData()
         {
             foreach (AFField field in getFields())
@@ -194,6 +205,11 @@ namespace AFWinPhone.components.types
             resetData();
         }
 
+        /// <summary>
+        /// Gets data from field given by specified identifier.
+        /// </summary>
+        /// <param name="id">identifier of field</param>
+        /// <returns> data from field</returns>
         public Object getDataFromFieldWithId(String id)
         {
             AFField field = getFieldById(id);
@@ -204,6 +220,11 @@ namespace AFWinPhone.components.types
             return null;
         }
 
+        /// <summary>
+        /// Sets data to field gived by specified identifier.
+        /// </summary>
+        /// <param name="id">identifier of field</param>
+        /// <param name="data">data to be set</param>
         public void setDataToFieldWithId(String id, Object data)
         {
             AFField field = getFieldById(id);

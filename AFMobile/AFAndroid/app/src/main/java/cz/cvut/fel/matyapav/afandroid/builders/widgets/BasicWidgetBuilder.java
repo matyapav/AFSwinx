@@ -1,12 +1,15 @@
 package cz.cvut.fel.matyapav.afandroid.builders.widgets;
 
-import com.tomscz.afrest.rest.dto.AFFieldInfo;
-
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 
 /**
- * Created by Pavel on 24.02.2016.
+ * Basic implementation of {@link AbstractWidgetBuilder}. Defines that widget builders needs skin
+ * and information about field. Every concrete implementation of widget builder should extends this class.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 abstract class BasicWidgetBuilder implements AbstractWidgetBuilder {
 

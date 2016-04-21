@@ -20,15 +20,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.WidgetBuilderFactory;
-import cz.cvut.fel.matyapav.afandroid.builders.widgets.AbstractWidgetBuilder;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.components.parts.CustomListAdapter;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 
 /**
- * Created by Pavel on 24.02.2016.
+ * Represents list component.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class AFList extends AFComponent {
 
@@ -64,6 +65,14 @@ public class AFList extends AFComponent {
         }
     }
 
+    /**
+     * Inserts data to specific list item
+     *
+     * @param jsonObject JSONObject which contains data for list item
+     * @param road used for inserting data into fields created from inner classes
+     * @param row row which represents data in list item
+     * @throws JSONException thrown if there was some error during parsing data object.
+     */
     private void insertDataObject(JSONObject jsonObject, StringBuilder road, Map<String, String> row) throws JSONException {
         Iterator<String> keys = jsonObject.keys();
         while(keys.hasNext()){
@@ -110,6 +119,12 @@ public class AFList extends AFComponent {
         throw new UnsupportedOperationException("List is read only");
     }
 
+    /**
+     * Gets list view. Use this if there is need to catch some events happened in list view like
+     * tapping on list item.
+     *
+     * @return view of the list
+     */
     public ListView getListView() {
         return listView;
     }
@@ -118,10 +133,21 @@ public class AFList extends AFComponent {
         this.listView = listView;
     }
 
+    /**
+     * Adds row to list
+     *
+     * @param values row with data
+     */
     public void addRow(Map<String, String> values){
         rows.add(values);
     }
 
+    /**
+     * Gets data from list item on specified position.
+     *
+     * @param position position of list item in list view
+     * @return corresponding data
+     */
     public Object getDataFromItemOnPosition(int position){
         AFSwinxConnection sendConnection = getConnectionPack().getSendConnection();
         // Generate send connection based on which will be retrieve data. The send connection is
@@ -136,6 +162,12 @@ public class AFList extends AFComponent {
         return data;
     }
 
+    /**
+     * Creates data from list item on given position which can be inserted to form.
+     *
+     * @param position position of list item in list view
+     * @return data of list item prepared to be inserted in form
+     */
     private AFDataHolder createFormDataFromList(int position) {
         AFDataHolder dataHolder = new AFDataHolder();
         for (AFField field : getFields()) {

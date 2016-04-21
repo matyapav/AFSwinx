@@ -2,6 +2,9 @@
 
 namespace ShowcaseWP.skins
 {
+    /// <summary>
+    /// Defines skin for absence management components
+    /// </summary>
     internal class AbsenceManagementSkin : DefaultSkin
     {
         public override int getLabelWidth()

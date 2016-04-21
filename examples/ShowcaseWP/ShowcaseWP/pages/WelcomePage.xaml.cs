@@ -47,7 +47,7 @@ namespace ShowcaseWP.pages
                 await progressbar.ShowAsync();
                 var previousCacheSize = Frame.CacheSize;
                 Frame.CacheSize = 0;
-                Localization.changeLanguage(SupportedLanguages.CZ);
+                Localization.changeLanguage("cs");
                 await Task.Delay(100);
                 Frame.Navigate(GetType());
                 if (Frame.CanGoBack)
@@ -63,7 +63,7 @@ namespace ShowcaseWP.pages
                 await progressbar.ShowAsync();
                 var previousCacheSize = Frame.CacheSize;
                 Frame.CacheSize = 0;
-                Localization.changeLanguage(SupportedLanguages.EN);
+                Localization.changeLanguage("en");
                 await Task.Delay(100);
                 Frame.Navigate(GetType());
                 if (Frame.CanGoBack)
@@ -134,6 +134,9 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
+        /// <summary>
+        /// Shows dialog where user must choose country in dropdows menu.
+        /// </summary>
         private async void showChooseCountryDialogAndNavigate()
         {
             var progressbar = StatusBar.GetForCurrentView().ProgressIndicator;

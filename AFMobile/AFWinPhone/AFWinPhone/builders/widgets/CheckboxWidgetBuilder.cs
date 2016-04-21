@@ -7,6 +7,9 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// This class is responsible for building checkbox element.
+    /// </summary>
     class CheckboxWidgetBuilder : BasicBuilder
     {
         public CheckboxWidgetBuilder(Skin skin, AFField field) : base(skin, field)

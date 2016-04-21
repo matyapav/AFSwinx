@@ -6,6 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace AFWinPhone.components.parts.validators
 {
+    /// <summary>
+    /// Validates REQUIRED rule, which checks field is filled.
+    /// </summary>
     class RequiredValidator : AFValidator
     {
         public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)

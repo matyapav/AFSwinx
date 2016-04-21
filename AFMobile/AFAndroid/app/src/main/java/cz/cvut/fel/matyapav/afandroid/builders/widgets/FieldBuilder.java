@@ -16,11 +16,24 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 
 /**
- * Builds input field
- * Created by Pavel on 25.12.2015.
+ * Builds whole input field. Input field is consisted of label, validation element and widget.
+ * This class builds all three elements and put them together according to specified layout settings.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class FieldBuilder {
 
+    /**
+     * Prepares field with all needed information including UI representation.
+     *
+     * @param properties information about a field, needed for e.g setting id of field
+     * @param road if not empty, field belongs to some inner class. This fact must be set into fields id.
+     * @param activity is needed to dynamically create parts of field in runtime
+     * @param skin defines the look of field
+     * @return prepared field with all needed information
+     */
     public AFField prepareField(AFFieldInfo properties, StringBuilder road, Activity activity, Skin skin) {
 
         AFField field = new AFField(properties);
@@ -51,6 +64,12 @@ public class FieldBuilder {
         return field;
     }
 
+    /**
+     * Builds complete view of field. Puts label, active element and validation element togetger in specified order.
+     * @param field field of which view is created
+     * @param skin in this case defines dimensions of field parts
+     * @return complete graphical representation of field
+     */
     private View buildCompleteView(AFField field, Skin skin){
         LinearLayout fullLayout = new LinearLayout(field.getFieldView().getContext());
         fullLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -102,6 +121,13 @@ public class FieldBuilder {
         return fullLayoutWithErrors;
     }
 
+    /**
+     * Builds element in which will be displayed validation errors.
+     *
+     * @param activity is needed to dynamically create parts of field in runtime
+     * @param skin defines the look of validations errors
+     * @return validation element
+     */
     private TextView buildErrorView(Activity activity, Skin skin){
         TextView errorView = new TextView(activity);
         errorView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -111,6 +137,14 @@ public class FieldBuilder {
         return errorView;
     }
 
+    /**
+     * Builds element for label.
+     *
+     * @param activity is needed to dynamically create parts of field in runtime
+     * @param properties information about label
+     * @param skin defines the look of label
+     * @return label element
+     */
     private TextView buildLabel(Activity activity, AFFieldInfo properties, Skin skin){
         TextView label = new TextView(activity);
         if (properties.getLabel() != null && !properties.getLabel().isEmpty()) {

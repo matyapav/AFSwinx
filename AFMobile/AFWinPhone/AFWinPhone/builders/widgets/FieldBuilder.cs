@@ -11,9 +11,20 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// Builds whole input field. Input field is consisted of label, validation element and widget.
+    /// This class builds all three elements and put them together according to specified layout settings
+    /// </summary>
     class FieldBuilder
     {
 
+        /// <summary>
+        ///  Prepares field with all needed information including UI representation.
+        /// </summary>
+        /// <param name="properties">information about a field, needed for e.g setting id of field</param>
+        /// <param name="road">if not empty, field belongs to some inner class. This fact must be set into fields id.</param>
+        /// <param name="skin">defines the look of field</param>
+        /// <returns>prepared field with all needed information</returns>
         public AFField prepareField(AFFieldInfo properties, StringBuilder road, Skin skin)
         {
 
@@ -48,6 +59,12 @@ namespace AFWinPhone.builders.widgets
             return field;
         }
 
+        /// <summary>
+        /// Builds complete view of field. Puts label, active element and validation element togetger in specified order.
+        /// </summary>
+        /// <param name="field">field of which view is created</param>
+        /// <param name="skin">in this case defines dimensions of field parts</param>
+        /// <returns>complete graphical representation of field</returns>
         private FrameworkElement buildCompleteView(AFField field, Skin skin)
         {
             StackPanel fullLayout = new StackPanel();
@@ -130,6 +147,11 @@ namespace AFWinPhone.builders.widgets
             return fullLayoutWithErrors;
         }
 
+        /// <summary>
+        /// Builds element in which will be displayed validation errors.
+        /// </summary>
+        /// <param name="skin">defines the look of validations errors</param>
+        /// <returns>validation element</returns>
         private TextBlock buildErrorView(Skin skin)
         {
             TextBlock errorView = new TextBlock();
@@ -142,6 +164,12 @@ namespace AFWinPhone.builders.widgets
             return errorView;
         }
 
+        /// <summary>
+        /// Builds element for label.
+        /// </summary>
+        /// <param name="properties">information about label</param>
+        /// <param name="skin">defines the look of label</param>
+        /// <returns>label element</returns>
         private TextBlock buildLabel(AFFieldInfo properties, Skin skin)
         {
             TextBlock label = new TextBlock();

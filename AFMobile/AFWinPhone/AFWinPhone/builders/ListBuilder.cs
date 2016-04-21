@@ -9,6 +9,9 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders
 {
+    /// <summary>
+    /// This class is responsible for creating a list component, which presents bigger amount of data to user.
+    /// </summary>
     public class ListBuilder : AFComponentBuilder<ListBuilder>
     {
         public override AFComponent createComponent()
@@ -63,6 +66,10 @@ namespace AFWinPhone.builders
                 listView.BorderBrush = new SolidColorBrush(getSkin().getListBorderColor());
                 listView.BorderThickness = new Thickness(getSkin().getListBorderWidth());
             }
+
+            //set list items clickable
+            listView.IsItemClickEnabled = true;
+            listView.SelectionMode = ListViewSelectionMode.None;
            
             //TODO not working 
             //set scroll bar visibility

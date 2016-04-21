@@ -85,6 +85,11 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
+        /// <summary>
+        /// Handles reset button click. Reset changes in profile form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="routedEventArgs"></param>
         private void ResetButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             AFForm form =
@@ -95,6 +100,11 @@ namespace ShowcaseWP.pages
             }
         }
 
+        /// <summary>
+        /// Handles update button click. Updates profile.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="routedEventArgs"></param>
         private async void UpdateButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             AFForm form =

@@ -10,6 +10,10 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// Builds widget, where user can write input. Input can be text, integer or double number.
+    ///  Type of input is defined by setting corresponding input type.
+    /// </summary>
     class TextWidgetBuilder : BasicBuilder
     {
         public TextWidgetBuilder(Skin skin, AFField field) : base(skin, field)

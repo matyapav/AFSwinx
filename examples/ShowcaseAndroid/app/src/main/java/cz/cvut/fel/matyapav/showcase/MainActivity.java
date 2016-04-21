@@ -12,15 +12,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import java.util.Locale;
-
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
-import cz.cvut.fel.matyapav.afandroid.enums.SupportedLanguages;
 import cz.cvut.fel.matyapav.showcase.fragments.AbsenceManagementFragment;
 import cz.cvut.fel.matyapav.showcase.fragments.AbsenceTypeManagementFragment;
 import cz.cvut.fel.matyapav.showcase.fragments.CountriesFragment;
@@ -44,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         //set localization
         getThisActivity().getPackageName();
         Localization.setContext(getThisActivity());
-        Localization.setPathToStrings("cz.cvut.fel.matyapav.showcase");
+        Localization.setStringsPackage("cz.cvut.fel.matyapav.showcase");
 
         if(savedInstanceState != null && Localization.getCurrentLanguage() != null){
             Localization.changeLanguage(Localization.getCurrentLanguage());
@@ -102,13 +97,13 @@ public class MainActivity extends AppCompatActivity
         // LOCALIZATION
         int id = item.getItemId();
         if(id == R.id.langCZ){
-            Localization.changeLanguage(SupportedLanguages.CZ);
+            Localization.changeLanguage("cs");
 
             System.err.println("Current locale: "+getThisActivity().getResources().getConfiguration().locale);
             restartActivity();
             }
         else if(id == R.id.langEN) {
-            Localization.changeLanguage(SupportedLanguages.EN);
+            Localization.changeLanguage("en");
             System.err.println("Current locale: " + getThisActivity().getResources().getConfiguration().locale);
             restartActivity();
         }
@@ -167,6 +162,9 @@ public class MainActivity extends AppCompatActivity
         return this;
     }
 
+    /**
+     * Restarts activity
+     */
     private void restartActivity(){
         Intent intent = getIntent();
         Bundle temp_bundle = new Bundle();

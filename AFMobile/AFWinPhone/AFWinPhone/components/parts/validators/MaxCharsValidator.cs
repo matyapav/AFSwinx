@@ -6,6 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace AFWinPhone.components.parts.validators
 {
+    /// <summary>
+    /// Validates MAXLENGTH rule, which checks if number of chars is less or equal than value specified in rule.
+    /// </summary>
     class MaxCharsValidator : AFValidator
     {
         public bool validate(AFField field, StringBuilder errorMsgs, AFValidationRule rule)

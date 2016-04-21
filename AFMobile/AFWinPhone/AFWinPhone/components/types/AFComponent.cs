@@ -13,6 +13,10 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.components.types
 {
+
+    /// <summary>
+    /// Common implementation of AbstractComponent. Implements common methods for each component.
+    /// </summary>
     public abstract class AFComponent : AbstractComponent
     {
         private AFClassInfo componentInfo;
@@ -31,12 +35,19 @@ namespace AFWinPhone.components.types
             this.skin = skin;
         }
 
-        //this one should be used by users
+        /// <summary>
+        /// Insert data method which should be used by end users.
+        /// </summary>
+        /// <param name="dataObject">data to be inserted</param>
         public void insertData(Object dataObject)
         {
             insertData(dataObject.ToString(), new StringBuilder());
         }
 
+        /// <summary>
+        /// Adds a field in component.
+        /// </summary>
+        /// <param name="field">field to be added</param>
         public void addField(AFField field)
         {
             if (fields == null)
@@ -47,6 +58,11 @@ namespace AFWinPhone.components.types
             fields.Add(field);
         }
 
+        /// <summary>
+        /// Gets the field with defined identifier.
+        /// </summary>
+        /// <param name="id">identifier of field</param>
+        /// <returns>corresponding field</returns>
         public AFField getFieldById(String id)
         {
             foreach (AFField field in getFields())
@@ -60,6 +76,10 @@ namespace AFWinPhone.components.types
             return null;
         }
 
+        /// <summary>
+        /// Gets count of field which are visible to user.
+        /// </summary>
+        /// <returns>number of visible fields</returns>
         public int getVisibleFieldsCount()
         {
             int res = 0;
@@ -72,6 +92,7 @@ namespace AFWinPhone.components.types
             }
             return res;
         }
+
 
         public AFClassInfo getComponentInfo()
         {
@@ -154,7 +175,6 @@ namespace AFWinPhone.components.types
 
         public abstract object generateSendData();
         public abstract Task<Boolean> sendData();
-
         public abstract void insertData(string dataResponse, StringBuilder road);
         public abstract SupportedComponents getComponentType();
         public abstract bool validateData();

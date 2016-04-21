@@ -14,7 +14,11 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 
 /**
- * Created by Pavel on 15.02.2016.
+ * Builds radio group widget, where user can choose from multiple options.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class OptionWidgetBuilder extends BasicWidgetBuilder {
 

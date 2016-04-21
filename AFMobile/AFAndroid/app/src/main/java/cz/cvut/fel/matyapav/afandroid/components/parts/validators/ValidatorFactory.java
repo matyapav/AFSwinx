@@ -4,13 +4,21 @@ import com.tomscz.afrest.commons.SupportedValidations;
 import com.tomscz.afrest.rest.dto.AFValidationRule;
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Factory class to determine which validator should be picked based on validation rule.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ValidatorFactory {
 
     private static ValidatorFactory instance = null;
 
 
+    /**
+     * Gets instance of validator factory.
+     * @return instance of validator factory
+     */
     public static synchronized ValidatorFactory getInstance() {
         if(instance == null){
             instance = new ValidatorFactory();
@@ -18,6 +26,12 @@ public class ValidatorFactory {
         return instance;
     }
 
+    /**
+     * Gets corresponding validator for specific validation rule.
+     *
+     * @param rule specific validation rule
+     * @return corresponding validator
+     */
     public AFValidator getValidator(AFValidationRule rule){
         if (rule.getValidationType().equals(SupportedValidations.REQUIRED) && Boolean.valueOf(rule.getValue())) {
             return new RequiredValidator();

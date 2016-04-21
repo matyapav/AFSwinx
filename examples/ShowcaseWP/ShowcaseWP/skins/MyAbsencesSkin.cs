@@ -4,6 +4,9 @@ using AFWinPhone.builders.skins;
 
 namespace ShowcaseWP.skins
 {
+    /// <summary>
+    /// Defines skin for my absences list
+    /// </summary>
     internal class MyAbsencesSkin : DefaultSkin
     {
         public override float getListBorderWidth()

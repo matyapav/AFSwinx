@@ -1,4 +1,4 @@
-\begin{thebibliography}{34}
+\begin{thebibliography}{36}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -62,6 +62,10 @@
 \emph{Introducing JSON} [online]. [cit.~01.\,04.\,2016].
 \newblock Dostupn{\'{e}} z: \url{http://www.json.org/}.
 
+\bibitem[jun()]{junit}
+\emph{JUnit} [online]. [cit.~17.\,04.\,2016].
+\newblock Dostupn{\'{e}} z: \url{http://junit.org/}.
+
 \bibitem[met()]{metadata}
 \emph{Metadata} [online]. [cit.~09.\,04.\,2016].
 \newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Metadata}.
@@ -84,6 +88,11 @@
   [online]. [cit.~22.\,03.\,2016].
 \newblock Dostupn{\'{e}} z:
   \url{https://wikisofia.cz/index.php/Typy_u\v{z}ivatelsk\'{y}ch_rozhran\'{i}_a_jejich_specifika/old}.
+
+\bibitem[vs-()]{vs-unit}
+\emph{Unit Test Basics} [online]. [cit.~17.\,04.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{https://msdn.microsoft.com/en-us/library/hh694602.aspx}.
 
 \bibitem[wik()]{wiki-ws}
 \emph{Web service} [online]. [cit.~22.\,03.\,2016].

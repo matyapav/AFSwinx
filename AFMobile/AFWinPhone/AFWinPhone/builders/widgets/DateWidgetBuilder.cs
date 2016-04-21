@@ -10,6 +10,9 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// This class is responsible for building datepicker component.
+    /// </summary>
     class DateWidgetBuilder : BasicBuilder
     {
         private String dateFormat;

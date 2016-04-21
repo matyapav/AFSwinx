@@ -20,7 +20,11 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 
 /**
- * Created by Pavel on 15.02.2016.
+ * This class is responsible for building drop down menu widget.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class DropDownWidgetBuilder extends BasicWidgetBuilder {
 

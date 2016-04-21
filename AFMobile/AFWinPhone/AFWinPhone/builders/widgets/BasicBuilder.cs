@@ -4,6 +4,10 @@ using Windows.UI.Xaml;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// Basic implementation of AbstractWidgetBuilder. Defines that widget builders needs skin
+    /// and information about field. Every concrete implementation of widget builder should extends this class.
+    /// </summary>
     abstract class BasicBuilder : AbstractWidgetBuilder
     {
         private Skin skin;

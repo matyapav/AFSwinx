@@ -8,6 +8,9 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// Builds radio group widget, where user can choose from multiple options.
+    /// </summary>
     class OptionWidgetBuilder : BasicBuilder
     {
         public OptionWidgetBuilder(Skin skin, AFField field) : base(skin, field)

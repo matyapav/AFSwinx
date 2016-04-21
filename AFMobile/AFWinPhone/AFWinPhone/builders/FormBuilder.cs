@@ -9,6 +9,9 @@ using AFWinPhone.components.parts;
 
 namespace AFWinPhone.builders
 {
+    /// <summary>
+    /// This class if responsible for building form component, which should mainly hadle user input.
+    /// </summary>
     public class FormBuilder : AFComponentBuilder<FormBuilder>
     {
         public override AFComponent createComponent()

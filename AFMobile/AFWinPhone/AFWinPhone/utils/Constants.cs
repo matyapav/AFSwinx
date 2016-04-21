@@ -2,6 +2,9 @@
 
 namespace AFWinPhone.utils
 {
+    /// <summary>
+    /// This class defines string constants used in application.
+    /// </summary>
     class Constants
     {
         //JSON PARSING DEFINITION CONSTANTS

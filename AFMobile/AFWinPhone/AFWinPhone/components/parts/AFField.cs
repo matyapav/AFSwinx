@@ -9,6 +9,9 @@ using AFWinPhone.builders.widgets;
 
 namespace AFWinPhone.components.parts
 {
+    /// <summary>
+    /// This class defines GUI of the field + operations with it like validation
+    /// </summary>
     public class AFField
     {
         private AFFieldInfo fieldInfo;
@@ -28,6 +31,10 @@ namespace AFWinPhone.components.parts
             this.fieldInfo = fieldInfo;
         }
 
+        /// <summary>
+        /// Validates all rules connected with field. If any validation failed, validaiton element with erros messages is shown to user.
+        /// </summary>
+        /// <returns>true if all validations passed, false otherwise</returns>
         public bool validate()
         {
             bool allValidationsFine = true;

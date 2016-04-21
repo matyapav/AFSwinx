@@ -6,7 +6,11 @@ import android.view.ViewGroup;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.DefaultSkin;
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Skin for all lists in application. Another list skins should extend from this skin.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class ListSkin extends DefaultSkin {
 

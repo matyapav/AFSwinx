@@ -1,5 +1,8 @@
 ﻿namespace ShowcaseWP.utils
 {
+    /// <summary>
+    /// Contains constants used in showcase project.
+    /// </summary>
     internal class ShowcaseConstants
     {
         //absence type management

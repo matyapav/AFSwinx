@@ -14,7 +14,12 @@ import cz.cvut.fel.matyapav.showcase.R;
 import cz.cvut.fel.matyapav.showcase.utils.ShowCaseUtils;
 
 /**
- * Created by Pavel on 16.02.2016.
+ * Welcome screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
+ *
  */
 public class WelcomeFragment extends Fragment {
 

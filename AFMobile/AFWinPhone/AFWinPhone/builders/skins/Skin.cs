@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Media;
 
 namespace AFWinPhone.builders.skins
 {
+    /// <summary>
+    /// This is skin interfaces. This interface is used to skin component based on user setting.
+    /// </summary>
     public interface Skin
     {
 

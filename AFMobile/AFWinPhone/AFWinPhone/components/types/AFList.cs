@@ -18,6 +18,9 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.components.types
 {
+    /// <summary>
+    /// Represents list component.
+    /// </summary>
     public class AFList : AFComponent
     {
         private ListView listView;
@@ -75,6 +78,13 @@ namespace AFWinPhone.components.types
             }
         }
 
+        /// <summary>
+        /// Inserts data to specific list item.
+        /// Exception thrown if there was some error during parsing data object.
+        /// </summary>
+        /// <param name="jsonObject">JSONObject which contains data for list item</param>
+        /// <param name="road">used for inserting data into fields created from inner classes</param>
+        /// <param name="row">row which represents data in list item</param>
         private void insertDataObject(JsonObject jsonObject, StringBuilder road, Dictionary<String, String> row)
         {
             foreach(String key in jsonObject.Keys){
@@ -115,6 +125,11 @@ namespace AFWinPhone.components.types
             rows.Add(values);
         }
 
+        /// <summary>
+        /// Gets data from list item on specified position.
+        /// </summary>
+        /// <param name="position"> position of list item in list view</param>
+        /// <returns>corresponding data</returns>
         public Object getDataFromItemOnPosition(int position)
         {
             AFSwinxConnection sendConnection = getConnectionPack().getSendConnection();
@@ -131,6 +146,11 @@ namespace AFWinPhone.components.types
             return data.Stringify();
         }
 
+        /// <summary>
+        /// Creates data from list item on given position which can be inserted to form.
+        /// </summary>
+        /// <param name="position">position of list item in list view</param>
+        /// <returns> data of list item prepared to be inserted in form</returns>
         private AFDataHolder createFormDataFromList(int position)
         {
             AFDataHolder dataHolder = new AFDataHolder();
@@ -172,6 +192,11 @@ namespace AFWinPhone.components.types
             return dataHolder;
         }
 
+        /// <summary>
+        /// Creates custom list item.
+        /// </summary>
+        /// <param name="position">position of item in list view</param>
+        /// <returns>graphical representation of custom list item</returns>
         private StackPanel createCustomListItem(int position)
         {         
             StackPanel panel = new StackPanel();
@@ -293,6 +318,10 @@ namespace AFWinPhone.components.types
             return this.rows;
         }
 
+        /// <summary>
+        /// Gets list view. Use this if there is need to catch some events happened in list view like tapping on list item.
+        /// </summary>
+        /// <returns>list view</returns>
         public ListView getListView()
         {
             return listView;

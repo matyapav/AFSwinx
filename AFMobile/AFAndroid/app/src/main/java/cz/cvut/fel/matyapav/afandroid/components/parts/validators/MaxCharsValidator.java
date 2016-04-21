@@ -9,7 +9,11 @@ import cz.cvut.fel.matyapav.afandroid.utils.Localization;
 import cz.cvut.fel.matyapav.afandroid.utils.Utils;
 
 /**
- * Created by Pavel on 14.02.2016.
+ * Validates MAXLENGTH rule, which checks if number of chars is less or equal than value specified in rule.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class MaxCharsValidator implements AFValidator {
 

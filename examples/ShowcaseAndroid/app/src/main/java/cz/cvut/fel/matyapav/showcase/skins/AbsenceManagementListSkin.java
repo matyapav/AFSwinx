@@ -6,8 +6,12 @@ import android.support.v4.content.ContextCompat;
 import cz.cvut.fel.matyapav.showcase.R;
 
 /**
- * Created by Pavel on 26.02.2016.
- */
+ * Skin for absence management list
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
+*/
 public class AbsenceManagementListSkin extends ListSkin{
 
     public AbsenceManagementListSkin(Context context) {

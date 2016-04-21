@@ -6,7 +6,11 @@ import android.view.MotionEvent;
 import android.widget.ScrollView;
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Custom scroll view component which gives ability to scroll components in scroll view
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class VerticalScrollView extends ScrollView {
 

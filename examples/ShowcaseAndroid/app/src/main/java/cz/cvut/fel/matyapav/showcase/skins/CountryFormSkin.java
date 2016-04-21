@@ -5,7 +5,11 @@ import android.content.Context;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.DefaultSkin;
 
 /**
- * Created by Pavel on 28.02.2016.
+ * Skin for contry form
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class CountryFormSkin extends DefaultSkin {
 

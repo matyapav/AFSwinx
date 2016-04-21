@@ -15,10 +15,14 @@ import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
 import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 
 /**
- * Created by Pavel on 14.02.2016.
+ * Builds widget, where user can write input. Input can be text, integer or double number or password.
+ * Type of input is defined by setting corresponding input type.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class TextWidgetBuilder extends BasicWidgetBuilder {
-
 
     public TextWidgetBuilder(Skin skin, AFField field) {
         super(skin, field);

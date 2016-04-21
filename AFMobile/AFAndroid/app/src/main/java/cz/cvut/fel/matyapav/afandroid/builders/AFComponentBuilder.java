@@ -21,7 +21,12 @@ import cz.cvut.fel.matyapav.afandroid.builders.skins.Skin;
 import cz.cvut.fel.matyapav.afandroid.parsers.JSONDefinitionParser;
 
 /**
- * Created by Pavel on 19.02.2016.
+ * This class defines common parts of all component builders. Specific component builders must extend
+ * this class.
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public abstract class AFComponentBuilder<T> {
 
@@ -34,6 +39,16 @@ public abstract class AFComponentBuilder<T> {
     private HashMap<String, String> connectionParameters;
 
 
+    /**
+     * Initializes builder for component. This method should be used if getting definition of component
+     * from server does not need additional parameters like user credentials.
+     *
+     * @param activity needed to dynamically create UI in runtime.
+     * @param componentKeyName user defined name of component
+     * @param connectionResource input stream with XML file, which defines connections
+     * @param connectionKey used to get specific connection definition from connectionResource file.
+     * @return concrete builder
+     */
     public T initBuilder(Activity activity, String componentKeyName, InputStream connectionResource, String connectionKey){
         this.activity = activity;
         this.componentKeyName = componentKeyName;
@@ -47,6 +62,17 @@ public abstract class AFComponentBuilder<T> {
         return (T) this;
     }
 
+    /**
+     * Initializes builder for component. This method should be used if getting definition of component
+     * from server needs additional parameters like user credentials
+     *
+     * @param activity needed to dynamically create UI in runtime.
+     * @param componentKeyName user defined name of component
+     * @param connectionResource input stream with XML file, which defines connections
+     * @param connectionKey used to get specific connection definition from connectionResource file.
+     * @param connectionParameters additional parameters for connection like user credentials
+     * @return
+     */
     public T initBuilder(Activity activity, String componentKeyName, InputStream connectionResource,
                          String connectionKey, HashMap<String, String> connectionParameters) {
         this.activity = activity;
@@ -62,6 +88,12 @@ public abstract class AFComponentBuilder<T> {
         return (T) this;
     }
 
+    /**
+     * Initializes connections for component. Creates and sets connections from specified file to builder.
+     * Must be called before creating any part of component and after initialization of builder.
+     *
+     * @throws Exception throwed if not connection was specified, that means initialization of builder was not called.
+     */
     protected void initializeConnections() throws Exception {
         if (connectionPack == null && connectionKey != null && connectionResource != null) {
             ConnectionParser connectionParser =
@@ -73,10 +105,19 @@ public abstract class AFComponentBuilder<T> {
         } else {
             // Model connection is important if it could be found then throw exception
             throw new Exception(
-                    "There is error during building AFForm. Connection was not specified. Did you used initBuilder method before build?");
+                    "There is error during building component. Connection was not specified. Did you used initBuilder method before build?");
         }
     }
 
+    /**
+     * Prepares whole component especially its graphical representation which can be inserted in UI.
+     *
+     * @param classDef information about component
+     * @param component which component is being prepared
+     * @param numberOfInnerClasses number of inner classes which actual class definition has
+     * @param parsingInnerClass determines if preparing UI from inner class
+     * @param road passed to field buidlers. If not empty, field belongs to some inner class. This fact must be set into fields id.
+     */
     protected void prepareComponent(AFClassInfo classDef, AFComponent component, int numberOfInnerClasses, boolean parsingInnerClass, StringBuilder road){
         if(parsingInnerClass){
             numberOfInnerClasses = 0;
@@ -102,6 +143,12 @@ public abstract class AFComponentBuilder<T> {
         System.err.println("NUMBER OF ELEMENTS IN COMPONENT " + component.getFields().size());
     }
 
+    /**
+     * Builds and wraps component UI from class definition and sets it to component.
+     *
+     * @param component component its UI is being built wrapped and set.
+     * @throws Exception thrown if there is some error during parsing component definition or building component view
+     */
     protected void buildComponent(AFComponent component) throws Exception {
         LinearLayout componentView = new LinearLayout(getActivity());
         componentView.setLayoutParams(getSkin().getTopLayoutParams());
@@ -115,8 +162,21 @@ public abstract class AFComponentBuilder<T> {
         component.setView(componentView);
     }
 
+    /**
+     * Builder specific method which creates final version of component which is presented to user.
+     * Should be used by user to create component.
+     *
+     * @return completely created component
+     * @throws Exception thrown if there is an error during crating process. User must handle this exception.
+     */
     public abstract AFComponent createComponent() throws Exception;
 
+    /**
+     * Builder specific method used only for building graphical representation of component.
+     *
+     * @param component components its UI is being build.
+     * @return UI of component
+     */
     protected abstract View buildComponentView(AFComponent component);
 
     public Activity getActivity() {

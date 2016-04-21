@@ -77,6 +77,11 @@ namespace ShowcaseWP.pages
             progressbar.HideAsync();
         }
 
+        /// <summary>
+        /// Handles add absence button click. Adds new absence.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="routedEventArgs"></param>
         private async void AddButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             AFForm form =

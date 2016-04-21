@@ -11,6 +11,9 @@ using Windows.Web.Http.Headers;
 
 namespace AFWinPhone.rest
 {
+    /// <summary>
+    /// Class for making requests to server. Request must be asynchronous.
+    /// </summary>
     class RequestMaker
     {
         private HeaderType headerType;
@@ -29,6 +32,10 @@ namespace AFWinPhone.rest
             this.data = data;
         }
 
+        /// <summary>
+        /// Does all types of requests. Type of request is based on http method and data.
+        /// </summary>
+        /// <returns>response from server</returns>
         public async Task<String> doRequest()
         {
 

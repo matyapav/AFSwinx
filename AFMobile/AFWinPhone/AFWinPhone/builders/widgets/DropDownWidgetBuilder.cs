@@ -8,6 +8,9 @@ using AFWinPhone.utils;
 
 namespace AFWinPhone.builders.widgets
 {
+    /// <summary>
+    /// This class is responsible for building drop down menu widget.
+    /// </summary>
     class DropDownWidgetBuilder : BasicBuilder
     {
 

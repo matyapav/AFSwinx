@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cz.cvut.fel.matyapav.afandroid.AFAndroid;
 import cz.cvut.fel.matyapav.afandroid.components.parts.AFField;
@@ -25,10 +26,17 @@ import cz.cvut.fel.matyapav.showcase.utils.ShowcaseConstants;
 
 
 /**
- * Created by Pavel on 16.02.2016.
+ * Login screen
+ *
+ * @author Pavel Matyáš (matyapav@fel.cvut.cz)
+ *
+ * @since 1.0.0.
  */
 public class LoginFragment extends Fragment {
 
+    /**
+     * On login button click handler. Logs user in.
+     */
     private View.OnClickListener onLoginButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -56,6 +64,7 @@ public class LoginFragment extends Fragment {
         final View root = inflater.inflate(R.layout.login_fragment_layout, container, false);
 
         final LinearLayout layout = (LinearLayout) root.findViewById(R.id.loginLayout);
+
         try {
             //init builder
             AFForm form = AFAndroid.getInstance().getFormBuilder().initBuilder(getActivity(),
@@ -68,6 +77,7 @@ public class LoginFragment extends Fragment {
             System.err.println("FORM BUILDING FAILED");
             e.printStackTrace();
         }
+
 
         Button loginButton = new Button(getActivity());
         loginButton.setLayoutParams(new ViewGroup.LayoutParams(
@@ -103,6 +113,10 @@ public class LoginFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Logs user in.
+     * @param form form which data is got from.
+     */
     private void doLogin(AFForm form) {
         AFField usernameField = form.getFieldById("username");
         AFField passwordField = form.getFieldById("password");
