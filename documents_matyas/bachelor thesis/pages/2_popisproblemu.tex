@@ -40,7 +40,7 @@ Přijatá data lze na klientovi zpracovat více způsoby. Jednou z možností je
 
 Obdobně webové služby fungují i v případě odesílání dat. Zdroj webové služby definuje v jakém formátu data přijme a v dokumentaci lze opět nalézt definici objektu, do kterého se bude snažit data deserializovat, respektive přijatá data vložit. 
 
-Z uvedeného plyne, že se klientská aplikace musí v obou situacích, jak při zisku, tak při odesílání dat, adaptovat na určitou, předem danou strukturu dat. Pokud se tato struktura změní, tedy zění se objekt ze kterého serializací data vznikají a deserializují se \cite{serialization} do něj odeslaná data, je nutné upravit i příslušná místa v klienstké aplikaci, která zpracování a odesílání uživatelského vstupu mají nastarosti.  
+Z uvedeného plyne, že se klientská aplikace musí v obou situacích, jak při zisku, tak při odesílání dat, adaptovat na určitou, předem danou strukturu dat. Pokud se tato struktura změní, tedy změní se objekt ze kterého serializací data vznikají a deserializují se \cite{serialization} do něj odeslaná data, je nutné upravit i příslušná místa v klienstké aplikaci, která zpracování a odesílání uživatelského vstupu mají nastarosti.  
 
 Demostrujeme problém na příkladě. Máme server a na něm model naříklad Tým, který obsahuje dva sloupce - název týmu a počet členů. Vytvoříme si klienstkou aplikaci, která tato data získá a zobrazí, například v tabulce. Nyní se rozhodneme, že by měl přibýt v modelu sloupec, obsahující zkratku týmu. 
 
