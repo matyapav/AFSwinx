@@ -27,3 +27,4 @@ D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhone\obj\Debug\pri.resfiles.interm
 D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhone\obj\Debug\qualifiers.txt
 D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhone\obj\Debug\qualifiers.txt.intermediate
 D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\AFWinPhone\bin\Debug\AFWinPhone\xmlDoc.XML

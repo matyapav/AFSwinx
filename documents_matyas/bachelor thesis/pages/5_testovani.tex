@@ -63,9 +63,31 @@ Testované úkoly byly navrženy tak, aby pokryly co největší množství fram
 \item Propojte list s formulářem tak, že po kliknutí na položku listu se data nahrají do formuláře
 \end{enumerate}
 \subsection{Výsledky testu}
- TODO dotestovat lidi a pak udelat nejaky zaver
+Test dopadl dobře. Všichni testovaní zvládli splinit všechny úkoly zhruba v odhadovaném časovém limitu bez větších komplikací. Nicméně někdy bylo potřeba testovanému trochu poradit. Nejzávažnějším problémem pro testované bylo pochopit, jak funguje a k čemu přesně slouží XML soubor pro definici připojení. Většina testovaných postupovala podle uživatelské příručky, kde se nalézá ukázkový kód pro definici všech tří zdrojů a tento kód zkopírovala a dále upravovala. Nejvíce uživatele zarazilo, když měl být zdroj veřejný, tedy nebyl nijak zabezpečený a pouze nebylo třeba definovat dodatečné bezpečnostní parametry v uzlu <security-params>, uživatelé však chtěli tuto skutečnost někde nadefinovat a strávili dlouhou chvíli hledáním v příručce. Dva participanti si jednotlivá připojení libovolně pojmenovali, tedy nastavili připojení vlastní identifikátor, dva zanechali identifikátor ze zkopírovaného kódu z příručky, ale v průběhu testu jim skutečnost, že id nezměnili, došla. Zabrat daly uživatelům také hodnoty určené k nahrazení v XML souboru, uživatelé pochopili, že se budou hodnoty získávat z mapy nebo slovníku, který je předáván jako poslední parametr metody na inicializaci builderu, ale už jim nedošlo, kde mají mapu či slovník vzít. Jelikož je v uživatelské příručce zobrazena ukázka kódu z ukázkového projektu, kde je tato mapa či slovník získávána skrz utils metodu. Uživatelé chtěli tuto metodu použít a byli trochu překvapeni, když ji nemohli nalézt. Po krátkém vysvětlení, že se v ukázkové části kódu jedná o výtržek z ukázkové aplikace, už bylo všem jasné, že si musí mapu či slovník vytvořit sami. Někteří ještě chvíli tápali, jaké hodnoty do mapy vložit, zkoušeli jako klíč uživatelské jméno a hodnotu heslo, ale nakonec všem správné použití došlo samovolně bez jakékoliv pomoci. Obrázek jedné z aplikcí vytvořených v rámci testování je zobrazen v příloze \ref{img:testApp}.
 
-\section{Kvantitativni test} 
+Uživatelé na framework reagovali kladně. V průběhu testu se o něj zajímali a vnímají ho jako silný nástroj. Samozřejmě byly i připomínky. Windows Phone uživatelé moc dobře poznali, že je WP verze přepisována z Javy a vnímali WP framework jako příliš javovský, což nepokládali za překážku, ale spíše jako estetiskou vadu. Testovaní také měli pocit, že některé věci by mohli být lépe zdokumentované v uživatelské příručce, jejich výtky jsem si zapisoval a v uživatelské příručce později změnil. Seznam všech problému a návrhů jejich řešení je v tabulce \ref{table:testIssues}.
+
+\begin{table}[h!]
+\begin{center}
+\caption{Problémy zjištěné během testování s uživatelem}
+\label{table:testIssues}
+\begin{tabular}{|p{7cm}|p{7cm}|}
+\hline
+\textbf{Problém} & \textbf{Navrhované řešení} \\
+\hline
+Uživatelům trvalo než pochopili smysl XML souboru pro nadefinování zdrojů. Tři ze čtyř potřebovali poradit. & Lépe popsat tuto část v uživatelské příručce. \\
+\hline
+Lokalizace textů na klientské straně ruší výhodu, že formulář pružně reaguje na změnu datového modelu na serveru a není tudíž potřeba vydat novou verze aplikace. Tato verze bude muset být vydána stejně kvůli lokalizačnímu textu. & Klient bude při získání zdroje posílat jazyk a lokalizaci nějakým bude nějakým provedena už na serveru a klient přijme rovnou konkrétní překlad. \\
+\hline
+Získání dat z položky v listu chtěl uživatele provádět manuálně, tedy získat si data z položky ve formě mapy a poté nastavovat data jednotlivým polím, i když na to existuje metoda. & Lze použít metodu, která získá správnou reprezentaci dat pro naplnění formuláře skrz metodu insertData, která se používá i při plnění daty ze serveru. Lépe tento fakt zdokumentovat v uživatelské příruččce. \\
+\hline
+List disponuje metodou getView, která získá jeho celkovou grafickou reprezentaci, ale také metodou getListView, která slouží k získání pouze části, existuje však, aby šlo na tuto část připojit posluchač událostí. Uživatelé nevěděli, kterou metodu využít pro získání UI reprezentace, kterou mají vložit. & Zvážit zvolení jiných názvů metod, které by více vypovídali o tom, k čemu metody slouží. Také lépe zdokumentovat tuto část v uživatelské příručce. \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Kvantitativní test} 
 Tento test ukazuje závislost doby vytvoření komponenty na počtu částí, ze kterých se skládá a na rychlosti připojení k internetu. Test byl proveden na obou platformách. Bohužel nemůžeme platformy jednoduše mezi sebou porovnat, neboť zařízení, na kterých test proběhl, nemají stejné parametry, které taky rychlost vytváření ovlivňují. Nicméně bylo provedeno měření pro dva formuláře, jeden z nich se skládal ze dvou polí a nebyl naplněn daty, druhý měl polí čtrnáct a daty naplněn byl. Potom byl test proveden pro listy, kde bylo sledováno zda rychlost vytvoření komponenty ovlivňuje i množství dat, kterými se komponenta naplní. Jedna položka listu obsahovala u obou listů stejný počet informací, v obou listech byl ale rozdílný počet záznamů. Pro každou komponentu bylo provedeno 10 měření, ze kterých se pak udělal průměr. 
 
 Test na Android platformě ukázal, že na počtu polí ve formuláři i na rychlosti připojení záleží. Zatímco menší formulář byl na Wi-Fi v průměru vytvořen za 684 milisekund, větší formulář v průměru za 1084 milisekund a potom se ještě 645 ms nalňovat daty. Na mobilních datech pak vytvoření menšího formuláře trvalo téměř dvakrát déle, tedy 1110 milisekund, vytvoření většího trvalo přibližně 2035 milisekund bez naplnění daty a 2990 milisekund s vloženými daty. Test tvorby listu zase ukázal, že na množství položek v listu také záleží. List s jednou položkou se vytvořil a naplnil daty na Wi-Fi v průměru za 1450 milisekund a listu s osmi záznamy to trvalo v průměru pouze od 20 milisekund déle. Při slabším připojení byl rozdíl už markantnější, činil v průměru asi 350 milisekund.

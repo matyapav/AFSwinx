@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         //set localization
-        getThisActivity().getPackageName();
         Localization.setContext(getThisActivity());
         Localization.setStringsPackage("cz.cvut.fel.matyapav.showcase");
 

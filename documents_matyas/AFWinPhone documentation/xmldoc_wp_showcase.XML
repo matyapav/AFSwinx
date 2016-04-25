@@ -1,0 +1,977 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ShowcaseWP</name>
+    </assembly>
+    <members>
+        <member name="T:ShowcaseWP.App">
+            <summary>
+            Provides application-specific behavior to supplement the default Application class.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.App.#ctor">
+            <summary>
+            Initializes the singleton application object.  This is the first line of authored code
+            executed, and as such is the logical equivalent of main() or WinMain().
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.App.OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
+            <summary>
+            Invoked when the application is launched normally by the end user.  Other entry points
+            will be used when the application is launched to open a specific file, to display
+            search results, and so forth.
+            </summary>
+            <param name="e">Details about the launch request and process.</param>
+        </member>
+        <member name="M:ShowcaseWP.App.RootFrame_FirstNavigated(System.Object,Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            Restores the content transitions after the app has launched.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.App.OnSuspending(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
+            <summary>
+            Invoked when application execution is being suspended.  Application state is saved
+            without knowing whether the application will be terminated or resumed with the contents
+            of memory still intact.
+            </summary>
+            <param name="sender">The source of the suspend request.</param>
+            <param name="e">Details about the suspend request.</param>
+        </member>
+        <member name="T:ShowcaseWP.Common.NavigationHelper">
+            <summary>
+            NavigationHelper aids in navigation between pages.  It provides commands used to 
+            navigate back and forward as well as registers for standard mouse and keyboard 
+            shortcuts used to go back and forward in Windows and the hardware back button in
+            Windows Phone.  In addition it integrates SuspensionManger to handle process lifetime
+            management and state management when navigating between pages.
+            </summary>
+            <example>
+            To make use of NavigationHelper, follow these two steps or
+            start with a BasicPage or any other Page item template other than BlankPage.
+            
+            1) Create an instance of the NavigationHelper somewhere such as in the 
+                constructor for the page and register a callback for the LoadState and 
+                SaveState events.
+            <code>
+                public MyPage()
+                {
+                    this.InitializeComponent();
+                    var navigationHelper = new NavigationHelper(this);
+                    this.navigationHelper.LoadState += navigationHelper_LoadState;
+                    this.navigationHelper.SaveState += navigationHelper_SaveState;
+                }
+                
+                private async void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+                { }
+                private async void navigationHelper_SaveState(object sender, LoadStateEventArgs e)
+                { }
+            </code>
+            
+            2) Register the page to call into the NavigationHelper whenever the page participates 
+                in navigation by overriding the <see cref="M:Windows.UI.Xaml.Controls.Page.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)"/> 
+                and <see cref="M:Windows.UI.Xaml.Controls.Page.OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs)"/> events.
+            <code>
+                protected override void OnNavigatedTo(NavigationEventArgs e)
+                {
+                    navigationHelper.OnNavigatedTo(e);
+                }
+                
+                protected override void OnNavigatedFrom(NavigationEventArgs e)
+                {
+                    navigationHelper.OnNavigatedFrom(e);
+                }
+            </code>
+            </example>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.#ctor(Windows.UI.Xaml.Controls.Page)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ShowcaseWP.Common.NavigationHelper"/> class.
+            </summary>
+            <param name="page">A reference to the current page used for navigation.  
+            This reference allows for frame manipulation and to ensure that keyboard 
+            navigation requests only occur when the page is occupying the entire window.</param>
+        </member>
+        <member name="P:ShowcaseWP.Common.NavigationHelper.GoBackCommand">
+            <summary>
+            <see cref="T:ShowcaseWP.Common.RelayCommand"/> used to bind to the back Button's Command property
+            for navigating to the most recent item in back navigation history, if a Frame
+            manages its own navigation history.
+            
+            The <see cref="T:ShowcaseWP.Common.RelayCommand"/> is set up to use the virtual method <see cref="M:ShowcaseWP.Common.NavigationHelper.GoBack"/>
+            as the Execute Action and <see cref="M:ShowcaseWP.Common.NavigationHelper.CanGoBack"/> for CanExecute.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.NavigationHelper.GoForwardCommand">
+            <summary>
+            <see cref="T:ShowcaseWP.Common.RelayCommand"/> used for navigating to the most recent item in 
+            the forward navigation history, if a Frame manages its own navigation history.
+            
+            The <see cref="T:ShowcaseWP.Common.RelayCommand"/> is set up to use the virtual method <see cref="M:ShowcaseWP.Common.NavigationHelper.GoForward"/>
+            as the Execute Action and <see cref="M:ShowcaseWP.Common.NavigationHelper.CanGoForward"/> for CanExecute.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.CanGoBack">
+            <summary>
+            Virtual method used by the <see cref="P:ShowcaseWP.Common.NavigationHelper.GoBackCommand"/> property
+            to determine if the <see cref="P:ShowcaseWP.Common.NavigationHelper.Frame"/> can go back.
+            </summary>
+            <returns>
+            true if the <see cref="P:ShowcaseWP.Common.NavigationHelper.Frame"/> has at least one entry 
+            in the back navigation history.
+            </returns>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.CanGoForward">
+            <summary>
+            Virtual method used by the <see cref="P:ShowcaseWP.Common.NavigationHelper.GoForwardCommand"/> property
+            to determine if the <see cref="P:ShowcaseWP.Common.NavigationHelper.Frame"/> can go forward.
+            </summary>
+            <returns>
+            true if the <see cref="P:ShowcaseWP.Common.NavigationHelper.Frame"/> has at least one entry 
+            in the forward navigation history.
+            </returns>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.GoBack">
+            <summary>
+            Virtual method used by the <see cref="P:ShowcaseWP.Common.NavigationHelper.GoBackCommand"/> property
+            to invoke the <see cref="M:Windows.UI.Xaml.Controls.Frame.GoBack"/> method.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.GoForward">
+            <summary>
+            Virtual method used by the <see cref="P:ShowcaseWP.Common.NavigationHelper.GoForwardCommand"/> property
+            to invoke the <see cref="M:Windows.UI.Xaml.Controls.Frame.GoForward"/> method.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.HardwareButtons_BackPressed(System.Object,Windows.Phone.UI.Input.BackPressedEventArgs)">
+            <summary>
+            Invoked when the hardware back button is pressed. For Windows Phone only.
+            </summary>
+            <param name="sender">Instance that triggered the event.</param>
+            <param name="e">Event data describing the conditions that led to the event.</param>
+        </member>
+        <member name="E:ShowcaseWP.Common.NavigationHelper.LoadState">
+            <summary>
+            Register this event on the current page to populate the page
+            with content passed during navigation as well as any saved
+            state provided when recreating a page from a prior session.
+            </summary>
+        </member>
+        <member name="E:ShowcaseWP.Common.NavigationHelper.SaveState">
+            <summary>
+            Register this event on the current page to preserve
+            state associated with the current page in case the
+            application is suspended or the page is discarded from
+            the navigaqtion cache.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            Invoked when this page is about to be displayed in a Frame.  
+            This method calls <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>, where all page specific
+            navigation and process lifetime management logic should be placed.
+            </summary>
+            <param name="e">Event data that describes how this page was reached.  The Parameter
+            property provides the group to be displayed.</param>
+        </member>
+        <member name="M:ShowcaseWP.Common.NavigationHelper.OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            Invoked when this page will no longer be displayed in a Frame.
+            This method calls <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>, where all page specific
+            navigation and process lifetime management logic should be placed.
+            </summary>
+            <param name="e">Event data that describes how this page was reached.  The Parameter
+            property provides the group to be displayed.</param>
+        </member>
+        <member name="T:ShowcaseWP.Common.LoadStateEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>event
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.Common.SaveStateEventHandler">
+            <summary>
+            Represents the method that will handle the <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>event
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.Common.LoadStateEventArgs">
+            <summary>
+            Class used to hold the event data required when a page attempts to load state.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.LoadStateEventArgs.NavigationParameter">
+            <summary>
+            The parameter value passed to <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> 
+            when this page was initially requested.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.LoadStateEventArgs.PageState">
+            <summary>
+            A dictionary of state preserved by this page during an earlier
+            session.  This will be null the first time a page is visited.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.LoadStateEventArgs.#ctor(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ShowcaseWP.Common.LoadStateEventArgs"/> class.
+            </summary>
+            <param name="navigationParameter">
+            The parameter value passed to <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> 
+            when this page was initially requested.
+            </param>
+            <param name="pageState">
+            A dictionary of state preserved by this page during an earlier
+            session.  This will be null the first time a page is visited.
+            </param>
+        </member>
+        <member name="T:ShowcaseWP.Common.SaveStateEventArgs">
+            <summary>
+            Class used to hold the event data required when a page attempts to save state.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.SaveStateEventArgs.PageState">
+            <summary>
+            An empty dictionary to be populated with serializable state.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.SaveStateEventArgs.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ShowcaseWP.Common.SaveStateEventArgs"/> class.
+            </summary>
+            <param name="pageState">An empty dictionary to be populated with serializable state.</param>
+        </member>
+        <member name="T:ShowcaseWP.Common.ObservableDictionary">
+            <summary>
+            Implementation of IObservableMap that supports reentrancy for use as a default view
+            model.
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.Common.RelayCommand">
+            <summary>
+            A command whose sole purpose is to relay its functionality 
+            to other objects by invoking delegates. 
+            The default return value for the CanExecute method is 'true'.
+            <see cref="M:ShowcaseWP.Common.RelayCommand.RaiseCanExecuteChanged"/> needs to be called whenever
+            <see cref="M:ShowcaseWP.Common.RelayCommand.CanExecute(System.Object)"/> is expected to return a different value.
+            </summary>
+        </member>
+        <member name="E:ShowcaseWP.Common.RelayCommand.CanExecuteChanged">
+            <summary>
+            Raised when RaiseCanExecuteChanged is called.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.RelayCommand.#ctor(System.Action)">
+            <summary>
+            Creates a new command that can always execute.
+            </summary>
+            <param name="execute">The execution logic.</param>
+        </member>
+        <member name="M:ShowcaseWP.Common.RelayCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Creates a new command.
+            </summary>
+            <param name="execute">The execution logic.</param>
+            <param name="canExecute">The execution status logic.</param>
+        </member>
+        <member name="M:ShowcaseWP.Common.RelayCommand.CanExecute(System.Object)">
+            <summary>
+            Determines whether this <see cref="T:ShowcaseWP.Common.RelayCommand"/> can execute in its current state.
+            </summary>
+            <param name="parameter">
+            Data used by the command. If the command does not require data to be passed, this object can be set to null.
+            </param>
+            <returns>true if this command can be executed; otherwise, false.</returns>
+        </member>
+        <member name="M:ShowcaseWP.Common.RelayCommand.Execute(System.Object)">
+            <summary>
+            Executes the <see cref="T:ShowcaseWP.Common.RelayCommand"/> on the current command target.
+            </summary>
+            <param name="parameter">
+            Data used by the command. If the command does not require data to be passed, this object can be set to null.
+            </param>
+        </member>
+        <member name="M:ShowcaseWP.Common.RelayCommand.RaiseCanExecuteChanged">
+            <summary>
+            Method used to raise the <see cref="E:ShowcaseWP.Common.RelayCommand.CanExecuteChanged"/> event
+            to indicate that the return value of the <see cref="M:ShowcaseWP.Common.RelayCommand.CanExecute(System.Object)"/>
+            method has changed.
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.Common.SuspensionManager">
+            <summary>
+            SuspensionManager captures global session state to simplify process lifetime management
+            for an application.  Note that session state will be automatically cleared under a variety
+            of conditions and should only be used to store information that would be convenient to
+            carry across sessions, but that should be discarded when an application crashes or is
+            upgraded.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.SuspensionManager.SessionState">
+            <summary>
+            Provides access to global session state for the current session.  This state is
+            serialized by <see cref="M:ShowcaseWP.Common.SuspensionManager.SaveAsync"/> and restored by
+            <see cref="M:ShowcaseWP.Common.SuspensionManager.RestoreAsync(System.String)"/>, so values must be serializable by
+            <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> and should be as compact as possible.  Strings
+            and other self-contained data types are strongly recommended.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.Common.SuspensionManager.KnownTypes">
+            <summary>
+            List of custom types provided to the <see cref="T:System.Runtime.Serialization.DataContractSerializer"/> when
+            reading and writing session state.  Initially empty, additional types may be
+            added to customize the serialization process.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.Common.SuspensionManager.SaveAsync">
+            <summary>
+            Save the current <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
+            registered with <see cref="M:ShowcaseWP.Common.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also preserve their current
+            navigation stack, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity
+            to save its state.
+            </summary>
+            <returns>An asynchronous task that reflects when session state has been saved.</returns>
+        </member>
+        <member name="M:ShowcaseWP.Common.SuspensionManager.RestoreAsync(System.String)">
+            <summary>
+            Restores previously saved <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.  Any <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instances
+            registered with <see cref="M:ShowcaseWP.Common.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> will also restore their prior navigation
+            state, which in turn gives their active <see cref="T:Windows.UI.Xaml.Controls.Page"/> an opportunity restore its
+            state.
+            </summary>
+            <param name="sessionBaseKey">An optional key that identifies the type of session.
+            This can be used to distinguish between multiple application launch scenarios.</param>
+            <returns>An asynchronous task that reflects when session state has been read.  The
+            content of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/> should not be relied upon until this task
+            completes.</returns>
+        </member>
+        <member name="M:ShowcaseWP.Common.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)">
+            <summary>
+            Registers a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> instance to allow its navigation history to be saved to
+            and restored from <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.  Frames should be registered once
+            immediately after creation if they will participate in session state management.  Upon
+            registration if state has already been restored for the specified key
+            the navigation history will immediately be restored.  Subsequent invocations of
+            <see cref="M:ShowcaseWP.Common.SuspensionManager.RestoreAsync(System.String)"/> will also restore navigation history.
+            </summary>
+            <param name="frame">An instance whose navigation history should be managed by
+            <see cref="T:ShowcaseWP.Common.SuspensionManager"/></param>
+            <param name="sessionStateKey">A unique key into <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/> used to
+            store navigation-related information.</param>
+            <param name="sessionBaseKey">An optional key that identifies the type of session.
+            This can be used to distinguish between multiple application launch scenarios.</param>
+        </member>
+        <member name="M:ShowcaseWP.Common.SuspensionManager.UnregisterFrame(Windows.UI.Xaml.Controls.Frame)">
+            <summary>
+            Disassociates a <see cref="T:Windows.UI.Xaml.Controls.Frame"/> previously registered by <see cref="M:ShowcaseWP.Common.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/>
+            from <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.  Any navigation state previously captured will be
+            removed.
+            </summary>
+            <param name="frame">An instance whose navigation history should no longer be
+            managed.</param>
+        </member>
+        <member name="M:ShowcaseWP.Common.SuspensionManager.SessionStateForFrame(Windows.UI.Xaml.Controls.Frame)">
+            <summary>
+            Provides storage for session state associated with the specified <see cref="T:Windows.UI.Xaml.Controls.Frame"/>.
+            Frames that have been previously registered with <see cref="M:ShowcaseWP.Common.SuspensionManager.RegisterFrame(Windows.UI.Xaml.Controls.Frame,System.String,System.String)"/> have
+            their session state saved and restored automatically as a part of the global
+            <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.  Frames that are not registered have transient state
+            that can still be useful when restoring pages that have been discarded from the
+            navigation cache.
+            </summary>
+            <remarks>Apps may choose to rely on <see cref="T:ShowcaseWP.Common.NavigationHelper"/> to manage
+            page-specific state instead of working with frame session state directly.</remarks>
+            <param name="frame">The instance for which session state is desired.</param>
+            <returns>A collection of state subject to the same serialization mechanism as
+            <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.</returns>
+        </member>
+        <member name="T:ShowcaseWP.pages.AbsenceManagementPage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceManagementPage.Perform_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Hadles perform click. Sends form to server.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceManagementPage.AbsenceManagementPage_ItemClick(System.Object,Windows.UI.Xaml.Controls.ItemClickEventArgs)">
+            <summary>
+            Handles absence management list item click event. Fills absence management form with data in clicked lsit item.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.AbsenceManagementPage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.AbsenceManagementPage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceManagementPage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.AbsenceTypesPage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.OnItemClick(System.Object,Windows.UI.Xaml.Controls.ItemClickEventArgs)">
+            <summary>
+            Handles list on item click event. Fills data from clicked list item into the form.
+            </summary>
+            <param name="sender">clicked list item</param>
+            <param name="e">clicked list item arguments</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.Clear_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles event fired when clicked on clear button. Clears the form.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.Reset_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles event fired when clicked on reset button. Resets the form.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.Perform_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles event fired when clicked on performs button. Sends the form to server.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+                Populates the page with content passed during navigation.  Any saved state is also
+                provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+                The source of the event; typically <see cref="P:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper" />
+            </param>
+            <param name="e">
+                Event data that provides both the navigation parameter passed to
+                <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)" /> when this page was initially requested and
+                a dictionary of state preserved by this page during an earlier
+                session.  The state will be null the first time a page is visited.
+            </param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.AbsenceTypesPage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.AbsenceTypesPage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.CreateAbsencePage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.CreateAbsencePage.AddButtonOnClick(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles add absence button click. Adds new absence.
+            </summary>
+            <param name="sender"></param>
+            <param name="routedEventArgs"></param>
+        </member>
+        <member name="P:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.CreateAbsencePage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.CreateAbsencePage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.CreateAbsencePage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.LoginPage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.LoginPage.doLogin(AFWinPhone.components.types.AFForm)">
+            <summary>
+            Logs user in.
+            </summary>
+            <param name="form">login form</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.LoginPage.LoginBtn_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles login button click. Logs user in.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:ShowcaseWP.pages.LoginPage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.LoginPage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.LoginPage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.LoginPage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.LoginPage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.LoginPage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.LoginPage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.LoginPage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.MyAbsencesPage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.MyAbsencesPage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.MyAbsencesPage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.MyAbsencesPage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.ProfilePage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.ProfilePage.ResetButtonOnClick(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles reset button click. Reset changes in profile form.
+            </summary>
+            <param name="sender"></param>
+            <param name="routedEventArgs"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.ProfilePage.UpdateButtonOnClick(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles update button click. Updates profile.
+            </summary>
+            <param name="sender"></param>
+            <param name="routedEventArgs"></param>
+        </member>
+        <member name="P:ShowcaseWP.pages.ProfilePage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.ProfilePage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.ProfilePage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.ProfilePage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.ProfilePage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.ProfilePage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.ProfilePage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.ProfilePage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.SupportedCountriesPage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.OnItemClick(System.Object,Windows.UI.Xaml.Controls.ItemClickEventArgs)">
+            <summary>
+            Handles countries list item click. Fill country form with data in clicked list item.
+            </summary>
+            <param name="sender"></param>
+            <param name="itemClickEventArgs"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.Clear_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles clear button click. Clears country form.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.Reset_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles reset button click. Resets country form.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.Perform_Click(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles perform button click. Adds or updates country.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.SupportedCountriesPage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.SupportedCountriesPage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.SupportedCountriesPage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.pages.WelcomePage">
+            <summary>
+            An empty page that can be used on its own or navigated to within a Frame.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.WelcomePage.showChooseCountryDialogAndNavigate">
+            <summary>
+            Shows dialog where user must choose country in dropdows menu.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.WelcomePage.NavigationHelper">
+            <summary>
+            Gets the <see cref="P:ShowcaseWP.pages.WelcomePage.NavigationHelper"/> associated with this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            </summary>
+        </member>
+        <member name="P:ShowcaseWP.pages.WelcomePage.DefaultViewModel">
+            <summary>
+            Gets the view model for this <see cref="T:Windows.UI.Xaml.Controls.Page"/>.
+            This can be changed to a strongly typed view model.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.pages.WelcomePage.NavigationHelper_LoadState(System.Object,ShowcaseWP.Common.LoadStateEventArgs)">
+            <summary>
+            Populates the page with content passed during navigation.  Any saved state is also
+            provided when recreating a page from a prior session.
+            </summary>
+            <param name="sender">
+            The source of the event; typically <see cref="P:ShowcaseWP.pages.WelcomePage.NavigationHelper"/>
+            </param>
+            <param name="e">Event data that provides both the navigation parameter passed to
+            <see cref="M:Windows.UI.Xaml.Controls.Frame.Navigate(System.Type,System.Object)"/> when this page was initially requested and
+            a dictionary of state preserved by this page during an earlier
+            session.  The state will be null the first time a page is visited.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.WelcomePage.NavigationHelper_SaveState(System.Object,ShowcaseWP.Common.SaveStateEventArgs)">
+            <summary>
+            Preserves state associated with this page in case the application is suspended or the
+            page is discarded from the navigation cache.  Values must conform to the serialization
+            requirements of <see cref="P:ShowcaseWP.Common.SuspensionManager.SessionState"/>.
+            </summary>
+            <param name="sender">The source of the event; typically <see cref="P:ShowcaseWP.pages.WelcomePage.NavigationHelper"/></param>
+            <param name="e">Event data that provides an empty dictionary to be populated with
+            serializable state.</param>
+        </member>
+        <member name="M:ShowcaseWP.pages.WelcomePage.OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs)">
+            <summary>
+            The methods provided in this section are simply used to allow
+            NavigationHelper to respond to the page's navigation methods.
+            <para>
+            Page specific logic should be placed in event handlers for the  
+            <see cref="E:ShowcaseWP.Common.NavigationHelper.LoadState"/>
+            and <see cref="E:ShowcaseWP.Common.NavigationHelper.SaveState"/>.
+            The navigation parameter is available in the LoadState method 
+            in addition to page state preserved during an earlier session.
+            </para>
+            </summary>
+            <param name="e">Provides data for navigation methods and event
+            handlers that cannot cancel the navigation request.</param>
+        </member>
+        <member name="T:ShowcaseWP.skins.AbsenceManagementSkin">
+            <summary>
+            Defines skin for absence management components
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.skins.LoginFormSkin">
+            <summary>
+            Defines skin for login form
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.skins.MyAbsencesSkin">
+            <summary>
+            Defines skin for my absences list
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.utils.ShowcaseConstants">
+            <summary>
+            Contains constants used in showcase project.
+            </summary>
+        </member>
+        <member name="T:ShowcaseWP.utils.ShowcaseUtils">
+            <summary>
+            Utils used in showcase application.
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.utils.ShowcaseUtils.setUserInPreferences(System.String,System.String)">
+            <summary>
+            Sets user credentials in application preferences.
+            </summary>
+            <param name="username">user's username</param>
+            <param name="password">user's password</param>
+        </member>
+        <member name="M:ShowcaseWP.utils.ShowcaseUtils.clearUserInPreferences">
+            <summary>
+            Removes user credentials from application preferences
+            </summary>
+        </member>
+        <member name="M:ShowcaseWP.utils.ShowcaseUtils.getUserCredentials">
+            <summary>
+            Gets user credentials from applicaiton preferences
+            </summary>
+            <returns>dictionary with user credentials</returns>
+        </member>
+        <member name="M:ShowcaseWP.utils.ShowcaseUtils.getUserLogin">
+            <summary>
+            Gets username of user from application preferences
+            </summary>
+            <returns>user's login</returns>
+        </member>
+        <member name="M:ShowcaseWP.utils.ShowcaseUtils.showComponentBuildFailedDialog">
+            <summary>
+            Shows dialog with build failed message
+            </summary>
+        </member>
+    </members>
+</doc>

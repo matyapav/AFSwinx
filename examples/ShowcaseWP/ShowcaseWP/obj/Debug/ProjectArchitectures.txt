@@ -1,0 +1,1 @@
+D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\ShowcaseWP.csproj;neutral

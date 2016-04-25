@@ -1,0 +1,5 @@
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\PlugIn1\bin\Debug\PlugIn1.dll
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\PlugIn1\bin\Debug\PlugIn1.pdb
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\PlugIn1\obj\Debug\PlugIn1.csprojResolveAssemblyReference.cache
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\PlugIn1\obj\Debug\PlugIn1.dll
+D:\Projects\AFSwinx\AFMobile\AFWinPhone\PlugIn1\obj\Debug\PlugIn1.pdb

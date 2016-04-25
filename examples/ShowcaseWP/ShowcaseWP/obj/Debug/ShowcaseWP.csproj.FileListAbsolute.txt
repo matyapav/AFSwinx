@@ -144,3 +144,4 @@ D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\obj\Debug\qualifiers.txt.inte
 D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\obj\Debug\AFWinPhone.pri.xml
 D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\obj\Debug\ProjectArchitectures.txt
+D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\bin\Debug\xml_wp_showcase.XML

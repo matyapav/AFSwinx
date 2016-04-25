@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AFWinPhone</name>
+    </assembly>
+    <members>
+        <member name="T:AFWinPhone.builders.AFComponentBuilder`1">
+            <summary>
+            This class defines common parts of all component builders. Specific component builders must extend
+            </summary>
+            <typeparam name="T">Concrete type of builder</typeparam>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.initBuilder(System.String,System.String,System.String)">
+            <summary>
+            Initializes builder for component. This method should be used if getting definition of component
+            from server does not need additional parameters like user credentials.
+            </summary>
+            <param name="componentKeyName">user defined name of component</param>
+            <param name="pathToConnectionResource">path to XML file with defined connections</param>
+            <param name="connectionKey">used to get specific connection definition from connection resource file.</param>
+            <returns>concrete builder</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.initBuilder(System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Initializes builder for component. This method should be used if getting definition of component
+            from server needs additional parameters like user credentials
+            </summary>
+            <param name="componentKeyName">user defined name of component</param>
+            <param name="pathToConnectionResource">path to XML file with defined connections</param>
+            <param name="connectionKey">used to get specific connection definition from connection resource file.</param>
+            <param name="connectionParameters">additional parameters for connection like user credentials</param>
+            <returns>concrete builder</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.initializeConnections">
+            <summary>
+            Initializes connections for component. Creates and sets connections from specified file to builder.
+            Must be called before creating any part of component and after initialization of builder.
+            Exception throwed if not connection was specified, that means initialization of builder was not called.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.prepareComponent(AFWinPhone.components.parts.AFClassInfo,AFWinPhone.components.types.AFComponent,System.Int32,System.Boolean,System.Text.StringBuilder)">
+            <summary>
+            Prepares whole component especially its graphical representation which can be inserted in UI.
+            </summary>
+            <param name="classDef">information about component</param>
+            <param name="component">which component is being prepared</param>
+            <param name="numberOfInnerClasses">number of inner classes which actual class definition has</param>
+            <param name="parsingInnerClass">determines if preparing UI from inner class</param>
+            <param name="road">Passed to field buidlers. If not empty, field belongs to some inner class. This fact must be set into fields id.</param>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.buildComponent(AFWinPhone.components.types.AFComponent)">
+            <summary>
+            Builds and wraps component UI from class definition and sets it to component.
+            Exception thrown if there is some error during parsing component definition or building component view
+            </summary>
+            <param name="component">component its UI is being built wrapped and set.</param>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.createComponent">
+            <summary>
+            Builder specific method which creates final version of component which is presented to user. Should be used by user to create component.
+            Exception thrown if there is an error during crating process. User must handle this exception.
+            </summary>
+            <returns>completely created component</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.AFComponentBuilder`1.buildComponentView(AFWinPhone.components.types.AFComponent)">
+            <summary>
+            Builder specific method used only for building graphical representation of component.
+            </summary>
+            <param name="component">components its UI is being build.</param>
+            <returns>UI of component</returns>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.FieldBuilder">
+            <summary>
+            Builds whole input field. Input field is consisted of label, validation element and widget.
+            This class builds all three elements and put them together according to specified layout settings
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.FieldBuilder.prepareField(AFWinPhone.components.parts.AFFieldInfo,System.Text.StringBuilder,AFWinPhone.builders.skins.Skin)">
+            <summary>
+             Prepares field with all needed information including UI representation.
+            </summary>
+            <param name="properties">information about a field, needed for e.g setting id of field</param>
+            <param name="road">if not empty, field belongs to some inner class. This fact must be set into fields id.</param>
+            <param name="skin">defines the look of field</param>
+            <returns>prepared field with all needed information</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.FieldBuilder.buildCompleteView(AFWinPhone.components.parts.AFField,AFWinPhone.builders.skins.Skin)">
+            <summary>
+            Builds complete view of field. Puts label, active element and validation element togetger in specified order.
+            </summary>
+            <param name="field">field of which view is created</param>
+            <param name="skin">in this case defines dimensions of field parts</param>
+            <returns>complete graphical representation of field</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.FieldBuilder.buildErrorView(AFWinPhone.builders.skins.Skin)">
+            <summary>
+            Builds element in which will be displayed validation errors.
+            </summary>
+            <param name="skin">defines the look of validations errors</param>
+            <returns>validation element</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.FieldBuilder.buildLabel(AFWinPhone.components.parts.AFFieldInfo,AFWinPhone.builders.skins.Skin)">
+            <summary>
+            Builds element for label.
+            </summary>
+            <param name="properties">information about label</param>
+            <param name="skin">defines the look of label</param>
+            <returns>label element</returns>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.AbstractWidgetBuilder">
+            <summary>
+            Template for widget builders and it defines methods which every widget builder should have.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.AbstractWidgetBuilder.buildFieldView">
+            <summary>
+            This method is used for build graphical representation of widget - field's active element,
+            that means without validation or label elements.
+            </summary>
+            <returns>graphical representation of field's active element</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.AbstractWidgetBuilder.setData(System.Object)">
+            <summary>
+            Sets data to widget - field's active element
+            </summary>
+            <param name="value">data to set (usually String)</param>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.AbstractWidgetBuilder.getData">
+            <summary>
+            Gets data from widget - field's active element
+            </summary>
+            <returns>data from widget</returns>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.BasicBuilder">
+            <summary>
+            Basic implementation of AbstractWidgetBuilder. Defines that widget builders needs skin
+            and information about field. Every concrete implementation of widget builder should extends this class.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.CheckboxWidgetBuilder">
+            <summary>
+            This class is responsible for building checkbox element.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.DateWidgetBuilder">
+            <summary>
+            This class is responsible for building datepicker component.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.DropDownWidgetBuilder">
+            <summary>
+            This class is responsible for building drop down menu widget.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.OptionWidgetBuilder">
+            <summary>
+            Builds radio group widget, where user can choose from multiple options.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.PasswordWidgetBuilder">
+            <summary>
+            This class is responsible for building password widget.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.TextWidgetBuilder">
+            <summary>
+            Builds widget, where user can write input. Input can be text, integer or double number.
+             Type of input is defined by setting corresponding input type.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.widgets.WidgetBuilderFactory">
+            <summary>
+             Factory class which is used for picking corresponding widget builder based on widget type.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.WidgetBuilderFactory.getInstance">
+            <summary>
+            Gets the instance of WidgetBuilderFactory
+            </summary>
+            <returns>instance of factory</returns>
+        </member>
+        <member name="M:AFWinPhone.builders.widgets.WidgetBuilderFactory.getFieldBuilder(AFWinPhone.components.parts.AFField,AFWinPhone.builders.skins.Skin)">
+            <summary>
+            Gets corresponding widget builder based on input type
+            </summary>
+            <param name="field">holds information about input type</param>
+            <param name="skin">passed to builders to define look of widgets</param>
+            <returns>corresponding widget builder</returns>
+        </member>
+        <member name="T:AFWinPhone.builders.FormBuilder">
+            <summary>
+            This class if responsible for building form component, which should mainly hadle user input.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.ListBuilder">
+            <summary>
+            This class is responsible for creating a list component, which presents bigger amount of data to user.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.skins.DefaultSkin">
+             <summary>
+             This class represents default implementation of {@link Skin} interface and will be used
+            if user did not specify own skin.User's skins should extends this class because
+            it gives ability to define only needed parts of skin.
+             </summary>
+        </member>
+        <member name="T:AFWinPhone.builders.skins.Skin">
+            <summary>
+            This is skin interfaces. This interface is used to skin component based on user setting.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.AFField">
+            <summary>
+            This class defines GUI of the field + operations with it like validation
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.parts.AFField.validate">
+            <summary>
+            Validates all rules connected with field. If any validation failed, validaiton element with erros messages is shown to user.
+            </summary>
+            <returns>true if all validations passed, false otherwise</returns>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.AFValidator">
+            <summary>
+            Interface for all rule validators.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.parts.validators.AFValidator.validate(AFWinPhone.components.parts.AFField,System.Text.StringBuilder,AFWinPhone.components.parts.AFValidationRule)">
+            <summary>
+            Validates specific validation rule of specific field. Appends error message if validation failed.
+            </summary>
+            <param name="field">field on which should be validation checked</param>
+            <param name="errorMsgs">string builder to potentially append error message</param>
+            <param name="rule">specific validation rule which should be checked</param>
+            <returns>true if validation passed, false otherwise</returns>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.LessThanValidator">
+            <summary>
+            Validates LESSTHAN rule, which checks if value in one field is less or equal than value in other field.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.MaxCharsValidator">
+            <summary>
+            Validates MAXLENGTH rule, which checks if number of chars is less or equal than value specified in rule.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.MaxValueValidator">
+            <summary>
+            Validates MAX rule, which checks if value in field is less or equal than value specified in rule.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.MinValueValidator">
+            <summary>
+            Validates MIN rule, which checks if value in field is more or equal than value specified in rule.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.NumberValidator">
+            <summary>
+            Validates if inserted value in field is number.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.validators.RequiredValidator">
+            <summary>
+            Validates REQUIRED rule, which checks field is filled.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.components.parts.ValidatorFactory">
+            <summary>
+            Factory class to determine which validator should be picked based on validation rule.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.parts.ValidatorFactory.getInstance">
+            <summary>
+            Gets instance of validator factory.
+            </summary>
+            <returns>instance of validator factory</returns>
+        </member>
+        <member name="M:AFWinPhone.components.parts.ValidatorFactory.getValidator(AFWinPhone.components.parts.AFValidationRule)">
+            <summary>
+            Gets corresponding validator for specific validation rule.
+            </summary>
+            <param name="rule">specific validation rule</param>
+            <returns>corresponding validator</returns>
+        </member>
+        <member name="T:AFWinPhone.components.types.AbstractComponent">
+            <summary>
+            Interface for components. Defines methods which should be implemented by components. Some of methods 
+            like validate or send data won't be used by read only components (like AFList)
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.insertData(System.String,System.Text.StringBuilder)">
+            <summary>
+            Inserts data to component.
+            </summary>
+            <param name="dataResponse">response with data in some format</param>
+            <param name="road">used for inserting data into fields created from inner classes</param>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.getComponentType">
+            <summary>
+            Gets the type of component
+            </summary>
+            <returns>component type</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.validateData">
+            <summary>
+            Validates data in component.
+            </summary>
+            <returns>false if any validation failed.</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.reserialize">
+            <summary>
+            Converts data to representation suitable for server needs.
+            </summary>
+            <returns>reserialized data</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.getModelResponse">
+            <summary>
+            Gets metamodel response from server.
+            Exception thrown if there was connection problem.
+            </summary>
+            <returns>metamodel string from server</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.getDataResponse">
+            <summary>
+            Gets data response from server.
+            Exception thrown if there was connection problem.
+            </summary>
+            <returns>data string from server</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.generateSendData">
+            <summary>
+            Generates data, which should be sent to server.
+            </summary>
+            <returns>generated data</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AbstractComponent.sendData">
+            <summary>
+            Sends data back to server.
+            Exception thrown if there was problem in connection.
+            </summary>
+            <returns>return false if there was problem in generating data, true if data was successfully generated and sended to server.</returns>
+        </member>
+        <member name="T:AFWinPhone.components.types.AFComponent">
+            <summary>
+            Common implementation of AbstractComponent. Implements common methods for each component.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFComponent.insertData(System.Object)">
+            <summary>
+            Insert data method which should be used by end users.
+            </summary>
+            <param name="dataObject">data to be inserted</param>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFComponent.addField(AFWinPhone.components.parts.AFField)">
+            <summary>
+            Adds a field in component.
+            </summary>
+            <param name="field">field to be added</param>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFComponent.getFieldById(System.String)">
+            <summary>
+            Gets the field with defined identifier.
+            </summary>
+            <param name="id">identifier of field</param>
+            <returns>corresponding field</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFComponent.getVisibleFieldsCount">
+            <summary>
+            Gets count of field which are visible to user.
+            </summary>
+            <returns>number of visible fields</returns>
+        </member>
+        <member name="T:AFWinPhone.components.types.AFForm">
+            <summary>
+            Representing a form component.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFForm.hideErrors">
+            <summary>
+            Hides validation errors.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFForm.resetData">
+            <summary>
+            Resets data in form. If there were no data set, it just clears the form.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFForm.clearData">
+            <summary>
+            Clears the form - sets all fields to empty or default value.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFForm.getDataFromFieldWithId(System.String)">
+            <summary>
+            Gets data from field given by specified identifier.
+            </summary>
+            <param name="id">identifier of field</param>
+            <returns> data from field</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFForm.setDataToFieldWithId(System.String,System.Object)">
+            <summary>
+            Sets data to field gived by specified identifier.
+            </summary>
+            <param name="id">identifier of field</param>
+            <param name="data">data to be set</param>
+        </member>
+        <member name="T:AFWinPhone.components.types.AFList">
+            <summary>
+            Represents list component.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFList.insertDataObject(Windows.Data.Json.JsonObject,System.Text.StringBuilder,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Inserts data to specific list item.
+            Exception thrown if there was some error during parsing data object.
+            </summary>
+            <param name="jsonObject">JSONObject which contains data for list item</param>
+            <param name="road">used for inserting data into fields created from inner classes</param>
+            <param name="row">row which represents data in list item</param>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFList.getDataFromItemOnPosition(System.Int32)">
+            <summary>
+            Gets data from list item on specified position.
+            </summary>
+            <param name="position"> position of list item in list view</param>
+            <returns>corresponding data</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFList.createFormDataFromList(System.Int32)">
+            <summary>
+            Creates data from list item on given position which can be inserted to form.
+            </summary>
+            <param name="position">position of list item in list view</param>
+            <returns> data of list item prepared to be inserted in form</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFList.createCustomListItem(System.Int32)">
+            <summary>
+            Creates custom list item.
+            </summary>
+            <param name="position">position of item in list view</param>
+            <returns>graphical representation of custom list item</returns>
+        </member>
+        <member name="M:AFWinPhone.components.types.AFList.getListView">
+            <summary>
+            Gets list view. Use this if there is need to catch some events happened in list view like tapping on list item.
+            </summary>
+            <returns>list view</returns>
+        </member>
+        <member name="T:AFWinPhone.parsers.JSONDefinitionParser">
+            <summary>
+            Parser for component definition in JSON format.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONDefinitionParser.parseFieldInfo(Windows.Data.Json.JsonObject)">
+            <summary>
+            Parses information about one field in component.
+            Exception thrown if there war error during parsing field info.
+            </summary>
+            <param name="field">field information wrapped in JSONObject</param>
+            <returns>field info wrapped in AFFieldInfo object</returns>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONDefinitionParser.createTopLayoutProperties(Windows.Data.Json.JsonObject)">
+            <summary>
+            Parses and creates layout properties of whole component.
+            Exception thrown if any error happened during parsing layout properties
+            </summary>
+            <param name="layoutJson">JSON object with layout properties</param>
+            <returns>Layout of whole component</returns>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONDefinitionParser.createLayoutProperties(Windows.Data.Json.JsonObject)">
+            <summary>
+            Parses and creates layout properties of component field.
+            Exception thrown if any error happened during parsing layout properties
+            </summary>
+            <param name="layoutJson">JSON object with layout properties</param>
+            <returns>layout of the field</returns>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONDefinitionParser.createRule(Windows.Data.Json.JsonObject)">
+            <summary>
+            Parses and creates validation rule.
+            Exception thrown if any error happened during parsing validation rule
+            </summary>
+            <param name="ruleJson">JSON object which contains info about validation rule</param>
+            <returns>created validation rule</returns>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONDefinitionParser.createOption(Windows.Data.Json.JsonObject)">
+            <summary>
+            Parses and creates option, from which user can choose.
+            Exception thrown if any error happened during parsing option.
+            </summary>
+            <param name="optionJson">JSON object which contains info about option</param>
+            <returns> created option</returns>
+        </member>
+        <member name="T:AFWinPhone.parsers.JSONParser">
+            <summary>
+            Interface for JSON parsers of components information.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.parsers.JSONParser.parse(System.String,System.Boolean)">
+            <summary>
+            arses given string in JSON format. Parsing should be different if parsing inner class of component.
+            </summary>
+            <param name="jsonStrToBeParsed">string to be parsed</param>
+            <param name="parsingInnerClass">true if parsing inner class of component</param>
+            <returns>information wrapped in object</returns>
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String)">
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personService
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String,System.String)">
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personService
+            @param protocol ex: http, https, etc.
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String,AFWinPhone.rest.connection.HeaderType,AFWinPhone.rest.connection.HeaderType)">
+            
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personService
+            @param acceptedType type of accepted response see {@link HeaderType} for more information
+            @param contentType type of request on end point see {@link HeaderType} for more information
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String,AFWinPhone.rest.connection.HeaderType,AFWinPhone.rest.connection.HeaderType,Windows.Web.Http.HttpMethod)">
+            
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personService
+            @param acceptedType type of accepted response see {@link HeaderType} for more information
+            @param contentType type of request on end point see {@link HeaderType} for more information
+            @param httpMethod method which will be used see {@link HttpMethod}
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String,AFWinPhone.rest.connection.HeaderType,AFWinPhone.rest.connection.HeaderType,System.String)">
+            
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personServicer more information
+            @param contentType type of request on end point see {@link HeaderType} for more information
+            @param protocol ex: http, https, etc.
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor(System.String,System.Int32,System.String,AFWinPhone.rest.connection.HeaderType,AFWinPhone.rest.connection.HeaderType,System.String,Windows.Web.Http.HttpMethod)">
+            
+            Constructor to create connection.
+            
+            @param address end point without protocol ex: localhost, toms-cz.com, google.com
+            @param port port in which service available.
+            @param parameters url parameters if service is available on localhost:8080/rest/personService
+                   then parameter are /rest/personService include slash, or
+                   localhost:8080/AFServer/rest/personService then parameter is
+                   /AFserver/rest/personServicer more information
+            @param contentType type of request on end point see {@link HeaderType} for more information
+            @param protocol ex: http, https, etc.
+            @param httpMethod method which will be used see {@link HttpMethod}
+        </member>
+        <member name="M:AFWinPhone.rest.connection.AFSwinxConnection.#ctor">
+            This constructor is protected because its used in {@link ConnectionParser}. It's easily use
+            set method then hold all variables in memory. Default content and header type is
+            application.json from {@link HeaderType}.
+        </member>
+        <member name="T:AFWinPhone.rest.connection.Reselization">
+            This interface specify method, which are used to rebuild data and these data will be send back to
+            server or this data comes from server and must be interpreted. This interface provide only method
+            which leads to data. No connection or request is performed there.
+            
+            @author Martin Tomasek (martin@toms-cz.com)
+            
+            @since 1.0.0.
+        </member>
+        <member name="M:AFWinPhone.rest.connection.Reselization.reselialize(AFWinPhone.rest.holder.AFDataHolder)">
+            This method build data which will be set to server. Data are build from componentData
+            parameter in this method.
+            
+            @param componentData data which will be used to build data which will be send on server.
+            @return Data which will be send on server.
+        </member>
+        <member name="M:AFWinPhone.rest.connection.RestBuilderFactory.getBuilder(AFWinPhone.rest.connection.AFSwinxConnection)">
+            This method return builder based on content type of connection.
+            
+            @param connection based on which will be returned builder.
+            @return Builder which can build data for request on server
+        </member>
+        <member name="T:AFWinPhone.rest.RequestMaker">
+            <summary>
+            Class for making requests to server. Request must be asynchronous.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.rest.RequestMaker.doRequest">
+            <summary>
+            Does all types of requests. Type of request is based on http method and data.
+            </summary>
+            <returns>response from server</returns>
+        </member>
+        <member name="T:AFWinPhone.utils.Constants">
+            <summary>
+            This class defines string constants used in application.
+            </summary>
+        </member>
+        <member name="T:AFWinPhone.utils.Localization">
+            <summary>
+            This class is responsible for translations of strings. Gives user also ability to change language.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.utils.Localization.translate(System.String)">
+            <summary>
+            Translates given resource. Looks for the texts in Strings/{lang folder}/Resources.resw file in the root package of application.
+            </summary>
+            <param name="resource">key to be translated</param>
+            <returns>Translation if key was found in localization texts, otherwise key is not translated and returned.</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Localization.changeLanguage(System.String)">
+            <summary>
+            Changes language of application.
+            </summary>
+            <param name="lang">Shortcut of language. Examples: English = en, Czech = cs etc.</param>
+        </member>
+        <member name="T:AFWinPhone.utils.Utils">
+            <summary>
+            Util methods used within the application.
+            </summary>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.IsFieldWritable(AFWinPhone.enums.SupportedWidgets)">
+            <summary>
+            Determines if field is writable based on widget type, that means user can write into it.
+            </summary>
+            <param name="widgetType">widget type of field</param>
+            <returns>true if the field is writable, false otherwise</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.IsFieldNumberField(AFWinPhone.components.parts.AFField)">
+            <summary>
+            Determine if field is number field, that means user can only write numbers in it.
+            </summary>
+            <param name="field">field to check</param>
+            <returns>true if field is number field, false otherwise</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.GetConnectionEndPoint(AFWinPhone.rest.connection.AFSwinxConnection)">
+            <summary>
+            Gets connection end point URL made from parts saved in given connection.
+            </summary>
+            <param name="connection">holds all parts of end point</param>
+            <returns>string representing connection end point</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.ShouldBeInvisible(System.String,AFWinPhone.components.types.AFComponent)">
+            <summary>
+            Determines if column in list should be invisible or not.
+            </summary>
+            <param name="column">specified column to check</param>
+            <param name="component">component to which should be column added</param>
+            <returns>true, if should be invisible, false otherwise</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.ParseDate(System.String)">
+            <summary>
+            Parses string into date using ISO format or dd.MM.yyyy format.
+            </summary>
+            <param name="date">string representation of date</param>
+            <returns>parsed date if it was in one of formats, null if date is not in specified formats.</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.BuildDocumentFromFile(System.String)">
+            <summary>
+            Builds Xml document from specified file.
+            </summary>
+            <param name="pathToFile">path to file which should be document builded from</param>
+            <returns>built xml document</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.ValueOf``1(System.Type,System.String)">
+            <summary>
+            Returns enumeration based on its value.
+            </summary>
+            <typeparam name="T">type of enumeration</typeparam>
+            <param name="clazz">class where should program look for</param>
+            <param name="value">value of enumeration</param>
+            <returns>Specific enumeration if found</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.TryToGetValueFromJson(Windows.Data.Json.IJsonValue)">
+            <summary>
+            Tries to get value from Json file. Chooses suitable method for each value type that might show up in Json file.
+            </summary>
+            <param name="value">value which should be got</param>
+            <returns>value in specific value type</returns>
+        </member>
+        <member name="M:AFWinPhone.utils.Utils.TryToConvertIntoBoolean(System.String)">
+            <summary>
+            Converts String value into boolean
+            </summary>
+            <param name="value">value to be converted</param>
+            <returns>converted value, false if convertion failed</returns>
+        </member>
+    </members>
+</doc>
