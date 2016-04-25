@@ -1,0 +1,2 @@
+MainPackage=D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\bin\ARM\Release\ShowcaseWP_1.0.0.0_ARM.appx
+SymbolPackage=D:\Projects\AFSwinx\ExecutableArtifacts\k7\ShowcaseWP_1.0.0.0_Test\ShowcaseWP_1.0.0.0_ARM.appxsym

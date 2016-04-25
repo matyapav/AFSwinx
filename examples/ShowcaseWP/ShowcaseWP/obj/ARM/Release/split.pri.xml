@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5" version="1.0" primary="true">
+		<Qualifiers>
+			<Language>EN-US</Language>
+			<Scale>240</Scale>
+		</Qualifiers>
+		<ResourceMapSubtree name="Files">
+			<NamedResource name="App.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/App.xbf">
+				<Candidate type="Path">
+					<Value>App.xbf</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="connection.xml" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/connection.xml">
+				<Candidate type="Path">
+					<Value>connection.xml</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="connection_local.xml" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/connection_local.xml">
+				<Candidate type="Path">
+					<Value>connection_local.xml</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="ShowcaseWP.xr.xml" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/ShowcaseWP.xr.xml">
+				<Candidate type="Path">
+					<Value>ShowcaseWP.xr.xml</Value>
+				</Candidate>
+			</NamedResource>
+			<ResourceMapSubtree name="AFWinPhone">
+				<NamedResource name="AFWinPhone.xr.xml" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/AFWinPhone/AFWinPhone.xr.xml">
+					<Candidate type="Path">
+						<Value>AFWinPhone\AFWinPhone.xr.xml</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="App.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/AFWinPhone/App.xbf">
+					<Candidate type="Path">
+						<Value>AFWinPhone\App.xbf</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Assets">
+				<NamedResource name="launcher_icon-web.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/launcher_icon-web.png">
+					<Candidate type="Path">
+						<Value>Assets\launcher_icon-web.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Logo.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/Logo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\Logo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="SmallLogo.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/SmallLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\SmallLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="SplashScreen.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/SplashScreen.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\SplashScreen.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="Square71x71Logo.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/Square71x71Logo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\Square71x71Logo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="StoreLogo.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/StoreLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\StoreLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="WideLogo.png" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Assets/WideLogo.png">
+					<Candidate qualifiers="Scale-240" isDefault="true" type="Path">
+						<Value>Assets\WideLogo.scale-240.png</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Common">
+				<NamedResource name="ReadMe.txt" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/Common/ReadMe.txt">
+					<Candidate type="Path">
+						<Value>Common\ReadMe.txt</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="pages">
+				<NamedResource name="AbsenceManagementPage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/AbsenceManagementPage.xbf">
+					<Candidate type="Path">
+						<Value>pages\AbsenceManagementPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="AbsenceTypesPage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/AbsenceTypesPage.xbf">
+					<Candidate type="Path">
+						<Value>pages\AbsenceTypesPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="CreateAbsencePage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/CreateAbsencePage.xbf">
+					<Candidate type="Path">
+						<Value>pages\CreateAbsencePage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="LoginPage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/LoginPage.xbf">
+					<Candidate type="Path">
+						<Value>pages\LoginPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="MyAbsencesPage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/MyAbsencesPage.xbf">
+					<Candidate type="Path">
+						<Value>pages\MyAbsencesPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="ProfilePage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/ProfilePage.xbf">
+					<Candidate type="Path">
+						<Value>pages\ProfilePage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="SupportedCountriesPage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/SupportedCountriesPage.xbf">
+					<Candidate type="Path">
+						<Value>pages\SupportedCountriesPage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="WelcomePage.xbf" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Files/pages/WelcomePage.xbf">
+					<Candidate type="Path">
+						<Value>pages\WelcomePage.xbf</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+		<ResourceMapSubtree name="Resources">
+			<NamedResource name="NavigationFailedExceptionMessage" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/NavigationFailedExceptionMessage">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Navigation failed.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NewItemDescription" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/NewItemDescription">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Item Description: Pellentesque porta, mauris quis interdum vehicula, urna sapien ultrices velit, nec venenatis dui odio in augue. Cras posuere, enim a cursus convallis, neque turpis malesuada erat, ut adipiscing neque tortor ac erat.</Value>
+				</Candidate>
+			</NamedResource>
+			<NamedResource name="NewItemTitle" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/NewItemTitle">
+				<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+					<Value>Item Title: {0}</Value>
+				</Candidate>
+			</NamedResource>
+			<ResourceMapSubtree name="absenceInstance">
+				<NamedResource name="duration" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstance/duration">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Duration</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="endDate" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstance/endDate">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>End</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="startDate" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstance/startDate">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Start</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="state" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstance/state">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Status</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="absenceInstances">
+				<NamedResource name="accepted" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstances/accepted">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Accepted</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="cancelled" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstances/cancelled">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Cancelled</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="denied" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstances/denied">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Denied</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="requested" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceInstances/requested">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Requested</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="AbsenceManagementPageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/AbsenceManagementPageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Absence management</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="absenceType">
+				<NamedResource name="active" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceType/active">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Active</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="maxDaysPerYear" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceType/maxDaysPerYear">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Year quote</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="name" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/absenceType/name">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Name</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="AbsenceTypePagePivot">
+				<NamedResource name="Title" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/AbsenceTypePagePivot/Title">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>AF Windows Phone Showcase</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="add">
+				<NamedResource name="failed" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/add/failed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add failed.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="success" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/add/success">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add was successful.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="AddAppBarButton">
+				<NamedResource name="Label" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/AddAppBarButton/Label">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>add</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="addOrUpdate">
+				<NamedResource name="failed" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/addOrUpdate/failed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add or update failed.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="success" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/addOrUpdate/success">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add or update was successful.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="AFTitle">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/AFTitle/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>AF Windows Phone Showcase</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="btn">
+				<NamedResource name="clear" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/clear">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Clear</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="login" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/login">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Login</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="logout" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/logout">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Logout</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="perform" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/perform">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Perform</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="reset" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/reset">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Reset</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="update" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/btn/update">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Update</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="build">
+				<NamedResource name="failed" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/build/failed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Something went wrong during building. Maybe you are not connected to the internet?</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="button">
+				<NamedResource name="add" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/button/add">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="choose">
+				<NamedResource name="country" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/choose/country">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Please, choose country.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="CountriesPageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/CountriesPageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Countries</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="country">
+				<NamedResource name="isActive" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/country/isActive">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Active</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="name" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/country/name">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Country</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="shortCut" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/country/shortCut">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Shortcut</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="CreateAbsencePageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/CreateAbsencePageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Create absence</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Header">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/Header/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>MY APPLICATION</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="login">
+				<NamedResource name="failed" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/login/failed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Login failed.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="password" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/login/password">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Password</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="userName" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/login/userName">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Username</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="LoginPageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/LoginPageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Login</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="menu">
+				<NamedResource name="absenceManagement" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/absenceManagement">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Absence Management</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="absenceTypes" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/absenceTypes">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Absence Types Management</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="countries" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/countries">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>SupportedCountries</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="createAbsence" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/createAbsence">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Create absence</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="myAbsences" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/myAbsences">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>My absences</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="profile" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/menu/profile">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>User profile</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="MyAbsencesPageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/MyAbsencesPageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>My absences</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="option">
+				<NamedResource name="no" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/option/no">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>No</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="yes" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/option/yes">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Yes</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="person">
+				<NamedResource name="age" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/person/age">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Age</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="firstName" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/person/firstName">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>First name</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="lastName" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/person/lastName">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Surname</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="updateFailed" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/person/updateFailed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Update of profile failed.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="updateSuccess" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/person/updateSuccess">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Update of profile was successful.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="Pivot">
+				<NamedResource name="Title" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/Pivot/Title">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>MY APPLICATION</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="PivotItem1">
+				<NamedResource name="Header" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/PivotItem1/Header">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Absence types</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="PivotItem2">
+				<NamedResource name="Header" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/PivotItem2/Header">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Add/Edit type</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="please">
+				<NamedResource name="wait" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/please/wait">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Please wait...</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="ProfilePageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/ProfilePageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Profile</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="SecondaryButton1">
+				<NamedResource name="Label" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/SecondaryButton1/Label">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>secondary command 1</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="SecondaryButton2">
+				<NamedResource name="Label" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/SecondaryButton2/Label">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>secondary command 2</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="validation">
+				<NamedResource name="double" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/double">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Please enter integer or decimal number.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="integer" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/integer">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Please enter integer number.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="lessThan" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/lessThan">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Value must be less or equal than value in field</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="maxchars" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/maxchars">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Maximum of chars is</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="maxval" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/maxval">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Maximum value is</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="minval" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/minval">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Minimum value is</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="required" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/validation/required">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>This field is required.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="welcome">
+				<NamedResource name="msg" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/welcome/msg">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Welcome user</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+			<ResourceMapSubtree name="WelcomePageName">
+				<NamedResource name="Text" uri="ms-resource://a1b1dd01-4eff-4f04-b06a-196ebbfb2ad5/Resources/WelcomePageName/Text">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Welcome page</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>

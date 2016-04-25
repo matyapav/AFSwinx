@@ -10,6 +10,7 @@
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\Assets\WideLogo.scale-240.png" "Assets\WideLogo.scale-240.png"
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\Assets\launcher_icon-web.png" "Assets\launcher_icon-web.png"
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\Common\ReadMe.txt" "Common\ReadMe.txt"
+"D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\connection_local.xml" "connection_local.xml"
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\connection.xml" "connection.xml"
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\bin\ARM\Release\ShowcaseWP.xr.xml" "ShowcaseWP.xr.xml"
 "D:\Projects\AFSwinx\examples\ShowcaseWP\ShowcaseWP\bin\ARM\Release\App.xbf" "App.xbf"
