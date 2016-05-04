@@ -9,9 +9,11 @@ The style file: csplainnat.bst
 A level-1 auxiliary file: pages/prilohy/zkratky.aux
 A level-1 auxiliary file: pages/prilohy/7_install.aux
 A level-1 auxiliary file: pages/prilohy/uml_a_obrazky.aux
+A level-1 auxiliary file: pages/prilohy/zdrojove_kody.aux
 Database file #1: reference.bib
 Warning--I didn't find a database entry for "infodp"
 Warning--to sort, need author or key in uiTypes
+Warning--to sort, need author or key in usability
 Warning--to sort, need author or key in wiki-ws
 Warning--to sort, need author or key in oracle-ws
 Warning--to sort, need author or key in serialization
@@ -34,4 +36,4 @@ Warning--to sort, need author or key in android-lin-layout
 Warning--to sort, need author or key in wp-grid
 Warning--to sort, need author or key in junit
 Warning--to sort, need author or key in vs-unit
-(There were 24 warnings)
+(There were 25 warnings)

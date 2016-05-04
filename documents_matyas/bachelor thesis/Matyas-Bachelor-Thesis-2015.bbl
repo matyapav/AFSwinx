@@ -1,4 +1,4 @@
-\begin{thebibliography}{36}
+\begin{thebibliography}{38}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -89,6 +89,11 @@
 \newblock Dostupn{\'{e}} z:
   \url{https://wikisofia.cz/index.php/Typy_u\v{z}ivatelsk\'{y}ch_rozhran\'{i}_a_jejich_specifika/old}.
 
+\bibitem[usa()]{usability}
+\emph{Usability Testing} [online]. [cit.~04.\,05.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.usability.gov/how-to-and-tools/methods/usability-testing.html}.
+
 \bibitem[vs-()]{vs-unit}
 \emph{Unit Test Basics} [online]. [cit.~17.\,04.\,2016].
 \newblock Dostupn{\'{e}} z:
@@ -96,7 +101,8 @@
 
 \bibitem[wik()]{wiki-ws}
 \emph{Web service} [online]. [cit.~22.\,03.\,2016].
-\newblock Dostupn{\'{e}} z: \url{https://en.wikipedia.org/wiki/Web_service}.
+\newblock Dostupn{\'{e}} z:
+  \url{https://www.w3.org/TR/2004/NOTE-ws-gloss-20040211/\#webservice}.
 
 \bibitem[wp-({\natexlab{a}})]{wp-grid}
  [online]. [cit.~13.\,04.\,2016].
@@ -188,6 +194,13 @@ JENKOV, J.
 \newblock Dostupn{\'{e}} z:
   \url{http://tutorials.jenkov.com/web-services/message-formats.html}.
 
+\bibitem[Kilian()]{app-approval}
+KILIAN, K.
+\newblock \emph{Google po vzoru Applu schvaluje aplikace do Obchodu Play
+  ručně} [online]. [cit.~01.\,05.\,2016].
+\newblock Dostupn{\'{e}} z:
+  \url{http://www.svetandroida.cz/google-play-schvalovani-201503}.
+
 \bibitem[Sommerville(2011)]{sommerville}
 SOMMERVILLE, I.
 \newblock \emph{Software engineering}.
@@ -201,8 +214,8 @@ TAKA, D.
 \newblock Dostupn{\'{e}} z:
   \url{http://www.sitepoint.com/introduction-windows-phone-8-1-development}.
 
-\bibitem[Tomášek(2015)]{tomasek-thesis}
-TOMášEK, M.
+\bibitem[Tomasek(2015)]{tomasek-thesis}
+TOMASEK, M.
 \newblock Aspektově orientovaný vývoj uživatelských rozhraní pro Java SE
   aplikace.
 \newblock Master's thesis, České vysoké učení technické v Praze Fakulta

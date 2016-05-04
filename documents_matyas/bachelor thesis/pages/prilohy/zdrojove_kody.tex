@@ -1,0 +1,50 @@
+\chapter{Ukázky zdrojových kódů}
+V této sekci naleznete ukázky zdrojového kódu, na které bylo v textu odkazováno.
+
+\begin{lstlisting}[caption=Ukázka XML specifikace zdrojů,
+label={code:xmlSource}, basicstyle=\footnotesize]
+<?xml version="1.0" encoding="UTF-8"?>
+<connectionRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<connection id="personProfile">
+		<metaModel>
+			<endPoint>toms-cz.com</endPoint>
+			<endPointParameters>
+				/AFServer/rest/users/profile
+			</endPointParameters>
+			<protocol>http</protocol>
+			<port></port>
+			<header-param>
+				<param>content-type</param>
+				<value>Application/Json</value>
+			</header-param>
+		</metaModel>
+		<data>
+			<endPoint>toms-cz.com</endPoint>
+			<endPointParameters>
+				/AFServer/rest/users/user/#{username}
+			</endPointParameters>
+			<protocol>http</protocol>
+			<port></port>
+			<security-params>
+				<security-method>basic</security-method>
+				<userName>#{username}</userName>
+				<password>#{password}</password>
+			</security-params>
+		</data>
+		<send>
+			<endPoint>toms-cz.com</endPoint>
+			<endPointParameters>
+				/AFServer/rest/users/update
+			</endPointParameters>
+			<protocol>http</protocol>
+			<method>post</method>
+			<port></port>
+			<security-params>
+				<security-method>basic</security-method>
+				<userName>#{username}</userName>
+				<password>#{password}</password>
+			</security-params>
+		</send>
+	</connection>
+</connectionRoot>
+\end{lstlisting}
