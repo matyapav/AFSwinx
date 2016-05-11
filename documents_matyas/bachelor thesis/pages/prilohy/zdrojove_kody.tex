@@ -1,7 +1,44 @@
 \chapter{Ukázky zdrojových kódů}
 V této sekci naleznete ukázky zdrojového kódu, na které bylo v textu odkazováno.
+\newpage
+\begin{lstlisting}[caption=Upravená šablona date.xml,
+label={code:dateXml}, basicstyle=\footnotesize]
+<widget>
+	<widgetType>calendar</widgetType>
+	<fieldName>$field$</fieldName>
+	<label>$label$</label>
+	<readonly>false</readonly>
+	<validations>
+		<required>$required$</required>
+		<lessthan>$lessthan$</lessthan>
+	</validations>
+	<fieldLayout>
+		<layoutOrientation>$layoutOrientation$</layoutOrientation>
+		<labelPossition>$labelPossition$</labelPossition>
+		<layout>$layout$</layout>
+	</fieldLayout>
+</widget>
+\end{lstlisting}
 
-\begin{lstlisting}[caption=Ukázka XML specifikace zdrojů,
+\begin{lstlisting}[caption=Ukázka použití anotace @UILessThan,
+label={code:uiLessThanUsage}, basicstyle=\footnotesize]
+@Entity
+public class AbsenceInstance {
+	...
+	@Temporal(value = TemporalType.DATE)
+	private Date startDate;
+	@Temporal(value = TemporalType.DATE)
+	private Date endDate;
+	...
+	@UILessThan(value="endDate")
+	public Date getStartDate() {
+        	return startDate;
+	}
+	...
+}
+\end{lstlisting}
+
+\begin{lstlisting}[float=h, caption=Ukázka XML specifikace zdrojů,
 label={code:xmlSource}, basicstyle=\footnotesize]
 <?xml version="1.0" encoding="UTF-8"?>
 <connectionRoot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -48,3 +85,4 @@ label={code:xmlSource}, basicstyle=\footnotesize]
 	</connection>
 </connectionRoot>
 \end{lstlisting}
+
