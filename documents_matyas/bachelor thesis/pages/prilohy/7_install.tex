@@ -1,15 +1,15 @@
 \chapter{Instalační a uživatelská příručka}
-Všechny android aplikace jsou Gradle projekty, tedy android framework, který byl zkompilován do AAR souboru, lze přidat jako knihovnu nebo jako Gradle závislost. Windows phone verze byla zkompilována do DLL souboru a přidává se do projektů jako refrence. Podrobnější postup integrace frameworků do projektu a také způsoby jejich použití jsou popsány v uživatelské příručce na přiloženém CD.
+Všechny Android aplikace jsou Gradle projekty, tedy Android framework, který byl zkompilován do AAR souboru, lze přidat jako knihovnu nebo jako Gradle závislost. Windows phone verze byla zkompilována do DLL souboru a přidává se do projektů jako reference. Podrobnější postup integrace frameworků do projektu a také způsoby jejich použití jsou popsány v uživatelské příručce na přiloženém CD.
 
 \section{Integrace AFAndroid frameworku}
-Nejjednoduším způsobem je intergrovat framework ve vývojovém prostředí Android Studio. To nabízí možnost přidat framework jako nový modul a všechny potřebné gradle závislosti se vytvoří a nakonfigurují automaticky. V případě, že bude framework vložen tímto způsobem vytvoří se v kořenovém adresáři projektu balíček obsahující importovaný AAR soubor, IML soubor popsiující právě vytvořený modul a soubor build.gradle, ve kterém jsou dva důležité řádky zobrazené v ukázce kódu \ref{code:moduleGradle}
+Nejjednoduším způsobem je intergrovat framework ve vývojovém prostředí Android Studio. To nabízí možnost přidat framework jako nový modul a všechny potřebné Gradle závislosti se vytvoří a nakonfigurují automaticky. V případě, že bude framework vložen tímto způsobem, vytvoří se v kořenovém adresáři projektu balíček obsahující importovaný AAR soubor, IML soubor popisující právě vytvořený modul a soubor build.gradle, ve kterém jsou dva důležité řádky zobrazené v ukázce kódu \ref{code:moduleGradle}
 \begin{lstlisting}[caption={Gradle soubor pro build v balíčku s novým modulem},
 label={code:moduleGradle}, basicstyle=\footnotesize, frame=single]
 configurations.create("<nazev konfigurace>") 
 artifacts.add("<nazev konfigurace>", file('<jmeno souboru>.aar'))
 \end{lstlisting}
 
-Aplikace, do které je framework přidáván má také svůj soubor build.gradle \ref{code:appGradle}, do kterého přibudou následující závislosti. Také je nutné přidat závislost pro knihovnu GSON, která je frameworkem vnitřně používána. 
+Aplikace, do které je framework přidáván má také svůj soubor build.gradle \ref{code:appGradle}, do kterého přibudou následující závislosti v ukázce kódu \ref{code:appGradle}. Také je nutné přidat závislost pro knihovnu GSON, která je frameworkem vnitřně používána. 
 \begin{lstlisting}[caption={Gradle soubor pro build aplikace, do které je framework integrován},
 label={code:appGradle}, basicstyle=\footnotesize, frame=single]
 dependencies {
@@ -20,7 +20,7 @@ dependencies {
 } 
 \end{lstlisting}
 
-Dále do souboru settings.gradle \ref{code:settingsGradle} přibude následující řádek
+Dále do souboru settings.gradle \ref{code:settingsGradle} přibude následující řádek.
 \begin{lstlisting}[caption={Gradle soubor s nastaveními aplikace, do které je framework integrován },
 label={code:settingsGradle}, basicstyle=\footnotesize, frame=single ]
 include ':<nazev modulu s aplikaci>', ':<nazev importovaneho modulu>' 
@@ -38,7 +38,7 @@ Nyní stačí provést build projektu a framework je připraven k použití.
 Pro vývoj Windows Phone aplikací se nejčastěji používá vývojové prostředí Visual Studio, pro které je popsán způsob vložení frameworku. Ve Visual Studiu má každá aplikace ve svém kořenovém adresáři položku References, která obsahuje knihovny používané aplikací. Postup vložení je následující:
 \begin{enumerate}
 \item Klikněte pravým tlačítkem na References a poté na Add Reference.
-\item Objeví se dialog, kde klikněte na Browse… a vyhledejte příslušný DLL soubor
+\item Objeví se dialog, kde klikněte na Browse… a vyhledejte příslušný DLL soubor.
 \item Zkontrolujte, zda je nalezený soubor v dialogu zaškrtnutý.
 \item Povtrďte volbu stisknutím OK.
 \item Proveďte build projektu. 
@@ -46,7 +46,7 @@ Pro vývoj Windows Phone aplikací se nejčastěji používá vývojové prostř
 Po těchto krocích by měla být knihovna připravena k použití.
 
 \section{Ukázkové projekty}
-Ukázkové projekty pro Android i pro Windows phone jsou přiloženy na CD. Jelikož je potřeba pro běh klientských aplikací server poskytující potřebné definice, je na CD přiložena i serverová část AFServer vytvořená jako ukázkový projekt pro demonstaci frameworků AFRest a AFSwinx. Způsob spuštění lze nalézt ve výňatku z instalační příručky těchto frameworků, která je na CD rovněž přiložena \cite{tomasek-thesis}. Pro každý ukázkový projekt jsou na CD dva soubory, jeden z nich má definovaná připojení pro localhost a je nutné si pro jejich vyzkoušení spustit server lokálně dle zmíněného příručky pro AFRest a AFSwinx a klienstkou aplikaci nejlépe v emulátoru na stejném stroji. Druhý projekt komunikuje se serverem vystaveným na adrese \url{toms-cz.com/AFServer} a lze tak aplikace nahrát a vyzkoušet je přímo na mobilních zařízeních. 
+Ukázkové projekty pro Android i pro Windows phone jsou přiloženy na CD. Jelikož je potřeba pro běh klientských aplikací server poskytující potřebné definice, je na CD přiložena i serverová část AFServer vytvořená jako ukázkový projekt pro demonstaci frameworků AFRest a AFSwinx. Způsob spuštění lze nalézt ve výňatku z instalační příručky těchto frameworků, která je na CD rovněž přiložena \cite{tomasek-thesis}. Pro každý ukázkový projekt jsou na CD dva soubory. Jeden z nich má definovaná připojení pro localhost a je nutné si pro jejich vyzkoušení spustit server lokálně dle zmíněného příručky pro AFRest a AFSwinx a klienstkou aplikaci nejlépe v emulátoru na stejném stroji. Druhý projekt komunikuje se serverem vystaveným na adrese \url{toms-cz.com/AFServer} a lze tak aplikace nahrát a vyzkoušet je přímo na mobilních zařízeních. 
 \subsection{Nahrání ukázkové aplikace do Android zařízení}
 Pro nahrání aplikace do zařízení postačí aplikaci ve formě APK souboru vložit přes USB kabel do zařízení a provést následující kroky.
 \begin{enumerate}
@@ -58,7 +58,7 @@ Pro nahrání aplikace do zařízení postačí aplikaci ve formě APK souboru v
 \subsection{Nahrání ukázkové aplikace do Windows Phone zařízení}
 Pro nahrání aplikace do zařízení je třeba nahrát APPX soubor do zařízení prostřednictvím aplikace Application Deployment. To se provede následujícími kroky.
 \begin{enumerate}
-\item Nalezněte v počítači aplikaci Application Deployment. Měla by se nainstalovat společně s Visual Studio. Aplikaci spusťte.
+\item Nalezněte v počítači aplikaci Windows Phone Application Deployment. Měla by se nainstalovat společně s Visual Studiem. Aplikaci spusťte.
 \item Vyberte zařízení připojené přes USB kabel.
 \item Najděte cestu k příslušnému APPX souboru. 
 \item Klikněte na Deploy. Aplikace se do zařízení nahraje a poté ji můžete spustit.
