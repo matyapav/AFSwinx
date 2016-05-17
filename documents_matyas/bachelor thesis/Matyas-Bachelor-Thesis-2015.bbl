@@ -1,4 +1,4 @@
-\begin{thebibliography}{39}
+\begin{thebibliography}{40}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -225,5 +225,15 @@ TOMASEK, M.
   aplikace.
 \newblock Master's thesis, České vysoké učení technické v Praze Fakulta
   Elektrotechnická, 1 2015.
+
+\bibitem[Tomasek -- Cerny(2015)Tomasek, Cerny]{on-web-services}
+TOMASEK, M. -- CERNY, T.
+\newblock On Web Services UI in User Interface Generation in Standalone
+  Applications.
+\newblock In \emph{Proceedings of the 2015 Conference on Research in Adaptive
+  and Convergent Systems}, RACS, s. 363--368, New York, NY, USA, 2015. ACM.
+\newblock \doi{10.1145/2811411.2811537}.
+\newblock Dostupn{\'{e}} z: \url{http://doi.acm.org/10.1145/2811411.2811537}.
+\newblock ISBN 978-1-4503-3738-0.
 
 \end{thebibliography}
